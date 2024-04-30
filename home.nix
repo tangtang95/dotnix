@@ -3,6 +3,7 @@
 {
   home.username = "tangtang";
   home.homeDirectory = "/home/tangtang";
+  home.stateVersion = "23.11";
   home.packages = [
     # new coreutils
     pkgs.ripgrep
@@ -77,8 +78,9 @@
 
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ./config/zellij.kdl;
-  home.stateVersion = "23.11";
+
   programs = {
+    home-manager.enable = true;
     fish = {
       enable = true;
       interactiveShellInit = ''
