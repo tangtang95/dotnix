@@ -18,8 +18,11 @@ sudo apt install alacritty
 ## Usage
 Manage home with the following command:
 ```sh
-nix run .#home-manager -- switch --flake ~/dotnix
+nix run .#home-manager -- switch --impure --flake ~/dotnix
 
 # after one generation of home manager, it is possible to use home-manager directly
-home-manager switch --flake ~/dotnix
+home-manager switch --impure --flake ~/dotnix
 ```
+
+### Limitations
+- Determinism due to impure evaluation mode. Impure is necessary due to limitation of nixGL (i.e. builtins.currentTime https://github.com/nix-community/nixGL/blob/main/nixGL.nix#L215-L226)

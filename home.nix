@@ -1,6 +1,17 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, lib, ... }:
+let
+  nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
+    mkdir $out
+    ln -s ${pkg}/* $out
+    rm $out/bin
+    mkdir $out/bin
+    for bin in ${pkg}/bin/*; do
+     wrapped_bin=$out/bin/$(basename $bin)
+     echo "exec ${lib.getExe' pkgs.nixgl.auto.nixGLDefault "nixGL"} $bin \"\$@\"" > $wrapped_bin
+    chmod +x $wrapped_bin
+    done
+  '';
+in {
   home.username = "tangtang";
   home.homeDirectory = "/home/tangtang";
   home.stateVersion = "23.11";
@@ -71,6 +82,7 @@
     pkgs.tealdeer
     pkgs.wl-clipboard
     pkgs.xdg-utils
+    pkgs.nixgl.auto.nixGLDefault
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -128,6 +140,12 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+    };
+    
+    # guis
+    alacritty = {
+      enable = true;
+      package = nixGLWrap pkgs.alacritty;
     };
   };
 }
