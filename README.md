@@ -9,12 +9,6 @@ Dotfiles for configuring linux environments through nix home-manager tool.
 ## Nix installation
 Use determinatate system nix installer since it will also automatically enable flakes experimental feature (https://github.com/DeterminateSystems/nix-installer).
 
-## Other installations
-Install OpenGL GUI that does not work well with nix non-NixOS such as:
-```sh
-sudo apt install alacritty
-```
-
 ## Usage
 Manage home with the following command:
 ```sh
@@ -25,4 +19,4 @@ home-manager switch --impure --flake ~/dotnix
 ```
 
 ### Limitations
-- Determinism due to impure evaluation mode. Impure is necessary due to limitation of nixGL (i.e. builtins.currentTime https://github.com/nix-community/nixGL/blob/main/nixGL.nix#L215-L226)
+- Determinism due to impure evaluation mode. Impure is necessary due to limitation of nixGL (i.e. builtins.currentTime https://github.com/NixOS/nix/issues/3539) 
