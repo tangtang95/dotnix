@@ -71,7 +71,9 @@
     pkgs.wl-clipboard
     pkgs.xdg-utils
   ];
-  home.sessionVariables = { };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ./config/zellij.kdl;
