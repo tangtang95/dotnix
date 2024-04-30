@@ -1,16 +1,20 @@
-{ config, pkgs, lib, ... }:
-let
-  nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
-    mkdir $out
-    ln -s ${pkg}/* $out
-    rm $out/bin
-    mkdir $out/bin
-    for bin in ${pkg}/bin/*; do
-     wrapped_bin=$out/bin/$(basename $bin)
-     echo "exec ${lib.getExe' pkgs.nixgl.auto.nixGLDefault "nixGL"} $bin \"\$@\"" > $wrapped_bin
-    chmod +x $wrapped_bin
-    done
-  '';
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  nixGLWrap = pkg:
+    pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
+      mkdir $out
+      ln -s ${pkg}/* $out
+      rm $out/bin
+      mkdir $out/bin
+      for bin in ${pkg}/bin/*; do
+       wrapped_bin=$out/bin/$(basename $bin)
+       echo "exec ${lib.getExe' pkgs.nixgl.auto.nixGLDefault "nixGL"} $bin \"\$@\"" > $wrapped_bin
+      chmod +x $wrapped_bin
+      done
+    '';
 in {
   home.username = "tangtang";
   home.homeDirectory = "/home/tangtang";
@@ -43,14 +47,17 @@ in {
 
     # languages
     pkgs.rust-bin.stable.latest.default
-    (pkgs.python3.withPackages(ps: with ps; [pip]))
-    (pkgs.lua.withPackages(ps: with ps; [jsregexp]))
+    (pkgs.python3.withPackages (ps: with ps; [pip]))
+    (pkgs.lua.withPackages (ps: with ps; [jsregexp]))
     pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs
 
     # language tools
     pkgs.tree-sitter
+
+    # formatters
+    pkgs.alejandra
 
     # dap (debugger tool)
     pkgs.vscode-extensions.vadimcn.vscode-lldb
@@ -62,7 +69,7 @@ in {
     pkgs.tealdeer
     pkgs.wl-clipboard
     pkgs.xdg-utils
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
     pkgs.nixgl.auto.nixGLDefault
   ];
   home.sessionVariables = {
@@ -130,19 +137,18 @@ in {
       settings = {
         shell = "fish";
         window.dimensions = {
-	  columns = 100;
-	  lines = 25;
-	};
+          columns = 100;
+          lines = 25;
+        };
         font.normal.family = "JetBrainsMono Nerd Font";
-	font.size = 12;
+        font.size = 12;
       };
     };
-    
   };
 
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       xkb-options = ["caps:swapescape"];
     };
-  }; 
+  };
 }
