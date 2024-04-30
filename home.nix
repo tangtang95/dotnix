@@ -82,6 +82,7 @@ in {
     pkgs.tealdeer
     pkgs.wl-clipboard
     pkgs.xdg-utils
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     pkgs.nixgl.auto.nixGLDefault
   ];
   home.sessionVariables = {
@@ -90,6 +91,7 @@ in {
 
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ./config/zellij.kdl;
+  fonts.fontconfig.enable = true;
 
   programs = {
     home-manager.enable = true;
