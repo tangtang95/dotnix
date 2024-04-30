@@ -9,8 +9,17 @@ Dotfiles for configuring linux environments through nix home-manager tool.
 ## Nix installation
 Use determinatate system nix installer since it will also automatically enable flakes experimental feature (https://github.com/DeterminateSystems/nix-installer).
 
+## Other installations
+Install OpenGL GUI that does not work well with nix non-NixOS such as:
+```sh
+sudo apt install alacritty
+```
+
 ## Usage
 Manage home with the following command:
 ```sh
 nix run .#home-manager -- switch --flake ~/dotnix
+
+# after one generation of home manager, it is possible to use home-manager directly
+home-manager switch --flake ~/dotnix
 ```
