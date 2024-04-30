@@ -111,6 +111,7 @@ in {
     };
     starship = {
       enable = true;
+      enableFishIntegration = true;
     };
     zellij = {
       enable = true;
@@ -143,11 +144,19 @@ in {
       defaultEditor = true;
       vimAlias = true;
     };
-    
-    # guis
     alacritty = {
       enable = true;
       package = nixGLWrap pkgs.alacritty;
+      settings = {
+        shell = "fish";
+        window.dimensions = {
+	  columns = 100;
+	  lines = 25;
+	};
+        font.normal.family = "JetBrainsMono Nerd Font";
+	font.size = 12;
+      };
     };
+    
   };
 }
