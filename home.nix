@@ -52,26 +52,6 @@ in {
     # language tools
     pkgs.tree-sitter
 
-    # language servers
-    pkgs.nil # nix
-    pkgs.marksman # markdown
-    pkgs.lua-language-server
-    pkgs.nodePackages.vscode-langservers-extracted # html, css, json, eslint
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.yaml-language-server
-    pkgs.taplo # toml
-
-    # formatters
-    pkgs.alejandra # nix
-    pkgs.nodePackages.prettier
-    pkgs.stylua
-    pkgs.shfmt # shell
-
-    # linters
-    pkgs.deadnix # nix
-    pkgs.shellcheck
-    pkgs.markdownlint-cli
-
     # dap (debugger tool)
     pkgs.vscode-extensions.vadimcn.vscode-lldb
 
