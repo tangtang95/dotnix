@@ -189,5 +189,9 @@ in {
       switch-to-workspace-3 = ["<Super>3"];
       switch-to-workspace-4 = ["<Super>4"];
     };
+    "org/gnome/desktop/applications/terminal" = {
+      exec = "alacritty";
+      exec-arg = "";
+    };
   };
 }
