@@ -29,4 +29,3 @@ home-manager switch --impure --flake ~/dotnix
 ## Other tools to install
 
 - Steam with Proton
-- Mail Client (e.g. Geary with GNOME integration (for Google right click and then reload if it is stuck))
