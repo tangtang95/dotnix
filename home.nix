@@ -97,6 +97,8 @@ in {
     pkgs.wl-clipboard
     pkgs.xdg-utils
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+
+    # guis
     pkgs.nixgl.auto.nixGLDefault
   ];
   home.sessionVariables = {
@@ -105,6 +107,8 @@ in {
 
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ./config/zellij.kdl;
+
+  # enable user fonts
   fonts.fontconfig.enable = true;
 
   programs = {
@@ -131,7 +135,7 @@ in {
       enable = true;
       enableFishIntegration = true;
     };
-    git = (import ./programs/git.nix);
+    git = import ./programs/git.nix;
     lazygit = {
       enable = true;
       settings = {
@@ -159,6 +163,10 @@ in {
       defaultEditor = true;
       vimAlias = true;
     };
+  };
+
+  # gui programs
+  programs = {
     alacritty = (import ./programs/alacritty.nix) {
       inherit pkgs;
       inherit themeColors;
