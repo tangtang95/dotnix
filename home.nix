@@ -179,7 +179,7 @@ in {
     "org/gnome/desktop/input-sources" = {
       xkb-options = ["caps:swapescape"];
     };
-    "org/gnome/desktop/wm/keybidings" = {
+    "org/gnome/desktop/wm/keybindings" = {
       move-to-workspace-1 = ["<Shift><Super>exclam"];
       move-to-workspace-2 = ["<Shift><Super>quotedbl"];
       move-to-workspace-3 = ["<Shift><Super>sterling"];
