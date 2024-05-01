@@ -172,6 +172,14 @@ in {
       inherit themeColors;
       inherit nixGLWrap;
     };
+    thunderbird = {
+      enable = true;
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+      };
+    };
   };
 
   # only gnome settings (for pop-os)
