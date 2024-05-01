@@ -111,6 +111,9 @@ in {
         pfl = "push --force-with-lease";
         log1l = "log --oneline";
       };
+      delta = {
+        enable = true;
+      };
       extraConfig = {
         push = {
           default = "current";
@@ -119,6 +122,12 @@ in {
         pull = {
           rebase = true;
         };
+        merge.tool = "nvimdiff";
+        mergetool = {
+          prompt = false;
+          keepBackup = false;
+        };
+        "mergetool \"vimdiff\"".layout = "LOCAL,MERGED,REMOTE";
         init = {
           defaultBranch = "main";
         };
