@@ -174,9 +174,20 @@ in {
     };
   };
 
+  # only gnome settings (for pop-os)
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       xkb-options = ["caps:swapescape"];
+    };
+    "org/gnome/desktop/wm/keybidings" = {
+      move-to-workspace-1 = ["<Shift><Super>exclam"];
+      move-to-workspace-2 = ["<Shift><Super>quotedbl"];
+      move-to-workspace-3 = ["<Shift><Super>sterling"];
+      move-to-workspace-4 = ["<Shift><Super>dollar"];
+      switch-to-workspace-1 = ["<Super>1"];
+      switch-to-workspace-2 = ["<Super>2"];
+      switch-to-workspace-3 = ["<Super>3"];
+      switch-to-workspace-4 = ["<Super>4"];
     };
   };
 }
