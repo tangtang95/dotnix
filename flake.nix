@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixgl.url = "github:nix-community/nixGL";
     rust-overlay.url = "github:oxalica/rust-overlay";
     home-manager = {
@@ -12,15 +13,28 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     nixgl,
     rust-overlay,
   }: let
     system = "x86_64-linux";
+    config = {
+      allowUnfree = true;
+    };
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [nixgl.overlay rust-overlay.overlays.default];
-      config.allowUnfree = true;
+      inherit config;
+      overlays = [
+        nixgl.overlay
+        rust-overlay.overlays.default
+        (_final: prev: {
+          unstable = import nixpkgs-unstable {
+            inherit (prev) system;
+            inherit config;
+          };
+        })
+      ];
     };
   in {
     homeConfigurations."tangtang" = home-manager.lib.homeManagerConfiguration {

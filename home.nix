@@ -15,6 +15,35 @@
       chmod +x $wrapped_bin
       done
     '';
+  # catppuccin mocha colors
+  themeColors = {
+    rosewater = "#f5e0dc";
+    flamingo = "#f2cdcd";
+    pink = "#f5c2e7";
+    mauve = "#cba6f7";
+    red = "#f38ba8";
+    maroon = "#eba0ac";
+    peach = "#fab387";
+    yellow = "#f9e2af";
+    green = "#a6e3a1";
+    teal = "#94e2d5";
+    sky = "#89dceb";
+    sapphire = "#74c7ec";
+    blue = "#89b4fa";
+    lavender = "#b4befe";
+    text = "#cdd6f4";
+    subtext1 = "#bac2de";
+    subtext0 = "#a6adc8";
+    overlay2 = "#9399b2";
+    overlay1 = "#7f849c";
+    overlay0 = "#6c7086";
+    surface2 = "#585b70";
+    surface1 = "#45475a";
+    surface0 = "#313244";
+    base = "#1e1e2e";
+    mantle = "#181825";
+    crust = "#11111b";
+  };
 in {
   home.username = "tangtang";
   home.homeDirectory = "/home/tangtang";
@@ -138,19 +167,19 @@ in {
       settings = {
         gui = {
           theme = {
-            activeBorderColor = ["#89b4fa" "bold"];
-            inactiveBorderColor = ["#a6adc8"];
-            optionsTextColor = ["#89b4fa"];
-            selectedLineBgColor = ["#313244"];
-            cherryPickedCommitBgColor = ["#45475a"];
-            cherryPickedCommitFgColor = ["#89b4fa"];
-            unstagedChangesColor = ["#f38ba8"];
-            defaultFgColor = ["#cdd6f4"];
-            searchingActiveBorderColor = ["#f9e2af"];
+            activeBorderColor = [themeColors.blue "bold"];
+            inactiveBorderColor = [themeColors.subtext0];
+            optionsTextColor = [themeColors.blue];
+            selectedLineBgColor = [themeColors.surface0];
+            cherryPickedCommitBgColor = [themeColors.surface1];
+            cherryPickedCommitFgColor = [themeColors.blue];
+            unstagedChangesColor = [themeColors.red];
+            defaultFgColor = [themeColors.text];
+            searchingActiveBorderColor = [themeColors.yellow];
           };
           authorColors = {
-            "Tangtang Zhou" = "#cba6f7";
-            "*" = "#b4befe";
+            "Tangtang Zhou" = themeColors.mauve;
+            "*" = themeColors.lavender;
           };
         };
       };
@@ -171,6 +200,86 @@ in {
         };
         font.normal.family = "JetBrainsMono Nerd Font";
         font.size = 12;
+        colors = {
+          primary = {
+            background = themeColors.base;
+            foreground = themeColors.text;
+            dim_foreground = themeColors.text;
+            bright_foreground = themeColors.text;
+          };
+          cursor = {
+            text = themeColors.base;
+            cursor = themeColors.pink;
+          };
+          vi_mode_cursor = {
+            text = themeColors.base;
+            cursor = themeColors.lavender;
+          };
+          search.matches = {
+            foreground = themeColors.base;
+            background = themeColors.green;
+          };
+          search.focused_match = {
+            foreground = themeColors.base;
+            background = themeColors.subtext0;
+          };
+          footer_bar = {
+            foreground = themeColors.base;
+            background = themeColors.green;
+          };
+          hints.start = {
+            foreground = themeColors.base;
+            background = themeColors.yellow;
+          };
+          hints.end = {
+            foreground = themeColors.base;
+            background = themeColors.green;
+          };
+          selection = {
+            text = themeColors.base;
+            background = themeColors.rosewater;
+          };
+          normal = {
+            black = themeColors.surface1;
+            red = themeColors.red;
+            green = themeColors.green;
+            yellow = themeColors.yellow;
+            blue = themeColors.blue;
+            magenta = themeColors.pink;
+            cyan = themeColors.teal;
+            white = themeColors.subtext1;
+          };
+          bright = {
+            black = themeColors.surface2;
+            red = themeColors.red;
+            green = themeColors.green;
+            yellow = themeColors.yellow;
+            blue = themeColors.blue;
+            magenta = themeColors.pink;
+            cyan = themeColors.teal;
+            white = themeColors.subtext0;
+          };
+          dim = {
+            black = themeColors.surface1;
+            red = themeColors.red;
+            green = themeColors.green;
+            yellow = themeColors.yellow;
+            blue = themeColors.blue;
+            magenta = themeColors.pink;
+            cyan = themeColors.teal;
+            white = themeColors.subtext1;
+          };
+          indexed_colors = [
+            {
+              index = 16;
+              color = themeColors.peach;
+            }
+            {
+              index = 17;
+              color = themeColors.rosewater;
+            }
+          ];
+        };
       };
     };
   };
