@@ -49,7 +49,6 @@ in {
     pkgs.rust-bin.stable.latest.default
     (pkgs.python3.withPackages (ps: with ps; [pip]))
     (pkgs.lua.withPackages (ps: with ps; [jsregexp]))
-    pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs
 
