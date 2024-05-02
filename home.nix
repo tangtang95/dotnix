@@ -51,17 +51,20 @@ in {
   home.packages = [
     # new coreutils
     pkgs.ripgrep
+    pkgs.ripgrep-all
     pkgs.fd
     pkgs.bat
     pkgs.bottom
     pkgs.du-dust
     pkgs.sd
     pkgs.procs
+    pkgs.tailspin
 
     # web tools
     pkgs.wget
     pkgs.httpie
     pkgs.termscp
+    pkgs.dogdns
 
     # file processors
     pkgs.jq
@@ -96,6 +99,7 @@ in {
     pkgs.tealdeer
     pkgs.wl-clipboard
     pkgs.xdg-utils
+    pkgs.watchexec
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
     # guis
@@ -134,6 +138,9 @@ in {
     zellij = {
       enable = true;
       enableFishIntegration = true;
+    };
+    broot = {
+      enable = true;
     };
     git = import ./programs/git.nix;
     lazygit = {
