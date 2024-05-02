@@ -104,6 +104,7 @@ in {
 
     # guis
     pkgs.nixgl.auto.nixGLDefault
+    pkgs.spotify
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
