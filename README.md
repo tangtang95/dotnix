@@ -29,3 +29,4 @@ home-manager switch --impure --flake ~/dotnix
 ## Other tools to install
 
 - Steam with Proton
+- Spotify (log in via Browser does not work if installed via nix)
