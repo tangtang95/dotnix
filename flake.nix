@@ -47,7 +47,5 @@
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
     };
-    inherit home-manager;
-    inherit (home-manager) packages;
   };
 }
