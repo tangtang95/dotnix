@@ -30,3 +30,7 @@ home-manager switch --impure --flake ~/dotnix
 
 - Steam with Proton
 - Spotify (log in via Browser does not work if installed via nix)
+
+## Other tweaks
+
+- If there is screen tearing with NVIDIA gpu, enable force composition pipeline
