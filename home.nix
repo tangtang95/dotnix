@@ -72,6 +72,7 @@ in {
     pkgs.yq
     pkgs.zip
     pkgs.unzip
+    pkgs.hexyl
 
     # text editors
     pkgs.vim
