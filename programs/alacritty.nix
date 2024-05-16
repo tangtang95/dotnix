@@ -6,7 +6,6 @@
   enable = true;
   package = nixGLWrap pkgs.alacritty;
   settings = {
-    shell = "fish";
     window.dimensions = {
       columns = 100;
       lines = 25;
