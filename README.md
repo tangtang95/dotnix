@@ -26,6 +26,15 @@ home-manager switch --impure --flake ~/dotnix
 
 - Determinism due to impure evaluation mode. Impure is necessary due to limitation of nixGL (i.e. builtins.currentTime https://github.com/NixOS/nix/issues/3539)
 
+## Change default shell
+
+Add shell program to `/etc/shells` and then change shell. Example with `fish`:
+
+```sh
+command -v fish | sudo tee -a /etc/shells
+sudo chsh -s "$(command -v fish)" "${USER}"
+```
+
 ## Other tools to install
 
 - Steam with Proton
