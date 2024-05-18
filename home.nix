@@ -85,6 +85,9 @@ in {
     pkgs.gnumake
     pkgs.nodejs
 
+    # cargo packages
+    pkgs.cargo-llvm-cov
+
     # language tools
     pkgs.tree-sitter
 
