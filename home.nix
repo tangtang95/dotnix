@@ -127,6 +127,10 @@ in {
         set fish_greeting # Disable greeting
       '';
     };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     eza = {
       enable = true;
       enableAliases = true;
