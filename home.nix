@@ -65,6 +65,7 @@ in {
     pkgs.httpie
     pkgs.termscp
     pkgs.dogdns
+    pkgs.bandwhich
 
     # file processors
     pkgs.jq
@@ -101,7 +102,7 @@ in {
     pkgs.fzf
     pkgs.neofetch
     pkgs.tealdeer
-    pkgs.wl-clipboard
+    pkgs.xclip
     pkgs.xdg-utils
     pkgs.watchexec
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
