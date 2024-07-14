@@ -20,6 +20,9 @@
     pull = {
       rebase = true;
     };
+    delta = {
+      navigate = true;
+    };
     merge.tool = "nvimdiff";
     mergetool = {
       prompt = false;
