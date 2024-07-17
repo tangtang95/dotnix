@@ -5,6 +5,8 @@
   aliases = {
     pfl = "push --force-with-lease";
     log1l = "log --oneline";
+    logp = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+    branch-merged = "!git branch --merged | grep  -v '\\*\\|master\\|main'";
   };
   delta = {
     enable = true;
