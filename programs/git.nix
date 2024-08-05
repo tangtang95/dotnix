@@ -24,6 +24,7 @@
     };
     delta = {
       navigate = true;
+      dark = true;
     };
     merge.tool = "nvimdiff";
     mergetool = {
