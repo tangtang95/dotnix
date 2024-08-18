@@ -85,6 +85,7 @@ in {
     (pkgs.lua.withPackages (ps: with ps; [jsregexp]))
     pkgs.gnumake
     pkgs.nodejs
+    pkgs.unstable.zig
 
     # cargo packages
     pkgs.cargo-llvm-cov
