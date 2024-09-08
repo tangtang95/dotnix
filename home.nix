@@ -114,6 +114,7 @@ in {
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
+    LD_LIBRARY_PATH = "";
   };
 
   # zellij static config file (because limitation in nix to kdl converter)
