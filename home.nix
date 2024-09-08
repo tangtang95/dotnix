@@ -102,6 +102,7 @@ in {
     # others
     pkgs.fzf
     pkgs.neofetch
+    pkgs.tokei
     pkgs.tealdeer
     pkgs.xclip
     pkgs.xdg-utils
