@@ -207,10 +207,10 @@ in {
       xkb-options = ["caps:swapescape"];
     };
     "org/gnome/desktop/wm/keybindings" = {
-      move-to-workspace-1 = ["<Shift><Super>exclam"];
-      move-to-workspace-2 = ["<Shift><Super>quotedbl"];
-      move-to-workspace-3 = ["<Shift><Super>sterling"];
-      move-to-workspace-4 = ["<Shift><Super>dollar"];
+      move-to-workspace-1 = ["<Shift><Super>1"];
+      move-to-workspace-2 = ["<Shift><Super>2"];
+      move-to-workspace-3 = ["<Shift><Super>3"];
+      move-to-workspace-4 = ["<Shift><Super>4"];
       switch-to-workspace-1 = ["<Super>1"];
       switch-to-workspace-2 = ["<Super>2"];
       switch-to-workspace-3 = ["<Super>3"];
