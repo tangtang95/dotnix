@@ -44,3 +44,4 @@ sudo chsh -s "$(command -v fish)" "${USER}"
 ## Other tweaks
 
 - If there is screen tearing with NVIDIA gpu, enable force composition pipeline
+- In order to use VIA keyboard tool, you need to add udev rule for the USB driver keyboard (https://get.vial.today/manual/linux-udev.html)
