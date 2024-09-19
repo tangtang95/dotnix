@@ -117,11 +117,13 @@ in {
     (nixGLWrap pkgs.gimp)
     (nixGLWrap pkgs.spotify)
     (nixGLWrap pkgs.discord)
+    (nixGLWrap pkgs.vlc)
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
     LD_LIBRARY_PATH = "";
   };
+  # set pointer cursor due to tiny icon when using scaling
   home.pointerCursor = {
     name = "Pop";
     package = pkgs.pop-icon-theme;
