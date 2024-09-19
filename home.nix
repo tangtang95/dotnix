@@ -113,6 +113,7 @@ in {
     pkgs.nixgl.auto.nixGLDefault
     pkgs.wineWowPackages.full
     (nixGLWrap pkgs.via)
+    pkgs.gimp
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
