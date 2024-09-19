@@ -122,6 +122,11 @@ in {
     EDITOR = "nvim";
     LD_LIBRARY_PATH = "";
   };
+  home.pointerCursor = {
+    name = "Pop";
+    package = pkgs.pop-icon-theme;
+    size = 32;
+  };
 
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ./config/zellij.kdl;
