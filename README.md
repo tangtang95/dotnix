@@ -26,6 +26,7 @@ home-manager switch --impure --flake ~/dotnix
 ### Limitations
 
 - Determinism due to impure evaluation mode. Impure is necessary due to limitation of nixGL (i.e. builtins.currentTime https://github.com/NixOS/nix/issues/3539)
+- Require to use firefox installed via nix and using nixGL. Otherwise other nix GUI apps that need to open web pages will not work
 
 ## Change default shell
 
@@ -39,7 +40,6 @@ sudo chsh -s "$(command -v fish)" "${USER}"
 ## Other tools to install
 
 - Steam with Proton
-- Spotify (log in via Browser does not work if installed via nix)
 
 ## Other tweaks
 

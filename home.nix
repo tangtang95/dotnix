@@ -115,6 +115,7 @@ in {
     (nixGLWrap pkgs.via)
     (nixGLWrap pkgs.gimp)
     (nixGLWrap pkgs.spotify)
+    (nixGLWrap pkgs.firefox)
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
