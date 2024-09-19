@@ -113,7 +113,8 @@ in {
     pkgs.nixgl.auto.nixGLDefault
     pkgs.wineWowPackages.full
     (nixGLWrap pkgs.via)
-    pkgs.gimp
+    (nixGLWrap pkgs.gimp)
+    (nixGLWrap pkgs.spotify)
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -195,6 +196,7 @@ in {
     };
     thunderbird = {
       enable = true;
+      package = nixGLWrap pkgs.thunderbird;
       profiles = {
         default = {
           isDefault = true;
