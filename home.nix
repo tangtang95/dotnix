@@ -112,10 +112,11 @@ in {
     # guis
     pkgs.nixgl.auto.nixGLDefault
     pkgs.wineWowPackages.full
+    (nixGLWrap pkgs.firefox) # must have a browser installed with nix as default browser
     (nixGLWrap pkgs.via)
     (nixGLWrap pkgs.gimp)
     (nixGLWrap pkgs.spotify)
-    (nixGLWrap pkgs.firefox)
+    (nixGLWrap pkgs.discord)
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
