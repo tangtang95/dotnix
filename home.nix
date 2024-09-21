@@ -121,7 +121,7 @@ in {
     (nixGLWrap pkgs.discord)
     (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
-    (nixGLWrap pkgs.whatsapp-for-linux)
+    (nixGLWrap pkgs.whatsapp-for-linux) # need to disable hardware acceleration
     (nixGLWrap pkgs.via) # for keychron keyboard
   ];
   home.sessionVariables = {
@@ -201,8 +201,9 @@ in {
     };
     gnome-shell = {
       enable = true;
-      extensions = [
-        {package = pkgs.gnome42.gnomeExtensions.clipboard-indicator;}
+      extensions = with pkgs.gnome42.gnomeExtensions; [
+        {package = clipboard-indicator;}
+        {package = gsconnect;}
       ];
     };
   };
