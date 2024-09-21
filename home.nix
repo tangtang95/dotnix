@@ -122,7 +122,6 @@ in {
     (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
     (nixGLWrap pkgs.whatsapp-for-linux)
-    (nixGLWrap pkgs.dconf-editor)
     (nixGLWrap pkgs.via) # for keychron keyboard
   ];
   home.sessionVariables = {
