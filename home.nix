@@ -117,11 +117,13 @@ in {
     (nixGLWrap pkgs.gimp)
     (nixGLWrap pkgs.spotify)
     (nixGLWrap pkgs.discord)
+    (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
+    (nixGLWrap pkgs.whatsapp-for-linux)
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
-    LD_LIBRARY_PATH = "";
+    LD_LIBRARY_PATH = ""; # to fix libgc issue with alacritty
   };
   # set pointer cursor due to tiny icon when using scaling
   home.pointerCursor = {
