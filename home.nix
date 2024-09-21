@@ -48,6 +48,9 @@ in {
   home.username = "tangtang";
   home.homeDirectory = "/home/tangtang";
   home.stateVersion = "23.11";
+  home.keyboard = {
+    layout = "us";
+  };
   home.packages = [
     # new coreutils
     pkgs.ripgrep
@@ -113,13 +116,14 @@ in {
     pkgs.nixgl.auto.nixGLDefault
     pkgs.wineWowPackages.full
     (nixGLWrap pkgs.firefox) # must have a browser installed with nix as default browser
-    (nixGLWrap pkgs.via)
     (nixGLWrap pkgs.gimp)
     (nixGLWrap pkgs.spotify)
     (nixGLWrap pkgs.discord)
     (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
     (nixGLWrap pkgs.whatsapp-for-linux)
+    (nixGLWrap pkgs.dconf-editor)
+    (nixGLWrap pkgs.via) # for keychron keyboard
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
