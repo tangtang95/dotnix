@@ -199,6 +199,12 @@ in {
       defaultEditor = true;
       vimAlias = true;
     };
+    gnome-shell = {
+      enable = true;
+      extensions = [
+        {package = pkgs.gnome42.gnomeExtensions.clipboard-indicator;}
+      ];
+    };
   };
 
   # gui programs
@@ -237,6 +243,9 @@ in {
     "org/gnome/desktop/applications/terminal" = {
       exec = "alacritty";
       exec-arg = "";
+    };
+    "org/gnome/shell/extensions/clipboard-indicator" = {
+      toggle-menu = ["<Super>p"];
     };
   };
 }
