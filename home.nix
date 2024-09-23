@@ -203,7 +203,6 @@ in {
       enable = true;
       extensions = with pkgs.gnome42.gnomeExtensions; [
         {package = clipboard-indicator;}
-        {package = gsconnect;}
       ];
     };
   };
