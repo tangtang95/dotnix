@@ -40,6 +40,7 @@ sudo chsh -s "$(command -v fish)" "${USER}"
 ## Other tools to install
 
 - Steam with Proton
+- virt-manager with kvm (https://ipv6.rs/tutorial/POP!_OS_Latest/KVM/)
 
 ## Other tweaks
 
