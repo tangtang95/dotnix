@@ -92,6 +92,7 @@ in {
 
     # cargo packages
     pkgs.cargo-llvm-cov
+    pkgs.cargo-cross
 
     # language tools
     pkgs.tree-sitter
