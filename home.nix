@@ -172,6 +172,10 @@ in {
     broot = {
       enable = true;
     };
+    yazi = {
+      enable = true;
+      enableFishIntegration = true;
+    };
     git = import ./programs/git.nix;
     lazygit = {
       enable = true;
