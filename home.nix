@@ -89,6 +89,7 @@ in {
     pkgs.gnumake
     pkgs.nodejs
     pkgs.unstable.zig
+    pkgs.unstable.go
 
     # cargo packages
     pkgs.cargo-llvm-cov
