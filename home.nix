@@ -89,7 +89,7 @@ in {
     pkgs.gnumake
     pkgs.nodejs
     pkgs.unstable.zig
-    pkgs.unstable.go
+    pkgs.go
 
     # cargo packages
     pkgs.cargo-llvm-cov
@@ -157,7 +157,7 @@ in {
     };
     eza = {
       enable = true;
-      icons = true;
+      icons = "auto";
     };
     zoxide = {
       enable = true;
