@@ -83,7 +83,9 @@ in {
     pkgs.delta
 
     # languages
-    pkgs.rust-bin.stable.latest.complete
+    (pkgs.rust-bin.stable.latest.complete.override {
+      targets = [ "i686-pc-windows-msvc" ];
+    })
     (pkgs.python3.withPackages (ps: with ps; [pip]))
     (pkgs.lua.withPackages (ps: with ps; [jsregexp]))
     pkgs.gnumake
@@ -94,6 +96,7 @@ in {
     # cargo packages
     pkgs.cargo-llvm-cov
     pkgs.cargo-cross
+    pkgs.unstable.cargo-xwin
 
     # language tools
     pkgs.tree-sitter
@@ -123,6 +126,7 @@ in {
     (nixGLWrap pkgs.discord)
     (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
+    (nixGLWrap pkgs.ghostty)
     (nixGLWrap pkgs.whatsapp-for-linux) # need to disable hardware acceleration
     (nixGLWrap pkgs.via) # for keychron keyboard
   ];
