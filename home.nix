@@ -47,7 +47,7 @@
 in {
   home.username = "tangtang";
   home.homeDirectory = "/home/tangtang";
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
   home.keyboard = {
     layout = "us";
   };
