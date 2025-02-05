@@ -4,6 +4,7 @@
     nixpkgs-gnome-42.url = "github:NixOS/nixpkgs/nixos-22.05"; # For gnome 42 extensions (Pop OS uses gnome 42)
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixgl.url = "github:nix-community/nixGL";
+    nix-gl-host.url = "github:numtide/nix-gl-host";
     rust-overlay.url = "github:oxalica/rust-overlay";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -18,6 +19,7 @@
     nixpkgs-gnome-42,
     home-manager,
     nixgl,
+    nix-gl-host,
     rust-overlay,
   }: let
     system = "x86_64-linux";
@@ -29,6 +31,7 @@
       overlays = [
         nixgl.overlay
         rust-overlay.overlays.default
+        nix-gl-host.overlays.default
         (_final: prev: {
           unstable = import nixpkgs-unstable {
             inherit (prev) system;

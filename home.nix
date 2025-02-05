@@ -11,7 +11,7 @@
       mkdir $out/bin
       for bin in ${pkg}/bin/*; do
        wrapped_bin=$out/bin/$(basename $bin)
-       echo "exec ${lib.getExe' pkgs.nixgl.auto.nixGLDefault "nixGL"} $bin \"\$@\"" > $wrapped_bin
+       echo "exec ${lib.getExe' pkgs.nix-gl-host "nixglhost"} $bin \"\$@\"" > $wrapped_bin
       chmod +x $wrapped_bin
       done
     '';
@@ -118,6 +118,7 @@ in {
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
     # guis
+    pkgs.nix-gl-host
     pkgs.nixgl.auto.nixGLDefault
     (nixGLWrap pkgs.wineWowPackages.full)
     (nixGLWrap pkgs.firefox) # must have a browser installed with nix as default browser
