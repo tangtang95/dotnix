@@ -119,7 +119,6 @@ in {
 
     # guis
     pkgs.nix-gl-host
-    pkgs.nixgl.auto.nixGLDefault
     (nixGLWrap pkgs.wineWowPackages.full)
     (nixGLWrap pkgs.firefox) # must have a browser installed with nix as default browser
     (nixGLWrap pkgs.gimp)
