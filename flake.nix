@@ -4,7 +4,7 @@
     nixpkgs-gnome-42.url = "github:NixOS/nixpkgs/nixos-22.05"; # For gnome 42 extensions (Pop OS uses gnome 42)
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixgl.url = "github:nix-community/nixGL";
-    nix-gl-host.url = "github:numtide/nix-gl-host";
+    nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";

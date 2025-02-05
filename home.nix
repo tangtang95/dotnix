@@ -83,7 +83,7 @@ in {
     pkgs.delta
 
     # languages
-    (pkgs.rust-bin.stable.latest.complete.override {
+    (pkgs.rust-bin.stable."1.83.0".complete.override {
       targets = [ "i686-pc-windows-msvc" ];
     })
     (pkgs.python3.withPackages (ps: with ps; [pip]))
@@ -132,7 +132,6 @@ in {
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
-    LD_LIBRARY_PATH = ""; # to fix libgc issue with alacritty
   };
   # set pointer cursor due to tiny icon when using scaling
   home.pointerCursor = {
