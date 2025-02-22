@@ -132,6 +132,7 @@ in {
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
+    LD_LIBRARY_PATH = "";
   };
   # set pointer cursor due to tiny icon when using scaling
   home.pointerCursor = {
@@ -153,6 +154,10 @@ in {
       interactiveShellInit = ''
         set fish_greeting # Disable greeting
       '';
+      shellAliases = {
+        pbcopy = "xclip -selection clipboard";
+        pbpaste = "xclip -selection clipboard -o";
+      };
     };
     direnv = {
       enable = true;
