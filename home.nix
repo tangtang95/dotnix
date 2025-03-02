@@ -83,7 +83,7 @@ in {
     pkgs.delta
 
     # languages
-    (pkgs.rust-bin.stable."1.83.0".complete.override {
+    (pkgs.rust-bin.stable.latest.complete.override {
       targets = [ "i686-pc-windows-msvc" ];
     })
     (pkgs.python3.withPackages (ps: with ps; [pip]))
