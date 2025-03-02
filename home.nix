@@ -109,7 +109,7 @@ in {
 
     # others
     pkgs.fzf
-    pkgs.neofetch
+    pkgs.fastfetch
     pkgs.tokei
     pkgs.tealdeer
     pkgs.xclip
