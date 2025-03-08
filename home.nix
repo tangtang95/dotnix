@@ -86,11 +86,11 @@ in {
     (pkgs.rust-bin.stable.latest.complete.override {
       targets = [ "i686-pc-windows-msvc" ];
     })
+    pkgs.zigpkgs.master-2025-03-06
     (pkgs.python3.withPackages (ps: with ps; [pip]))
     (pkgs.lua.withPackages (ps: with ps; [jsregexp]))
     pkgs.gnumake
     pkgs.nodejs
-    pkgs.unstable.zig
     pkgs.go
 
     # cargo packages

@@ -6,6 +6,7 @@
     nixgl.url = "github:nix-community/nixGL";
     nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
     rust-overlay.url = "github:oxalica/rust-overlay";
+    zig-overlay.url = "github:mitchellh/zig-overlay";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +22,7 @@
     nixgl,
     nix-gl-host,
     rust-overlay,
+    zig-overlay,
   }: let
     system = "x86_64-linux";
     config = {
@@ -31,6 +33,7 @@
       overlays = [
         nixgl.overlay
         rust-overlay.overlays.default
+        zig-overlay.overlays.default
         nix-gl-host.overlays.default
         (_final: prev: {
           unstable = import nixpkgs-unstable {
