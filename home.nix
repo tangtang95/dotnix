@@ -107,8 +107,13 @@ in {
     # dap (debugger tool)
     pkgs.vscode-extensions.vadimcn.vscode-lldb
 
+    # benchmarking tools
+    pkgs.samply
+    pkgs.hyperfine
+
     # others
     pkgs.fzf
+    pkgs.just
     pkgs.fastfetch
     pkgs.tokei
     pkgs.tealdeer
