@@ -83,7 +83,8 @@ in {
     pkgs.delta
 
     # languages
-    (pkgs.rust-bin.stable.latest.complete.override {
+    (pkgs.rust-bin.stable.latest.default.override {
+      extensions = [ "rust-analyzer" "rust-src" "llvm-tools" ];
       targets = [ "i686-pc-windows-msvc" ];
     })
     pkgs.zigpkgs.master-2025-03-06
@@ -183,13 +184,6 @@ in {
       enable = true;
       enableFishIntegration = true;
     };
-    broot = {
-      enable = true;
-    };
-    yazi = {
-      enable = true;
-      enableFishIntegration = true;
-    };
     git = import ./programs/git.nix;
     lazygit = {
       enable = true;
@@ -222,6 +216,7 @@ in {
       enable = true;
       extensions = with pkgs.gnome42.gnomeExtensions; [
         {package = clipboard-indicator;}
+        {package = workspaces-bar;} # deprecated after gnome42
       ];
     };
   };
