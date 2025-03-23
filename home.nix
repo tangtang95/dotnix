@@ -107,6 +107,7 @@ in {
 
     # dap (debugger tool)
     pkgs.vscode-extensions.vadimcn.vscode-lldb
+    pkgs.lldb
 
     # benchmarking tools
     pkgs.samply
