@@ -118,6 +118,7 @@ in {
     pkgs.just
     pkgs.fastfetch
     pkgs.tokei
+    pkgs.onefetch
     pkgs.tealdeer
     pkgs.xclip
     pkgs.xdg-utils
