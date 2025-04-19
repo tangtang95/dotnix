@@ -17,6 +17,9 @@
       vimAlias = true;
       defaultEditor = true;
     };
+    starship = {
+      enable = true;
+    };
     git = {
       enable = true;
       config = {
