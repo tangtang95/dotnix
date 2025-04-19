@@ -7,6 +7,7 @@
     nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     zig-overlay.url = "github:mitchellh/zig-overlay";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +19,7 @@
     nixpkgs,
     nixpkgs-unstable,
     nixpkgs-gnome-42,
+    nixos-wsl,
     home-manager,
     nixgl,
     nix-gl-host,
@@ -58,7 +60,17 @@
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
     };
-    inherit home-manager;
-    inherit (home-manager) packages;
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      inherit system;
+      inherit pkgs;
+      specialArgs = {
+        hostname = "nixos";
+        username = "nixos";
+      };
+      modules = [
+        nixos-wsl.nixosModules.default
+        ./systems/nixos-configuration.nix
+      ];
+    };
   };
 }

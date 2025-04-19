@@ -11,9 +11,7 @@ Use determinatate system nix installer since it will also automatically enable f
 Manage home with the following command:
 
 ```sh
-nix run .#home-manager -- switch --impure --flake ~/dotnix
-
-# after one generation of home manager, it is possible to use home-manager directly
+nix-shell -p home-manager
 home-manager switch --impure --flake ~/dotnix
 ```
 
