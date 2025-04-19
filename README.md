@@ -2,8 +2,6 @@
 
 Dotfiles for configuring linux environments through nix home-manager tool.
 
-## My Tower Desktop PC driver to install
-
 ## Nix installation
 
 Use determinatate system nix installer since it will also automatically enable flakes experimental feature (https://github.com/DeterminateSystems/nix-installer).
