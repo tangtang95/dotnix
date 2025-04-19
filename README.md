@@ -4,10 +4,6 @@ Dotfiles for configuring linux environments through nix home-manager tool.
 
 ## My Tower Desktop PC driver to install
 
- - TP-Link Archer T2U PLUS Wi-Fi driver (RTL8821AU)
-   - follow this guide https://github.com/aircrack-ng/rtl8812au but make sure that gcc version is the same as the one used to compile the kernel.
-   - Working commit hash version: https://github.com/aircrack-ng/rtl8812au/tree/63cf0b4584aa8878b0fe8ab38017f31c319bde3d 
-
 ## Nix installation
 
 Use determinatate system nix installer since it will also automatically enable flakes experimental feature (https://github.com/DeterminateSystems/nix-installer).
