@@ -134,6 +134,7 @@ in {
     (nixGLWrap pkgs.discord)
     (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
+    (nixGLWrap pkgs.evince) # document viewer
     (nixGLWrap pkgs.ghostty)
     (nixGLWrap pkgs.whatsapp-for-linux) # need to disable hardware acceleration
     (nixGLWrap pkgs.via) # for keychron keyboard
