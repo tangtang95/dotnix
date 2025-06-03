@@ -10,7 +10,7 @@
       columns = 100;
       lines = 25;
     };
-    font.normal.family = "JetBrainsMono Nerd Font";
+    font.normal.family = "JetBrainsMono NF";
     font.size = 12;
     colors = {
       primary = {
