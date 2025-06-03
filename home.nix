@@ -123,7 +123,7 @@ in {
     pkgs.xclip
     pkgs.xdg-utils
     pkgs.watchexec
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+    pkgs.nerd-fonts.jetbrains-mono
 
     # guis
     pkgs.nix-gl-host
