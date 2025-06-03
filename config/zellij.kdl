@@ -1,4 +1,5 @@
 default_shell "fish"
+show_startup_tips false
 pane_frames false
 theme "catppuccin-mocha"
 themes {
