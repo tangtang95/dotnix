@@ -93,6 +93,7 @@ in {
     pkgs.gnumake
     pkgs.nodejs
     pkgs.go
+    pkgs.typst
 
     # cargo packages
     pkgs.cargo-llvm-cov
@@ -131,6 +132,7 @@ in {
     (nixGLWrap pkgs.firefox) # must have a browser installed with nix as default browser
     (nixGLWrap pkgs.gimp)
     (nixGLWrap pkgs.spotify)
+    (nixGLWrap pkgs.qbittorrent)
     (nixGLWrap pkgs.discord)
     (nixGLWrap pkgs.onlyoffice-bin)
     (nixGLWrap pkgs.vlc)
