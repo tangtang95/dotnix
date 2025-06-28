@@ -79,7 +79,7 @@ in {
     })
     # pkgs.zigpkgs.master-2025-03-06
     (pkgs.python3.withPackages (ps: with ps; [pip]))
-    (pkgs.lua.withPackages (ps: with ps; [jsregexp]))
+    (pkgs.lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
     pkgs.gnumake
     pkgs.nodejs
     pkgs.go
@@ -203,17 +203,23 @@ in {
   };
 
   # gui programs
-  # programs = {
-  #   thunderbird = {
-  #     enable = true;
-  #     package = nixGLWrap pkgs.thunderbird;
-  #     profiles = {
-  #       default = {
-  #         isDefault = true;
-  #       };
-  #     };
-  #   };
-  # };
+  programs = {
+    ghostty = {
+      enable = true;
+      settings = {
+        theme = "catppuccin-mocha";
+      };
+    };
+    # thunderbird = {
+    #   enable = true;
+    #   package = pkgs.thunderbird;
+    #   profiles = {
+    #     default = {
+    #       isDefault = true;
+    #     };
+    #   };
+    # };
+  };
 
   # only gnome settings (for pop-os)
   dconf.settings = {
