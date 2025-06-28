@@ -131,6 +131,7 @@ in {
     pkgs.onlyoffice-bin
     pkgs.vlc
     pkgs.whatsapp-for-linux
+    pkgs.bitwarden-desktop
     pkgs.via # for keychron keyboard
   ];
   home.sessionVariables = {
