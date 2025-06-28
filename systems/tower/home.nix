@@ -84,11 +84,18 @@ in {
     pkgs.nodejs
     pkgs.go
     pkgs.typst
+    pkgs.gcc
 
     # cargo packages
     pkgs.cargo-llvm-cov
     pkgs.cargo-cross
     pkgs.unstable.cargo-xwin
+
+    # lsp only for nixos
+    pkgs.nixd
+    pkgs.gopls
+    pkgs.zls
+    pkgs.lua-language-server
 
     # language tools
     pkgs.tree-sitter
