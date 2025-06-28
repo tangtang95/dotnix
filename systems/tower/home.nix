@@ -203,13 +203,13 @@ in {
       defaultEditor = true;
       vimAlias = true;
     };
-    # gnome-shell = {
-    #   enable = true;
-    #   extensions = with pkgs.gnome42.gnomeExtensions; [
-    #     {package = clipboard-indicator;}
-    #     {package = workspaces-bar;} # deprecated after gnome42
-    #   ];
-    # };
+    gnome-shell = {
+      enable = true;
+      extensions = with pkgs.gnomeExtensions; [
+        {package = clipboard-indicator;}
+        {package = simple-workspaces-bar;}
+      ];
+    };
   };
 
   # gui programs
@@ -250,8 +250,8 @@ in {
       exec = "ghostty";
       exec-arg = "";
     };
-    # "org/gnome/shell/extensions/clipboard-indicator" = {
-    #   toggle-menu = ["<Super>p"];
-    # };
+    "org/gnome/shell/extensions/clipboard-indicator" = {
+      toggle-menu = ["<Super>p"];
+    };
   };
 }
