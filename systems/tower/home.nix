@@ -122,6 +122,16 @@ in {
     pkgs.xdg-utils
     pkgs.watchexec
     pkgs.nerd-fonts.jetbrains-mono
+
+    # gui
+    pkgs.gimp
+    pkgs.spotify
+    pkgs.qbittorrent
+    pkgs.discord
+    pkgs.onlyoffice-bin
+    pkgs.vlc
+    pkgs.whatsapp-for-linux
+    pkgs.via # for keychron keyboard
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -236,10 +246,10 @@ in {
       switch-to-workspace-3 = ["<Super>3"];
       switch-to-workspace-4 = ["<Super>4"];
     };
-    # "org/gnome/desktop/applications/terminal" = {
-    #   exec = "alacritty";
-    #   exec-arg = "";
-    # };
+    "org/gnome/desktop/applications/terminal" = {
+      exec = "ghostty";
+      exec-arg = "";
+    };
     # "org/gnome/shell/extensions/clipboard-indicator" = {
     #   toggle-menu = ["<Super>p"];
     # };

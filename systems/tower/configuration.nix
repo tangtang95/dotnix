@@ -113,6 +113,7 @@
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     };
+    command-not-found.enable = false; # Does not work on nixos with flakes
   };
 
   # List packages installed in system profile. To search, run:
