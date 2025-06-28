@@ -238,11 +238,24 @@ in {
     # };
   };
 
-  # only gnome settings (for pop-os)
+  # only gnome settings
   dconf.settings = {
+    # appeareance
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+    # power
+    "org/gnome/desktop/session" = {
+      idle-delay = lib.gvariant.mkUint32 600;
+    };
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-timeout = lib.gvariant.mkInt32 1800;
+    };
+    # keyboard
     "org/gnome/desktop/input-sources" = {
       xkb-options = ["caps:swapescape"];
     };
+    # shortcuts
     "org/gnome/desktop/wm/keybindings" = {
       move-to-workspace-1 = ["<Shift><Super>1"];
       move-to-workspace-2 = ["<Shift><Super>2"];
@@ -253,10 +266,10 @@ in {
       switch-to-workspace-3 = ["<Super>3"];
       switch-to-workspace-4 = ["<Super>4"];
     };
-    "org/gnome/desktop/applications/terminal" = {
-      exec = "ghostty";
-      exec-arg = "";
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      "www" = ["<Super>b"];
     };
+    # extensions
     "org/gnome/shell/extensions/clipboard-indicator" = {
       toggle-menu = ["<Super>p"];
     };
