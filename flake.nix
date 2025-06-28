@@ -60,16 +60,27 @@
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
     };
+    # nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    #   inherit system;
+    #   inherit pkgs;
+    #   specialArgs = {
+    #     hostname = "nixos";
+    #     username = "nixos";
+    #   };
+    #   modules = [
+    #     nixos-wsl.nixosModules.default
+    #     ./systems/wsl/nixos-configuration.nix
+    #   ];
+    # };
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       inherit pkgs;
       specialArgs = {
-        hostname = "nixos";
-        username = "nixos";
+        rootPath = ./.;
       };
       modules = [
-        nixos-wsl.nixosModules.default
-        ./systems/nixos-configuration.nix
+        ./systems/tower/configuration.nix
+	home-manager.nixosModules.home-manager
       ];
     };
   };
