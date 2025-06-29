@@ -72,7 +72,7 @@
     #     ./systems/wsl/nixos-configuration.nix
     #   ];
     # };
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.tower-nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       inherit pkgs;
       specialArgs = {

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, home-manager, rootPath, lib, ... }:
+{ config, pkgs, rootPath, lib, ... }:
 
 {
   imports =
@@ -17,12 +17,7 @@
   # Use nix flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = "tower-nixos";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -155,6 +150,9 @@
   environment.systemPackages = with pkgs; [
     wget
   ];
+  environment.sessionVariables = {
+    NVIM_USE_NIXOS_MODULE = "true";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

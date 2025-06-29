@@ -3,6 +3,7 @@
   userName = "Tangtang Zhou";
   userEmail = "tangtang2995@gmail.com";
   aliases = {
+    s = "status";
     pfl = "push --force-with-lease";
     log1l = "log --oneline";
     logp = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";

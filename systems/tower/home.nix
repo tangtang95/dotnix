@@ -132,11 +132,12 @@ in {
     pkgs.vlc
     pkgs.whatsapp-for-linux
     pkgs.bitwarden-desktop
+    pkgs.obsidian
     pkgs.via # for keychron keyboard
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
-    LD_LIBRARY_PATH = "";
+    NVIM_USE_NIXOS_MODULE = "true";
   };
 
   # zellij static config file (because limitation in nix to kdl converter)
