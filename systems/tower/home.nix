@@ -258,9 +258,10 @@ in {
     };
     # shortcuts
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      screensaver = [];
+      screensaver = []; # remove lock screen shortcut which default nixos gnome is <Ctrl>l
     };
     "org/gnome/shell/keybindings" = {
+      # remove all switch to app since default is <Super>1, ...
       switch-to-application-1 = [];
       switch-to-application-2 = [];
       switch-to-application-3 = [];
@@ -283,6 +284,14 @@ in {
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
       "www" = ["<Super>b"];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "open-terminal";
+      command = "ghostty";
+      binding = "<Super>t";
     };
     # extensions
     "org/gnome/shell/extensions/clipboard-indicator" = {
@@ -297,6 +306,8 @@ in {
       move-right = ["<Shift><Super>l"];
       move-up = ["<Shift><Super>k"];
       move-down = ["<Shift><Super>j"];
+      close-window = ["<Super>w"];
+      take-window = [];
     };
   };
 }
