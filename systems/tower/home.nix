@@ -210,6 +210,7 @@ in {
       extensions = with pkgs.gnomeExtensions; [
         {package = clipboard-indicator;}
         {package = simple-workspaces-bar;}
+        {package = paperwm;}
       ];
     };
   };
@@ -228,15 +229,14 @@ in {
         shell-integration-features = "no-cursor";
       };
     };
-    # thunderbird = {
-    #   enable = true;
-    #   package = pkgs.thunderbird;
-    #   profiles = {
-    #     default = {
-    #       isDefault = true;
-    #     };
-    #   };
-    # };
+    thunderbird = {
+      enable = true;
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+      };
+    };
   };
 
   # only gnome settings
@@ -257,6 +257,20 @@ in {
       xkb-options = ["caps:swapescape"];
     };
     # shortcuts
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      screensaver = [];
+    };
+    "org/gnome/shell/keybindings" = {
+      switch-to-application-1 = [];
+      switch-to-application-2 = [];
+      switch-to-application-3 = [];
+      switch-to-application-4 = [];
+      switch-to-application-5 = [];
+      switch-to-application-6 = [];
+      switch-to-application-7 = [];
+      switch-to-application-8 = [];
+      switch-to-application-9 = [];
+    };
     "org/gnome/desktop/wm/keybindings" = {
       move-to-workspace-1 = ["<Shift><Super>1"];
       move-to-workspace-2 = ["<Shift><Super>2"];
@@ -273,6 +287,16 @@ in {
     # extensions
     "org/gnome/shell/extensions/clipboard-indicator" = {
       toggle-menu = ["<Super>p"];
+    };
+    "org/gnome/shell/extensions/paperwm/keybindings" = {
+      switch-left = ["<Super>h"];
+      switch-right = ["<Super>l"];
+      switch-up = ["<Super>k"];
+      switch-down = ["<Super>j"];
+      move-left = ["<Shift><Super>h"];
+      move-right = ["<Shift><Super>l"];
+      move-up = ["<Shift><Super>k"];
+      move-down = ["<Shift><Super>j"];
     };
   };
 }

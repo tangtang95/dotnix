@@ -91,14 +91,6 @@
     };
   };
 
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "tangtang-tower";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
   # Install firefox.
   programs = {
     firefox.enable = true;
@@ -109,40 +101,6 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     };
     command-not-found.enable = false; # Does not work on nixos with flakes
-    dconf.profiles.user.databases = [
-      {
-        settings = {
-          "org/gnome/desktop/interface" = {
-            color-scheme = "prefer-dark";
-          };
-          "org/gnome/desktop/wm/keybindings" = {
-            move-to-workspace-1 = ["<Shift><Super>1"];
-            move-to-workspace-2 = ["<Shift><Super>2"];
-            move-to-workspace-3 = ["<Shift><Super>3"];
-            move-to-workspace-4 = ["<Shift><Super>4"];
-            switch-to-workspace-1 = ["<Super>1"];
-            switch-to-workspace-2 = ["<Super>2"];
-            switch-to-workspace-3 = ["<Super>3"];
-            switch-to-workspace-4 = ["<Super>4"];
-          };
-          # power
-          "org/gnome/desktop/session" = {
-            idle-delay = lib.gvariant.mkInt32 600;
-          };
-          "org/gnome/settings-daemon/plugins/power" = {
-            sleep-inactive-ac-timeout = "1800";
-          };
-          "org/gnome/desktop/applications/terminal" = {
-            exec = "ghostty";
-            exec-arg = "";
-          };
-          # extensions
-          "org/gnome/shell/extensions/clipboard-indicator" = {
-            toggle-menu = ["<Super>p"];
-          };
-        };
-      }
-    ];
   };
 
   # List packages installed in system profile. To search, run:
