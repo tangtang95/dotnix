@@ -1,6 +1,10 @@
-{ config, lib, pkgs, username, ...}: 
-
 {
+  config,
+  lib,
+  pkgs,
+  username,
+  ...
+}: {
   wsl.enable = true;
   wsl.defaultUser = "nixos";
 
@@ -25,8 +29,8 @@
       config = {
         user = {
           name = "Tangtang Zhou";
-	  email = "tangtang2995@gmail.com";
-	};
+          email = "tangtang2995@gmail.com";
+        };
         core = {
           editor = "nvim";
         };
@@ -50,7 +54,7 @@
       };
     };
   };
-  
+
   users.users.${username} = {
     isNormalUser = true;
     shell = pkgs.fish;
@@ -59,6 +63,6 @@
     ];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   system.stateVersion = "24.11";
 }

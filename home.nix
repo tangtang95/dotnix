@@ -84,8 +84,8 @@ in {
 
     # languages
     (pkgs.rust-bin.stable.latest.default.override {
-      extensions = [ "rust-analyzer" "rust-src" "llvm-tools" ];
-      targets = [ "i686-pc-windows-msvc" ];
+      extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
+      targets = ["i686-pc-windows-msvc"];
     })
     pkgs.zigpkgs.master-2025-03-06
     (pkgs.python3.withPackages (ps: with ps; [pip]))

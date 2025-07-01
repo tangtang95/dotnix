@@ -74,8 +74,8 @@ in {
 
     # languages
     (pkgs.rust-bin.stable.latest.default.override {
-      extensions = [ "rust-analyzer" "rust-src" "llvm-tools" ];
-      targets = [ "i686-pc-windows-msvc" ];
+      extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
+      targets = ["i686-pc-windows-msvc"];
     })
     # pkgs.zigpkgs.master-2025-03-06
     (pkgs.python3.withPackages (ps: with ps; [pip]))
@@ -97,11 +97,11 @@ in {
     pkgs.zls
     pkgs.lua-language-server
 
+    # formatters only for nixos
+    pkgs.alejandra
+
     # language tools
     pkgs.tree-sitter
-
-    # formatters
-    pkgs.alejandra
 
     # dap (debugger tool)
     pkgs.vscode-extensions.vadimcn.vscode-lldb
@@ -283,7 +283,7 @@ in {
       switch-to-workspace-4 = ["<Super>4"];
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      "www" = ["<Super>b"];
+      www = ["<Super>b"];
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
       ];
