@@ -223,7 +223,7 @@ in {
         theme = "catppuccin-mocha";
         font-family = "JetBrainsMono Nerd Font Mono";
         maximize = true;
-        window-decoration = "none";
+        gtk-titlebar = false;
         confirm-close-surface = false;
         cursor-style = "block";
         shell-integration-features = "no-cursor";
