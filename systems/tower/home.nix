@@ -77,7 +77,7 @@ in {
       extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
       targets = ["i686-pc-windows-msvc"];
     })
-    # pkgs.zigpkgs.master-2025-03-06
+    pkgs.zigpkgs."0.14.1"
     (pkgs.python3.withPackages (ps: with ps; [pip]))
     (pkgs.lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
     pkgs.gnumake
