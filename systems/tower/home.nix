@@ -211,6 +211,7 @@ in {
         {package = clipboard-indicator;}
         {package = simple-workspaces-bar;}
         {package = paperwm;}
+        {package = appindicator;}
       ];
     };
   };
