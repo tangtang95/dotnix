@@ -94,13 +94,17 @@
     };
   };
 
-  # Install firefox.
   programs = {
     firefox.enable = true;
     neovim.enable = true;
     fish.enable = true;
     steam = {
       enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = pkgs: with pkgs; [
+          adwaita-icon-theme
+        ];
+      };
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     };
     command-not-found.enable = false; # Does not work on nixos with flakes
