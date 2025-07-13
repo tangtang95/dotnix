@@ -210,7 +210,7 @@ in {
       extensions = with pkgs.gnomeExtensions; [
         {package = clipboard-indicator;}
         {package = simple-workspaces-bar;}
-        {package = paperwm;}
+        {package = forge;}
         {package = appindicator;}
       ];
     };
@@ -223,12 +223,15 @@ in {
       settings = {
         theme = "catppuccin-mocha";
         font-family = "JetBrainsMono Nerd Font Mono";
-        maximize = true;
         gtk-titlebar = false;
         confirm-close-surface = false;
         cursor-style = "block";
         shell-integration-features = "no-cursor";
       };
+    };
+    alacritty = (import ../../programs/alacritty.nix) {
+      inherit pkgs;
+      inherit themeColors;
     };
     thunderbird = {
       enable = true;
@@ -259,7 +262,7 @@ in {
     };
     # shortcuts
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      screensaver = []; # remove lock screen shortcut which default nixos gnome is <Ctrl>l
+      screensaver = []; # remove lock screen shortcut which default nixos gnome is <Super>l
     };
     "org/gnome/shell/keybindings" = {
       # remove all switch to app since default is <Super>1, ...
@@ -274,6 +277,10 @@ in {
       switch-to-application-9 = [];
     };
     "org/gnome/desktop/wm/keybindings" = {
+      minimize = [];
+      maximize = [];
+      unmaximize = [];
+      close = ["<Alt>F4" "<Super>q"];
       move-to-workspace-1 = ["<Shift><Super>1"];
       move-to-workspace-2 = ["<Shift><Super>2"];
       move-to-workspace-3 = ["<Shift><Super>3"];
@@ -283,6 +290,10 @@ in {
       switch-to-workspace-3 = ["<Super>3"];
       switch-to-workspace-4 = ["<Super>4"];
     };
+    "org/gnome/mutter/keybindings" = {
+      toggle-tiled-left = [];
+      toggle-tiled-right = [];
+    };
     "org/gnome/settings-daemon/plugins/media-keys" = {
       www = ["<Super>b"];
       custom-keybindings = [
@@ -291,24 +302,12 @@ in {
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "open-terminal";
-      command = "ghostty";
+      command = "alacritty";
       binding = "<Super>t";
     };
     # extensions
     "org/gnome/shell/extensions/clipboard-indicator" = {
       toggle-menu = ["<Super>p"];
-    };
-    "org/gnome/shell/extensions/paperwm/keybindings" = {
-      switch-left = ["<Super>h"];
-      switch-right = ["<Super>l"];
-      switch-up = ["<Super>k"];
-      switch-down = ["<Super>j"];
-      move-left = ["<Shift><Super>h"];
-      move-right = ["<Shift><Super>l"];
-      move-up = ["<Shift><Super>k"];
-      move-down = ["<Shift><Super>j"];
-      close-window = ["<Super>w"];
-      take-window = [];
     };
   };
 }

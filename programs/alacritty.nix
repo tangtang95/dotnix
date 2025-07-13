@@ -1,16 +1,16 @@
 {
   pkgs,
   themeColors,
-  nixGLWrap,
+  nixGLWrap ? null,
 }: {
   enable = true;
-  package = nixGLWrap pkgs.alacritty;
+  package = if nixGLWrap == null then pkgs.alacritty else nixGLWrap pkgs.alacritty;
   settings = {
     window.dimensions = {
       columns = 100;
       lines = 25;
     };
-    font.normal.family = "JetBrainsMono NF";
+    font.normal.family = "JetBrainsMono Nerd Font Mono";
     font.size = 12;
     colors = {
       primary = {
