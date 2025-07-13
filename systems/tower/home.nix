@@ -133,7 +133,6 @@ in {
     pkgs.whatsapp-for-linux
     pkgs.bitwarden-desktop
     pkgs.obsidian
-    pkgs.via # for keychron keyboard
   ];
   home.sessionVariables = {
     EDITOR = "nvim";

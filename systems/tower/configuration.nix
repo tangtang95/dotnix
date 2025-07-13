@@ -56,6 +56,15 @@
     variant = "";
   };
 
+  # For keychron keyboard detection
+  hardware.keyboard.qmk.enable = true;
+  services.udev = {
+    packages = with pkgs; [
+      qmk-udev-rules
+      via
+    ];
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -114,6 +123,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
+    via
   ];
   environment.sessionVariables = {
     NVIM_USE_NIXOS_MODULE = "true";
