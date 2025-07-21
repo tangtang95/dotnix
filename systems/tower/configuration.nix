@@ -14,8 +14,15 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      efiSupport = true;
+      devices = [ "nodev" ];
+      useOSProber = true;
+    };
+  };
 
   # Use nix flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -27,6 +34,8 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Rome";
+  # Avoid windows incorrect clock by sharing same clock
+  time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
