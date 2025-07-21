@@ -128,7 +128,7 @@ in {
     pkgs.spotify
     pkgs.qbittorrent
     pkgs.discord
-    pkgs.onlyoffice-bin
+    pkgs.libreoffice
     pkgs.vlc
     pkgs.whatsapp-for-linux
     pkgs.bitwarden-desktop
