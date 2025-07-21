@@ -20,7 +20,22 @@
       enable = true;
       efiSupport = true;
       devices = [ "nodev" ];
-      useOSProber = true;
+      font = "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
+      fontSize = 36;
+      # windows entry obtained by option `useOSProber = true;` avoid using useOSProber to speed up nixos rebuild
+      extraEntries = ''
+        menuentry 'Windows 11' --class windows --class os $menuentry_id_option 'osprober-efi-6E0F-9C7C' {
+          insmod part_gpt
+          insmod fat
+          set root='hd1,gpt1'
+          if [ x$feature_platform_search_hint = xy ]; then
+            search --no-floppy --fs-uuid --set=root --hint-ieee1275='ieee1275//disk@0,gpt1' --hint-bios=hd1,gpt1 --hint-efi=hd1,gpt1 --hint-baremetal=ahci1,gpt1  6E0F-9C7C
+          else
+            search --no-floppy --fs-uuid --set=root 6E0F-9C7C
+          fi
+          chainloader /efi/Microsoft/Boot/bootmgfw.efi
+        }
+      '';
     };
   };
 
