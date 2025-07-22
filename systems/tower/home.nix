@@ -211,6 +211,7 @@ in {
         {package = simple-workspaces-bar;}
         {package = forge;}
         {package = appindicator;}
+        {package = disable-workspace-animation;}
       ];
     };
   };
@@ -247,6 +248,7 @@ in {
     # appeareance
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      scaling-factor = lib.gvariant.mkUint32 2; # for log-in screen
     };
     # power
     "org/gnome/desktop/session" = {

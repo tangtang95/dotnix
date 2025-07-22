@@ -141,6 +141,16 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     };
     command-not-found.enable = false; # Does not work on nixos with flakes
+    # gnome settings for all
+    dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            scaling-factor = lib.gvariant.mkUint32 2; # for log-in screen
+          };
+        };
+      }
+    ];
   };
 
   # List packages installed in system profile. To search, run:
