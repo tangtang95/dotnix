@@ -304,7 +304,7 @@ in {
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "open-terminal";
       command = "alacritty";
-      binding = "<Super>t";
+      binding = "<Super>Return";
     };
     # extensions
     "org/gnome/shell/extensions/clipboard-indicator" = {
