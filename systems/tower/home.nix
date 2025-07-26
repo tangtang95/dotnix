@@ -245,6 +245,18 @@ in {
 
   # only gnome settings
   dconf.settings = {
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "Alacritty.desktop"
+        "firefox.desktop"
+        "thunderbird.desktop"
+        "discord.desktop"
+        "obsidian.desktop"
+        "spotify.desktop"
+        "bitwarden.desktop"
+      ];
+    };
     # appeareance
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -309,6 +321,9 @@ in {
     # extensions
     "org/gnome/shell/extensions/clipboard-indicator" = {
       toggle-menu = ["<Super>p"];
+    };
+    "org/gnome/shell/extensions/forge" = {
+      move-pointer-focus-enabled = false;
     };
     "org/gnome/shell/extensions/forge/keybindings" = {
       window-swap-last-active = []; # Remove <Super>Return shortcut
