@@ -310,5 +310,8 @@ in {
     "org/gnome/shell/extensions/clipboard-indicator" = {
       toggle-menu = ["<Super>p"];
     };
+    "org/gnome/shell/extensions/forge/keybindings" = {
+      window-swap-last-active = []; # Remove <Super>Return shortcut
+    };
   };
 }
