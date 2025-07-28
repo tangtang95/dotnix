@@ -4,7 +4,7 @@
 {
   config,
   pkgs,
-  rootPath,
+  username,
   lib,
   ...
 }: {
@@ -122,7 +122,6 @@
     users.tangtang-tower = import ./home.nix;
     extraSpecialArgs = {
       inherit pkgs;
-      inherit rootPath;
       username = "tangtang-tower";
     };
   };

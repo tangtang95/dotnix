@@ -153,7 +153,7 @@ in {
   };
 
   # zellij static config file (because limitation in nix to kdl converter)
-  xdg.configFile."zellij/config.kdl".source = ./config/zellij.kdl;
+  xdg.configFile."zellij/config.kdl".source = ../config/zellij.kdl;
 
   # enable user fonts
   fonts.fontconfig.enable = true;
@@ -189,7 +189,7 @@ in {
       enable = true;
       enableFishIntegration = true;
     };
-    git = import ./programs/git.nix;
+    git = import ../programs/git.nix;
     lazygit = {
       enable = true;
       settings = {
@@ -228,7 +228,7 @@ in {
 
   # gui programs
   programs = {
-    alacritty = (import ./programs/alacritty.nix) {
+    alacritty = (import ../programs/alacritty.nix) {
       inherit pkgs;
       inherit themeColors;
       inherit nixGLWrap;

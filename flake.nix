@@ -30,6 +30,7 @@
     config = {
       allowUnfree = true;
     };
+    username = "tangtang";
     pkgs = import nixpkgs {
       inherit system config;
       overlays = [
@@ -50,12 +51,12 @@
       ];
     };
   in {
-    homeConfigurations."tangtang" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
 
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
-      modules = [./home.nix];
+      modules = [./home/old-pop-os.nix];
 
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
@@ -65,7 +66,7 @@
       inherit pkgs;
       specialArgs = {
         hostname = "nixos-wsl";
-        username = "tangtang";
+        inherit username;
       };
       modules = [
         nixos-wsl.nixosModules.default
@@ -77,7 +78,7 @@
       inherit system;
       inherit pkgs;
       specialArgs = {
-        rootPath = ./.;
+        inherit username;
       };
       modules = [
         ./systems/tower/configuration.nix
