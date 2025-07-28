@@ -3,13 +3,18 @@
   lib,
   pkgs,
   username,
+  hostname,
   ...
 }: {
   wsl = {
     enable = true;
     defaultUser = "${username}";
-    wslConf.interop.appendWindowsPath = false;
+    wslConf = {
+      interop.appendWindowsPath = false;
+    };
   };
+
+  networking.hostName = "${hostname}";
 
   programs = {
     fish = {
