@@ -35,15 +35,15 @@
     crust = "#11111b";
   };
   guiPkgs = if installGui then with pkgs; [
-    pkgs.gimp
-    pkgs.spotify
-    pkgs.qbittorrent
-    pkgs.discord
-    pkgs.libreoffice
-    pkgs.vlc
-    pkgs.whatsapp-for-linux
-    pkgs.bitwarden-desktop
-    pkgs.obsidian
+    gimp
+    spotify
+    qbittorrent
+    discord
+    libreoffice
+    vlc
+    whatsapp-for-linux
+    bitwarden-desktop
+    obsidian
   ] else [];
 in {
   home.username = username;

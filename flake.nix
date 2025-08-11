@@ -66,7 +66,7 @@
       inherit pkgs;
       extraSpecialArgs = {
         username = "deck";
-	installGui = false;
+        installGui = false;
       };
       modules = [./home/home.nix];
     };
