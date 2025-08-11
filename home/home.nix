@@ -123,7 +123,6 @@ in {
     pkgs.hyperfine
 
     # others
-    pkgs.fzf
     pkgs.just
     pkgs.fastfetch
     pkgs.tokei
@@ -171,6 +170,10 @@ in {
       enable = true;
     };
     starship = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    fzf = {
       enable = true;
       enableFishIntegration = true;
     };
