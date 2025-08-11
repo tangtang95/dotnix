@@ -61,6 +61,15 @@
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
     };
+    # home config for steamdeck
+    homeConfigurations.deck = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = {
+        username = "deck";
+	installGui = false;
+      };
+      modules = [./home/home.nix];
+    };
     nixosConfigurations.nixos-wsl = nixpkgs.lib.nixosSystem {
       inherit system;
       inherit pkgs;
