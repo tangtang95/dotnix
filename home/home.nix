@@ -3,6 +3,7 @@
   lib,
   username,
   installGui ? true,
+  otherPkgs ? [],
   ...
 }: let
   # catppuccin mocha colors
@@ -134,7 +135,9 @@ in {
     pkgs.nerd-fonts.jetbrains-mono
 
   ] ++
-    guiPkgs;
+    guiPkgs
+    ++
+    otherPkgs;
   home.sessionVariables = {
     EDITOR = "nvim";
     NVIM_USE_NIXOS_MODULE = "true";
