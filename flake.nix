@@ -67,12 +67,8 @@
       extraSpecialArgs = {
         username = "deck";
         installGui = false;
-        otherPkgs = [
-          pkgs.nix-gl-host
-          pkgs.patchelf
-        ];
       };
-      modules = [./home/home.nix ./home/deck.nix];
+      modules = [./home/deck.nix];
     };
     nixosConfigurations.nixos-wsl = nixpkgs.lib.nixosSystem {
       inherit system;
