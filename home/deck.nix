@@ -52,11 +52,6 @@ in {
   imports = [
     ./home.nix
   ];
-  home.pointerCursor = {
-    name = "Breeze Dark";
-    package = pkgs.kdePackages.breeze-icons;
-    size = 32;
-  };
   home.packages = with pkgs; [
     patchelf
     nix-gl-host
