@@ -52,6 +52,12 @@ in {
   imports = [
     ./home.nix
   ];
+  home.pointerCursor = {
+    enable = true;
+    name = "breeze-dark";
+    package = pkgs.kdePackages.breeze;
+    size = 24;
+  };
   home.packages = with pkgs; [
     patchelf
     nix-gl-host
