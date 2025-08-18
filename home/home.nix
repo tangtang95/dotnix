@@ -124,7 +124,8 @@ in {
 
     # others
     pkgs.just
-    pkgs.fastfetch
+    pkgs.fastfetch # fetch OS info
+    pkgs.onefetch # fetch git info
     pkgs.tokei
     pkgs.onefetch
     pkgs.tealdeer
