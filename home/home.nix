@@ -107,6 +107,10 @@ in {
     pkgs.gopls
     pkgs.zls
     pkgs.lua-language-server
+    pkgs.marksman
+
+    # linter
+    pkgs.markdownlint-cli2
 
     # formatters only for nixos
     pkgs.alejandra
@@ -123,6 +127,8 @@ in {
     pkgs.hyperfine
 
     # others
+    pkgs.presenterm
+    pkgs.python313Packages.weasyprint # for presenterm export pdf
     pkgs.just
     pkgs.fastfetch # fetch OS info
     pkgs.onefetch # fetch git info
