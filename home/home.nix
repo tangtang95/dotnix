@@ -109,9 +109,6 @@ in {
     pkgs.lua-language-server
     pkgs.marksman
 
-    # linter
-    pkgs.markdownlint-cli2
-
     # formatters only for nixos
     pkgs.alejandra
 
