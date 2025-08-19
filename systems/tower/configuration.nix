@@ -119,10 +119,11 @@
     shell = pkgs.fish;
   };
   home-manager = {
-    users.tangtang-tower = import ./home.nix;
+    users.tangtang-tower = import ../../home/home.nix;
     extraSpecialArgs = {
       inherit pkgs;
       username = "tangtang-tower";
+      installGui = true;
     };
   };
 
