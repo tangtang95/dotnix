@@ -225,7 +225,7 @@ in {
         shell-integration-features = "no-cursor";
       };
     };
-    alacritty = (import ../../programs/alacritty.nix) {
+    alacritty = (import ../programs/alacritty.nix) {
       inherit pkgs;
       inherit themeColors;
     };
