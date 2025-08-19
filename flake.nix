@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-gnome-42.url = "github:NixOS/nixpkgs/nixos-22.05"; # For gnome 42 extensions (Pop OS uses gnome 42)
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixgl.url = "github:nix-community/nixGL";
     nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
@@ -18,7 +17,6 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    nixpkgs-gnome-42,
     nixos-wsl,
     home-manager,
     nixgl,
@@ -43,24 +41,10 @@
             inherit (prev) system;
             inherit config;
           };
-          gnome42 = import nixpkgs-gnome-42 {
-            inherit (prev) system;
-            inherit config;
-          };
         })
       ];
     };
   in {
-    homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
-      modules = [./home/old-pop-os.nix];
-
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
-    };
     # home config for steamdeck
     homeConfigurations.deck = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
