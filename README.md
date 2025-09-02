@@ -35,7 +35,7 @@ command -v fish | sudo tee -a /etc/shells
 sudo chsh -s "$(command -v fish)" "${USER}"
 ```
 
-Another way is to change the shell only for the terminal GUI (Recommended way?).
+NOTE: For WSL, you need to install and use fish on FHS env (e.g. /usr/bin/fish)
 
 #### Other tweaks
 
