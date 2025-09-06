@@ -44,6 +44,7 @@
     whatsapp-for-linux
     bitwarden-desktop
     obsidian
+    localsend # file sharing
   ] else [];
 in {
   home.username = username;
