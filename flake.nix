@@ -68,7 +68,7 @@
       inherit system;
       inherit pkgs;
       specialArgs = {
-        inherit username;
+        username = "tangtang-tower";
       };
       modules = [
         ./systems/tower/configuration.nix

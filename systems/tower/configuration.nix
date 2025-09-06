@@ -2,7 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
   pkgs,
   username,
   lib,
@@ -112,17 +111,17 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.tangtang-tower = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Tangtang";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.fish;
   };
   home-manager = {
-    users.tangtang-tower = import ../../home/home.nix;
+    users.${username} = import ../../home/home.nix;
     extraSpecialArgs = {
       inherit pkgs;
-      username = "tangtang-tower";
+      username = "${username}";
       installGui = true;
     };
   };
