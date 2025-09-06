@@ -75,5 +75,26 @@
         home-manager.nixosModules.home-manager
       ];
     };
+    # raspberry-pi4b as home server
+    nixosConfigurations.home-server = let 
+      system = "aarch64-linux";
+    in nixpkgs.lib.nixosSystem {
+      inherit system;
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          (_final: prev: {
+            unstable = import nixpkgs-unstable {
+              inherit (prev) system;
+            };
+          })
+        ];
+      };
+      specialArgs = {
+        hostname = "home-server";
+        inherit username;
+      };
+      modules = [ ./systems/pi4b/configuration.nix ];
+    };
   };
 }
