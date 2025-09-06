@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixgl.url = "github:nix-community/nixGL";
     nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     zig-overlay.url = "github:mitchellh/zig-overlay";
@@ -19,7 +18,6 @@
     nixpkgs-unstable,
     nixos-wsl,
     home-manager,
-    nixgl,
     nix-gl-host,
     rust-overlay,
     zig-overlay,
@@ -32,7 +30,6 @@
     pkgs = import nixpkgs {
       inherit system config;
       overlays = [
-        nixgl.overlay
         rust-overlay.overlays.default
         zig-overlay.overlays.default
         nix-gl-host.overlays.default
