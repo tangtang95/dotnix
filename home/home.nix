@@ -44,6 +44,7 @@
     whatsapp-for-linux
     bitwarden-desktop
     obsidian
+    yubioath-flutter # yubico
     localsend # file sharing
   ] else [];
 in {
@@ -127,6 +128,7 @@ in {
     # others
     pkgs.presenterm
     pkgs.python313Packages.weasyprint # for presenterm export pdf
+    pkgs.rclone
     pkgs.just
     pkgs.fastfetch # fetch OS info
     pkgs.onefetch # fetch git info
