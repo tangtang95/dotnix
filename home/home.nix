@@ -147,6 +147,13 @@ in {
     NVIM_USE_NIXOS_MODULE = "true";
   };
 
+  home.pointerCursor = {
+    name = "phinger-cursors-light";
+    package = pkgs.phinger-cursors;
+    size = 32;
+    gtk.enable = true;
+  };
+
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ../config/zellij.kdl;
 
