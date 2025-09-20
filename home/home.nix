@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   username,
   installGui ? true,
   ...
@@ -34,19 +35,23 @@
     mantle = "#181825";
     crust = "#11111b";
   };
-  guiPkgs = if installGui then with pkgs; [
-    gimp
-    spotify
-    qbittorrent
-    discord
-    libreoffice
-    vlc
-    whatsapp-for-linux
-    bitwarden-desktop
-    obsidian
-    yubioath-flutter # yubico
-    localsend # file sharing
-  ] else [];
+  guiPkgs =
+    if installGui
+    then
+      with pkgs; [
+        gimp
+        spotify
+        qbittorrent
+        discord
+        libreoffice
+        vlc
+        whatsapp-for-linux
+        bitwarden-desktop
+        obsidian
+        yubioath-flutter # yubico
+        localsend # file sharing
+      ]
+    else [];
 in {
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -54,94 +59,94 @@ in {
   home.keyboard = {
     layout = "us";
   };
-  home.packages = [
-    # new coreutils
-    pkgs.ripgrep
-    pkgs.ripgrep-all
-    pkgs.fd
-    pkgs.bat
-    pkgs.bottom
-    pkgs.du-dust
-    pkgs.sd
-    pkgs.procs
-    pkgs.tailspin
+  home.packages =
+    [
+      # new coreutils
+      pkgs.ripgrep
+      pkgs.ripgrep-all
+      pkgs.fd
+      pkgs.bat
+      pkgs.bottom
+      pkgs.du-dust
+      pkgs.sd
+      pkgs.procs
+      pkgs.tailspin
 
-    # web tools
-    pkgs.wget
-    pkgs.httpie
-    pkgs.termscp
-    pkgs.dogdns
-    pkgs.bandwhich
+      # web tools
+      pkgs.wget
+      pkgs.httpie
+      pkgs.termscp
+      pkgs.dogdns
+      pkgs.bandwhich
 
-    # file processors
-    pkgs.jq
-    pkgs.jqp
-    pkgs.yq
-    pkgs.zip
-    pkgs.unzip
-    pkgs.hexyl
+      # file processors
+      pkgs.jq
+      pkgs.jqp
+      pkgs.yq
+      pkgs.zip
+      pkgs.unzip
+      pkgs.hexyl
 
-    # text editors
-    pkgs.vim
-    pkgs.delta
+      # text editors
+      pkgs.vim
+      pkgs.delta
 
-    # languages
-    (pkgs.rust-bin.stable.latest.default.override {
-      extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
-      targets = ["i686-pc-windows-msvc"];
-    })
-    pkgs.zigpkgs."0.14.1"
-    (pkgs.python3.withPackages (ps: with ps; [pip]))
-    (pkgs.lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
-    pkgs.gnumake
-    pkgs.nodejs
-    pkgs.go
-    pkgs.typst
-    pkgs.gcc
+      # languages
+      (pkgs.rust-bin.stable.latest.default.override {
+        extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
+        targets = ["i686-pc-windows-msvc"];
+      })
+      pkgs.zigpkgs."0.14.1"
+      (pkgs.python3.withPackages (ps: with ps; [pip]))
+      (pkgs.lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
+      pkgs.gnumake
+      pkgs.nodejs
+      pkgs.go
+      pkgs.typst
+      pkgs.gcc
 
-    # cargo packages
-    pkgs.cargo-llvm-cov
-    pkgs.cargo-cross
-    pkgs.unstable.cargo-xwin
+      # cargo packages
+      pkgs.cargo-llvm-cov
+      pkgs.cargo-cross
+      pkgs.unstable.cargo-xwin
 
-    # lsp only for nixos
-    pkgs.nixd
-    pkgs.gopls
-    pkgs.zls
-    pkgs.lua-language-server
-    pkgs.marksman
+      # lsp only for nixos
+      pkgs.nixd
+      pkgs.gopls
+      pkgs.zls
+      pkgs.lua-language-server
+      pkgs.marksman
 
-    # formatters only for nixos
-    pkgs.alejandra
+      # formatters only for nixos
+      pkgs.alejandra
 
-    # language tools
-    pkgs.tree-sitter
+      # language tools
+      pkgs.tree-sitter
 
-    # dap (debugger tool)
-    pkgs.vscode-extensions.vadimcn.vscode-lldb
-    pkgs.lldb
+      # dap (debugger tool)
+      pkgs.vscode-extensions.vadimcn.vscode-lldb
+      pkgs.lldb
 
-    # benchmarking tools
-    pkgs.samply
-    pkgs.hyperfine
+      # benchmarking tools
+      pkgs.samply
+      pkgs.hyperfine
 
-    # others
-    pkgs.presenterm
-    pkgs.python313Packages.weasyprint # for presenterm export pdf
-    pkgs.rclone
-    pkgs.just
-    pkgs.fastfetch # fetch OS info
-    pkgs.onefetch # fetch git info
-    pkgs.tokei
-    pkgs.onefetch
-    pkgs.tealdeer
-    pkgs.xclip
-    pkgs.xdg-utils
-    pkgs.watchexec
-    pkgs.nerd-fonts.jetbrains-mono
-
-  ] ++
-    guiPkgs;
+      # others
+      pkgs.presenterm
+      pkgs.python313Packages.weasyprint # for presenterm export pdf
+      pkgs.rclone
+      pkgs.just
+      pkgs.fastfetch # fetch OS info
+      pkgs.onefetch # fetch git info
+      pkgs.tokei
+      pkgs.onefetch
+      pkgs.tealdeer
+      pkgs.xclip
+      pkgs.xdg-utils
+      pkgs.watchexec
+      pkgs.nerd-fonts.jetbrains-mono
+    ]
+    ++ guiPkgs;
   home.sessionVariables = {
     EDITOR = "nvim";
     NVIM_USE_NIXOS_MODULE = "true";
@@ -152,6 +157,39 @@ in {
     package = pkgs.phinger-cursors;
     size = 32;
     gtk.enable = true;
+    sway.enable = true;
+  };
+
+  wayland.windowManager.sway = {
+    enable = true;
+    package = null;
+    config = {
+      modifier = "Mod4";
+      terminal = "ghostty";
+      # TODO:
+      # set $uifont "Ubuntu 14"
+      # fonts = {};
+      # set $highlight #3daee9
+      # set $prompt #18b218
+      menu = "rofi -show drun -show-icons";
+      startup = [
+        {command = "mako";}
+        # TODO:
+        # exec dbus-update-activation-environment --systemd --all
+        # exec /usr/lib/xdg-desktop-portal --replace
+      ];
+      output = {
+        HDMI-A-2 = {
+          scale = "2";
+        };
+      };
+      keybindings = let
+        modifier = config.wayland.windowManager.sway.config.modifier;
+      in lib.mkOptionDefault {
+        "${modifier}+b" = "exec firefox";
+        "${modifier}+q" = "kill";
+      };
+    };
   };
 
   # zellij static config file (because limitation in nix to kdl converter)
@@ -160,107 +198,114 @@ in {
   # enable user fonts
   fonts.fontconfig.enable = true;
 
-  programs = {
-    home-manager.enable = true;
-    fish = {
-      enable = true;
-      interactiveShellInit = ''
-        set fish_greeting # Disable greeting
-      '';
-      shellAliases = {
-        pbcopy = "xclip -selection clipboard";
-        pbpaste = "xclip -selection clipboard -o";
+  programs =
+    {
+      home-manager.enable = true;
+      fish = {
+        enable = true;
+        interactiveShellInit = ''
+          set fish_greeting # Disable greeting
+        '';
+        shellAliases = {
+          pbcopy = "xclip -selection clipboard";
+          pbpaste = "xclip -selection clipboard -o";
+        };
       };
-    };
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-    eza = {
-      enable = true;
-      icons = "auto";
-    };
-    zoxide = {
-      enable = true;
-    };
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    fzf = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    zellij = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    git = import ../programs/git.nix;
-    lazygit = {
-      enable = true;
-      settings = {
-        gui = {
-          theme = {
-            activeBorderColor = [themeColors.blue "bold"];
-            inactiveBorderColor = [themeColors.subtext0];
-            optionsTextColor = [themeColors.blue];
-            selectedLineBgColor = [themeColors.surface0];
-            cherryPickedCommitBgColor = [themeColors.surface1];
-            cherryPickedCommitFgColor = [themeColors.blue];
-            unstagedChangesColor = [themeColors.red];
-            defaultFgColor = [themeColors.text];
-            searchingActiveBorderColor = [themeColors.yellow];
-          };
-          authorColors = {
-            "Tangtang Zhou" = themeColors.mauve;
-            "*" = themeColors.lavender;
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+      eza = {
+        enable = true;
+        icons = "auto";
+      };
+      zoxide = {
+        enable = true;
+      };
+      starship = {
+        enable = true;
+        enableFishIntegration = true;
+      };
+      fzf = {
+        enable = true;
+        enableFishIntegration = true;
+      };
+      zellij = {
+        enable = true;
+        enableFishIntegration = true;
+      };
+      git = import ../programs/git.nix;
+      lazygit = {
+        enable = true;
+        settings = {
+          gui = {
+            theme = {
+              activeBorderColor = [themeColors.blue "bold"];
+              inactiveBorderColor = [themeColors.subtext0];
+              optionsTextColor = [themeColors.blue];
+              selectedLineBgColor = [themeColors.surface0];
+              cherryPickedCommitBgColor = [themeColors.surface1];
+              cherryPickedCommitFgColor = [themeColors.blue];
+              unstagedChangesColor = [themeColors.red];
+              defaultFgColor = [themeColors.text];
+              searchingActiveBorderColor = [themeColors.yellow];
+            };
+            authorColors = {
+              "Tangtang Zhou" = themeColors.mauve;
+              "*" = themeColors.lavender;
+            };
           };
         };
       };
-    };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-    };
-  } // (if installGui then {
-    ghostty = {
-      enable = true;
-      settings = {
-        theme = "catppuccin-mocha";
-        font-family = "JetBrainsMono Nerd Font Mono";
-        gtk-titlebar = false;
-        confirm-close-surface = false;
-        cursor-style = "block";
-        shell-integration-features = "no-cursor";
+      neovim = {
+        enable = true;
+        defaultEditor = true;
+        vimAlias = true;
       };
-    };
-    alacritty = (import ../programs/alacritty.nix) {
-      inherit pkgs;
-      inherit themeColors;
-    };
-    thunderbird = {
-      enable = true;
-      profiles = {
-        default = {
-          isDefault = true;
+    }
+    // (
+      if installGui
+      then {
+        ghostty = {
+          enable = true;
+          package = pkgs.unstable.ghostty;
+          settings = {
+            theme = "catppuccin-mocha";
+            font-family = "JetBrainsMono Nerd Font Mono";
+            gtk-titlebar = false;
+            confirm-close-surface = false;
+            cursor-style = "block";
+            shell-integration-features = "no-cursor";
+          };
         };
-      };
-    };
-    gnome-shell = {
-      enable = true;
-      extensions = with pkgs.gnomeExtensions; [
-        {package = clipboard-indicator;}
-        {package = simple-workspaces-bar;}
-        {package = forge;}
-        {package = appindicator;}
-        {package = disable-workspace-animation;}
-      ];
-    };
-  } else {});
+        alacritty = (import ../programs/alacritty.nix) {
+          inherit pkgs;
+          inherit themeColors;
+        };
+        thunderbird = {
+          enable = true;
+          profiles = {
+            default = {
+              isDefault = true;
+            };
+          };
+        };
+        gnome-shell = {
+          enable = true;
+          extensions = with pkgs.gnomeExtensions; [
+            {package = clipboard-indicator;}
+            {package = simple-workspaces-bar;}
+            {package = forge;}
+            {package = appindicator;}
+            {package = disable-workspace-animation;}
+          ];
+        };
+      }
+      else {}
+    );
 
   # only gnome settings
-  dconf.settings = (lib.mkIf installGui {
+  dconf.settings = lib.mkIf installGui {
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
@@ -340,5 +385,5 @@ in {
     "org/gnome/shell/extensions/forge/keybindings" = {
       window-swap-last-active = []; # Remove <Super>Return shortcut
     };
-  });
+  };
 }

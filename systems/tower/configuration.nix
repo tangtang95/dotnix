@@ -18,7 +18,7 @@
     grub = {
       enable = true;
       efiSupport = true;
-      devices = [ "nodev" ];
+      devices = ["nodev"];
       font = "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
       fontSize = 56;
       # windows entry obtained by option `useOSProber = true;` avoid using useOSProber to speed up nixos rebuild
@@ -72,6 +72,22 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  # Enable Sway Window Manager
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      brightnessctl
+      foot
+      grim
+      swayidle
+      swaylock
+      wmenu
+      wl-clipboard
+      mako # notification system
+      pkgs.unstable.rofi #NOTE: unstable for 2.0.0 that supports wayland
+    ];
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -133,9 +149,10 @@
     steam = {
       enable = true;
       package = pkgs.steam.override {
-        extraPkgs = pkgs: with pkgs; [
-          adwaita-icon-theme
-        ];
+        extraPkgs = pkgs:
+          with pkgs; [
+            adwaita-icon-theme
+          ];
       };
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     };
