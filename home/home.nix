@@ -285,10 +285,6 @@ in {
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-inactive-ac-timeout = lib.gvariant.mkInt32 1800;
     };
-    # keyboard
-    "org/gnome/desktop/input-sources" = {
-      xkb-options = ["caps:swapescape"];
-    };
     # shortcuts
     "org/gnome/settings-daemon/plugins/media-keys" = {
       screensaver = []; # remove lock screen shortcut which default nixos gnome is <Super>l
