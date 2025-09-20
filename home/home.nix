@@ -150,6 +150,7 @@ in {
   home.sessionVariables = {
     EDITOR = "nvim";
     NVIM_USE_NIXOS_MODULE = "true";
+    DISPLAY=":1";
   };
 
   home.pointerCursor = {
@@ -160,24 +161,26 @@ in {
     sway.enable = true;
   };
 
-  wayland.windowManager.sway = {
+  wayland.windowManager.sway = lib.mkIf installGui {
     enable = true;
     package = null;
     config = {
       modifier = "Mod4";
-      terminal = "ghostty";
+      terminal = "alacritty";
       # TODO:
       # set $uifont "Ubuntu 14"
       # fonts = {};
       # set $highlight #3daee9
       # set $prompt #18b218
-      menu = "rofi -show drun -show-icons";
+      # NOTE: use xwayland-satellite on display :1
+      menu = "DISPLAY=:1 rofi -show drun -show-icons";
       startup = [
+        {command = "xwayland-satellite";} # use xwayland-satellite instead of xwayland for correct scaling
         {command = "mako";}
         # TODO:
-        # exec dbus-update-activation-environment --systemd --all
         # exec /usr/lib/xdg-desktop-portal --replace
       ];
+      defaultWorkspace = "workspace number 1";
       output = {
         HDMI-A-2 = {
           scale = "2";
@@ -185,10 +188,11 @@ in {
       };
       keybindings = let
         modifier = config.wayland.windowManager.sway.config.modifier;
-      in lib.mkOptionDefault {
-        "${modifier}+b" = "exec firefox";
-        "${modifier}+q" = "kill";
-      };
+      in
+        lib.mkOptionDefault {
+          "${modifier}+b" = "exec firefox";
+          "${modifier}+q" = "kill";
+        };
     };
   };
 
@@ -270,7 +274,7 @@ in {
           enable = true;
           package = pkgs.unstable.ghostty;
           settings = {
-            theme = "catppuccin-mocha";
+            theme = "Catppuccin Mocha";
             font-family = "JetBrainsMono Nerd Font Mono";
             gtk-titlebar = false;
             confirm-close-surface = false;

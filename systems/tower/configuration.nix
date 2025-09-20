@@ -84,9 +84,11 @@
       swaylock
       wmenu
       wl-clipboard
+      xwayland-satellite # x11 in wayland but with correct scaling
       mako # notification system
       pkgs.unstable.rofi #NOTE: unstable for 2.0.0 that supports wayland
     ];
+    xwayland.enable = true;
   };
 
   # Configure keymap in X11
