@@ -150,7 +150,7 @@ in {
   home.sessionVariables = {
     EDITOR = "nvim";
     NVIM_USE_NIXOS_MODULE = "true";
-    DISPLAY=":1";
+    DISPLAY = ":1";
   };
 
   home.pointerCursor = {
@@ -177,6 +177,16 @@ in {
       startup = [
         {command = "xwayland-satellite";} # use xwayland-satellite instead of xwayland for correct scaling
         {command = "mako";}
+        {
+          # idle mechanism
+          command = ''
+            exec swayidle -w \
+                      timeout 300 'swaylock -f -c 000000' \
+                      timeout 600 'swaymsg "output * dpms off"' \
+                           resume 'swaymsg "output * dpms on"' \
+                      before-sleep 'swaylock -f -c 000000'
+          '';
+        }
         # TODO:
         # exec /usr/lib/xdg-desktop-portal --replace
       ];
@@ -184,6 +194,7 @@ in {
       output = {
         HDMI-A-2 = {
           scale = "2";
+          bg = "${../wallpapers/yoichi-isagi-blue-3840x2160.jpg} fill";
         };
       };
       keybindings = let
@@ -192,6 +203,16 @@ in {
         lib.mkOptionDefault {
           "${modifier}+b" = "exec firefox";
           "${modifier}+q" = "kill";
+          "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
+          "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";
+          "${modifier}+Shift+3" = "move container to workspace number 3; workspace number 3";
+          "${modifier}+Shift+4" = "move container to workspace number 4; workspace number 4";
+          "${modifier}+Shift+5" = "move container to workspace number 5; workspace number 5";
+          "${modifier}+Shift+6" = "move container to workspace number 6; workspace number 6";
+          "${modifier}+Shift+7" = "move container to workspace number 7; workspace number 7";
+          "${modifier}+Shift+8" = "move container to workspace number 8; workspace number 8";
+          "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
+          "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
         };
     };
   };

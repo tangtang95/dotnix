@@ -72,24 +72,27 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
   # Enable Sway Window Manager
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
+      xfce.thunar # file explorer
+      blueman # bluetooth
       brightnessctl
-      foot
       grim
       swayidle
       swaylock
-      wmenu
       wl-clipboard
       xwayland-satellite # x11 in wayland but with correct scaling
       mako # notification system
-      pkgs.unstable.rofi #NOTE: unstable for 2.0.0 that supports wayland
+      libnotify
+      pkgs.unstable.rofi #TODO: remove unstable for 2.0.0 that supports wayland when available in stable
     ];
     xwayland.enable = true;
   };
+  services.gnome.gnome-keyring.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
