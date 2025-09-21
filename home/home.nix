@@ -200,6 +200,7 @@ in {
         modifier = config.wayland.windowManager.sway.config.modifier;
         wpctl = "${pkgs.wireplumber}/bin/wpctl";
         notify-send = "${pkgs.libnotify}/bin/notify-send";
+        grim = "${pkgs.grim}/bin/grim";
       in
         lib.mkOptionDefault {
           "${modifier}+b" = "exec firefox";
@@ -217,6 +218,7 @@ in {
           "XF86AudioRaiseVolume" = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1 && ${notify-send} \"🔊 Volume Up\" -t 1000";
           "XF86AudioLowerVolume" = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%- && ${notify-send} \"🔊 Volume Down\" -t 1000";
           "XF86AudioMute" = "exec --no-startup-id ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle && ${notify-send} \"🔇 Mute Toggled\" -t 1000";
+          "Print" = "exec ${grim} -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy && ${notify-send} \"Screen copied to clipboard\" -t 5000";
         };
     };
   };
