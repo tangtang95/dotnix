@@ -2,6 +2,7 @@
   pkgs,
   lib,
   terminal,
+  fontFamily,
   audioToggleCommand,
   audioRaiseCommand,
   audioLowerCommand,
@@ -13,9 +14,12 @@ in {
   config = {
     modifier = modifier;
     terminal = terminal;
+    fonts = {
+      names = [fontFamily];
+      style = "Bold Semi-Condensed";
+      size = 10.0;
+    };
     # TODO:
-    # set $uifont "Ubuntu 14"
-    # fonts = {};
     # set $highlight #3daee9
     # set $prompt #18b218
     # NOTE: use xwayland-satellite on display :1
