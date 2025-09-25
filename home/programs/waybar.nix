@@ -15,7 +15,7 @@
 
       modules-left = ["sway/workspaces" "sway/mode"];
       modules-center = [];
-      modules-right = ["clock" "pulseaudio" "backlight" "network" "cpu" "memory" "battery" "disk" "tray"];
+      modules-right = ["clock" "wireplumber" "backlight" "network" "cpu" "memory" "battery" "disk" "tray"];
 
       "sway/workspaces" = {
         disable-scroll = true;
@@ -115,10 +115,8 @@
         on-click = "${terminal} -e nmtui";
       };
 
-      pulseaudio = {
+      wireplumber = {
         format = "{icon} {volume}%";
-        format-bluetooth = "󰂰 {volume}%";
-        format-bluetooth-muted = "󰂲 {icon}";
         format-muted = "󰝟";
         format-icons = {
           headphone = "󰋋";
@@ -241,8 +239,8 @@
     @define-color battery-critical-color @red;
     @define-color network-color @blue;
     @define-color network-disconnected-color @red;
-    @define-color pulseaudio-color @orange;
-    @define-color pulseaudio-muted-color @red;
+    @define-color wireplumber-color @orange;
+    @define-color wireplumber-muted-color @red;
     @define-color backlight-color @yellow;
     @define-color disk-color @cyan;
     @define-color uptime-color @green;
@@ -269,7 +267,7 @@
 
     /* Common module styling with border-bottom */
     #mode, #mpd, #custom-weather, #custom-playerctl, #clock, #cpu,
-    #memory, #temperature, #battery, #network, #pulseaudio,
+    #memory, #temperature, #battery, #network, #wireplumber,
     #backlight, #disk, #custom-uptime, #custom-updates, #custom-quote,
     #idle_inhibitor, #tray {
         padding: 0 10px;
@@ -394,14 +392,14 @@
         border-bottom-color: @network-disconnected-color;
     }
 
-    #pulseaudio {
-        color: @pulseaudio-color;
-        border-bottom-color: @pulseaudio-color;
+    #wireplumber {
+        color: @wireplumber-color;
+        border-bottom-color: @wireplumber-color;
     }
 
-    #pulseaudio.muted {
-        color: @pulseaudio-muted-color;
-        border-bottom-color: @pulseaudio-muted-color;
+    #wireplumber.muted {
+        color: @wireplumber-muted-color;
+        border-bottom-color: @wireplumber-muted-color;
     }
 
     #backlight {
