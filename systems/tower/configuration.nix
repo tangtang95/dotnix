@@ -80,11 +80,13 @@
     extraPackages = with pkgs; [
       xfce.thunar # file explorer
       blueman # bluetooth
+      pavucontrol # gui for audio control
       brightnessctl
       grim
       swayidle
       swaylock
       wl-clipboard
+      waybar # wayland bar
       xwayland-satellite # x11 in wayland but with correct scaling
       mako # notification system
       libnotify

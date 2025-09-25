@@ -52,6 +52,11 @@
         localsend # file sharing
       ]
     else [];
+  wpctl = "${pkgs.wireplumber}/bin/wpctl";
+  terminal = "alacritty";
+  audioToggleCommand = "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+  audioRaiseCommand = "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1";
+  audioLowerCommand = "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
 in {
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -160,68 +165,10 @@ in {
     sway.enable = true;
   };
 
-  wayland.windowManager.sway = lib.mkIf installGui {
-    enable = true;
-    package = null;
-    config = {
-      modifier = "Mod4";
-      terminal = "alacritty";
-      # TODO:
-      # set $uifont "Ubuntu 14"
-      # fonts = {};
-      # set $highlight #3daee9
-      # set $prompt #18b218
-      # NOTE: use xwayland-satellite on display :1
-      menu = "DISPLAY=:1 rofi -show drun -show-icons";
-      startup = [
-        {command = "xwayland-satellite";} # use xwayland-satellite instead of xwayland for correct scaling
-        {command = "mako";}
-        {
-          # idle mechanism
-          command = ''
-            exec swayidle -w \
-                      timeout 300 'swaylock -f -c 000000' \
-                      timeout 600 'swaymsg "output * dpms off"' \
-                           resume 'swaymsg "output * dpms on"' \
-                      before-sleep 'swaylock -f -c 000000'
-          '';
-        }
-        # TODO:
-        # exec /usr/lib/xdg-desktop-portal --replace
-      ];
-      defaultWorkspace = "workspace number 1";
-      output = {
-        HDMI-A-2 = {
-          scale = "2";
-          bg = "${../wallpapers/yoichi-isagi-blue-3840x2160.jpg} fill";
-        };
-      };
-      keybindings = let
-        modifier = config.wayland.windowManager.sway.config.modifier;
-        wpctl = "${pkgs.wireplumber}/bin/wpctl";
-        notify-send = "${pkgs.libnotify}/bin/notify-send";
-        grim = "${pkgs.grim}/bin/grim";
-      in
-        lib.mkOptionDefault {
-          "${modifier}+b" = "exec firefox";
-          "${modifier}+q" = "kill";
-          "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
-          "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";
-          "${modifier}+Shift+3" = "move container to workspace number 3; workspace number 3";
-          "${modifier}+Shift+4" = "move container to workspace number 4; workspace number 4";
-          "${modifier}+Shift+5" = "move container to workspace number 5; workspace number 5";
-          "${modifier}+Shift+6" = "move container to workspace number 6; workspace number 6";
-          "${modifier}+Shift+7" = "move container to workspace number 7; workspace number 7";
-          "${modifier}+Shift+8" = "move container to workspace number 8; workspace number 8";
-          "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
-          "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
-          "XF86AudioRaiseVolume" = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1 && ${notify-send} \"🔊 Volume Up\" -t 1000";
-          "XF86AudioLowerVolume" = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%- && ${notify-send} \"🔊 Volume Down\" -t 1000";
-          "XF86AudioMute" = "exec --no-startup-id ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle && ${notify-send} \"🔇 Mute Toggled\" -t 1000";
-          "Print" = "exec ${grim} -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy && ${notify-send} \"Screen copied to clipboard\" -t 5000";
-        };
-    };
-  };
+  wayland.windowManager.sway = lib.mkIf installGui (import ./programs/sway.nix {
+    inherit pkgs lib terminal;
+    inherit audioToggleCommand audioRaiseCommand audioLowerCommand;
+  });
 
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ../config/zellij.kdl;
@@ -320,6 +267,10 @@ in {
               isDefault = true;
             };
           };
+        };
+        waybar = import ./programs/waybar.nix {
+          inherit terminal;
+          inherit audioToggleCommand audioRaiseCommand audioLowerCommand;
         };
         gnome-shell = {
           enable = true;
