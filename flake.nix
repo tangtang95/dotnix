@@ -2,25 +2,30 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    zig-overlay.url = "github:mitchellh/zig-overlay";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    zig-overlay.url = "github:mitchellh/zig-overlay";
   };
 
   outputs = {
-    self,
     nixpkgs,
     nixpkgs-unstable,
-    nixos-wsl,
     home-manager,
+    stylix,
+    nixos-wsl,
     nix-gl-host,
     rust-overlay,
     zig-overlay,
+    ...
   }: let
     system = "x86_64-linux";
     config = {
@@ -52,49 +57,51 @@
       modules = [./home/deck.nix];
     };
     nixosConfigurations.nixos-wsl = nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit pkgs;
+      inherit system pkgs;
       specialArgs = {
         hostname = "nixos-wsl";
         inherit username;
+        inherit stylix;
       };
       modules = [
         nixos-wsl.nixosModules.default
         home-manager.nixosModules.home-manager
+        stylix.nixosModules.stylix
         ./systems/wsl/configuration.nix
       ];
     };
     nixosConfigurations.tower-nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit pkgs;
+      inherit system pkgs;
       specialArgs = {
         username = "tangtang-tower";
       };
       modules = [
-        ./systems/tower/configuration.nix
         home-manager.nixosModules.home-manager
+        stylix.nixosModules.stylix
+        ./systems/tower/configuration.nix
       ];
     };
     # raspberry-pi4b as home server
-    nixosConfigurations.home-server = let 
+    nixosConfigurations.home-server = let
       system = "aarch64-linux";
-    in nixpkgs.lib.nixosSystem {
-      inherit system;
-      pkgs = import nixpkgs {
+    in
+      nixpkgs.lib.nixosSystem {
         inherit system;
-        overlays = [
-          (_final: prev: {
-            unstable = import nixpkgs-unstable {
-              inherit (prev) system;
-            };
-          })
-        ];
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (_final: prev: {
+              unstable = import nixpkgs-unstable {
+                inherit (prev) system;
+              };
+            })
+          ];
+        };
+        specialArgs = {
+          hostname = "home-server";
+          inherit username;
+        };
+        modules = [./systems/pi4b/configuration.nix];
       };
-      specialArgs = {
-        hostname = "home-server";
-        inherit username;
-      };
-      modules = [ ./systems/pi4b/configuration.nix ];
-    };
   };
 }

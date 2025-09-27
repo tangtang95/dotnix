@@ -6,35 +6,6 @@
   installGui ? true,
   ...
 }: let
-  # catppuccin mocha colors
-  themeColors = {
-    rosewater = "#f5e0dc";
-    flamingo = "#f2cdcd";
-    pink = "#f5c2e7";
-    mauve = "#cba6f7";
-    red = "#f38ba8";
-    maroon = "#eba0ac";
-    peach = "#fab387";
-    yellow = "#f9e2af";
-    green = "#a6e3a1";
-    teal = "#94e2d5";
-    sky = "#89dceb";
-    sapphire = "#74c7ec";
-    blue = "#89b4fa";
-    lavender = "#b4befe";
-    text = "#cdd6f4";
-    subtext1 = "#bac2de";
-    subtext0 = "#a6adc8";
-    overlay2 = "#9399b2";
-    overlay1 = "#7f849c";
-    overlay0 = "#6c7086";
-    surface2 = "#585b70";
-    surface1 = "#45475a";
-    surface0 = "#313244";
-    base = "#1e1e2e";
-    mantle = "#181825";
-    crust = "#11111b";
-  };
   guiPkgs =
     if installGui
     then
@@ -223,28 +194,7 @@ in {
         enableFishIntegration = true;
       };
       git = import ../programs/git.nix;
-      lazygit = {
-        enable = true;
-        settings = {
-          gui = {
-            theme = {
-              activeBorderColor = [themeColors.blue "bold"];
-              inactiveBorderColor = [themeColors.subtext0];
-              optionsTextColor = [themeColors.blue];
-              selectedLineBgColor = [themeColors.surface0];
-              cherryPickedCommitBgColor = [themeColors.surface1];
-              cherryPickedCommitFgColor = [themeColors.blue];
-              unstagedChangesColor = [themeColors.red];
-              defaultFgColor = [themeColors.text];
-              searchingActiveBorderColor = [themeColors.yellow];
-            };
-            authorColors = {
-              "Tangtang Zhou" = themeColors.mauve;
-              "*" = themeColors.lavender;
-            };
-          };
-        };
-      };
+      lazygit.enable = true;
       neovim = {
         enable = true;
         defaultEditor = true;
@@ -267,8 +217,7 @@ in {
           };
         };
         alacritty = (import ../programs/alacritty.nix) {
-          inherit pkgs;
-          inherit themeColors;
+          inherit pkgs lib;
         };
         thunderbird = {
           enable = true;
@@ -281,6 +230,11 @@ in {
         waybar = import ./programs/waybar.nix {
           inherit terminal;
           inherit audioToggleCommand audioRaiseCommand audioLowerCommand;
+        };
+        rofi = {
+          enable = true;
+          package = pkgs.unstable.rofi;
+          font = lib.mkForce "${nerdFontMono} 14";
         };
         gnome-shell = {
           enable = true;
@@ -312,7 +266,7 @@ in {
     };
     # appeareance
     "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
+      color-scheme = lib.mkForce "prefer-dark";
       scaling-factor = lib.gvariant.mkUint32 2; # for log-in screen
     };
     # power
@@ -364,7 +318,7 @@ in {
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "open-terminal";
-      command = "alacritty";
+      command = "${terminal}";
       binding = "<Super>Return";
     };
     # extensions

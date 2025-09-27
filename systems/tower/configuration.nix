@@ -19,7 +19,7 @@
       enable = true;
       efiSupport = true;
       devices = ["nodev"];
-      font = "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
+      font = lib.mkForce "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
       fontSize = 56;
       # windows entry obtained by option `useOSProber = true;` avoid using useOSProber to speed up nixos rebuild
       extraEntries = ''
@@ -141,12 +141,20 @@
     shell = pkgs.fish;
   };
   home-manager = {
-    users.${username} = import ../../home/home.nix;
+    users.${username}.imports = [
+      ../../home/home.nix
+      ../../home/stylix.nix
+    ];
     extraSpecialArgs = {
       inherit pkgs;
       username = "${username}";
       installGui = true;
     };
+  };
+
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
   };
 
   programs = {
