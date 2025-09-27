@@ -143,7 +143,6 @@
   home-manager = {
     users.${username}.imports = [
       ../../home/home.nix
-      ../../home/stylix.nix
     ];
     extraSpecialArgs = {
       inherit pkgs;
