@@ -23,13 +23,20 @@
         localsend # file sharing
       ]
     else [];
-  wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  terminal = "alacritty";
-  nerdFontMono = "JetBrainsMono Nerd Font Mono";
-  audioToggleCommand = "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-  audioRaiseCommand = "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1";
-  audioLowerCommand = "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
 in {
+  imports =
+    [
+      ./options.nix
+    ]
+    ++ (
+      if installGui
+      then [
+        ./programs/sway.nix
+        ./programs/waybar.nix
+      ]
+      else []
+    );
+
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "25.05";
@@ -136,12 +143,6 @@ in {
     sway.enable = true;
   };
 
-  wayland.windowManager.sway = lib.mkIf installGui (import ./programs/sway.nix {
-    inherit pkgs lib terminal;
-    inherit audioToggleCommand audioRaiseCommand audioLowerCommand;
-    fontFamily = nerdFontMono;
-  });
-
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ../config/zellij.kdl;
 
@@ -149,10 +150,10 @@ in {
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      serif = [nerdFontMono];
-      sansSerif = [nerdFontMono];
-      monospace = [nerdFontMono];
-      emoji = [nerdFontMono];
+      serif = [config.fontMonoNerd];
+      sansSerif = [config.fontMonoNerd];
+      monospace = [config.fontMonoNerd];
+      emoji = [config.fontMonoNerd];
     };
   };
 
@@ -211,15 +212,23 @@ in {
           package = pkgs.unstable.ghostty;
           settings = {
             theme = "Catppuccin Mocha";
-            font-family = nerdFontMono;
+            font-family = config.fontMonoNerd;
             gtk-titlebar = false;
             confirm-close-surface = false;
             cursor-style = "block";
             shell-integration-features = "no-cursor";
           };
         };
-        alacritty = (import ../programs/alacritty.nix) {
-          inherit pkgs lib;
+        alacritty = {
+          enable = true;
+          settings = {
+            window.dimensions = {
+              columns = 100;
+              lines = 25;
+            };
+            font.normal.family = lib.mkForce "JetBrainsMono Nerd Font Mono";
+            font.size = 12;
+          };
         };
         thunderbird = {
           enable = true;
@@ -229,14 +238,10 @@ in {
             };
           };
         };
-        waybar = import ./programs/waybar.nix {
-          inherit terminal;
-          inherit audioToggleCommand audioRaiseCommand audioLowerCommand;
-        };
         rofi = {
           enable = true;
           package = pkgs.unstable.rofi;
-          font = lib.mkForce "${nerdFontMono} 14";
+          font = lib.mkForce "${config.fontMonoNerd} 14";
         };
         gnome-shell = {
           enable = true;
@@ -320,7 +325,7 @@ in {
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "open-terminal";
-      command = "${terminal}";
+      command = config.defaultTerminal;
       binding = "<Super>Return";
     };
     # extensions
