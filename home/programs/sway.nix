@@ -11,9 +11,9 @@ in {
     package = null;
     config = {
       modifier = modifier;
-      terminal = config.defaultTerminal;
+      terminal = config.default.terminal;
       fonts = {
-        names = [config.fontMonoNerd];
+        names = [config.default.fontMonoNerd];
         style = "Bold Semi-Condensed";
         size = 10.0;
       };
@@ -68,9 +68,9 @@ in {
           "${modifier}+Shift+8" = "move container to workspace number 8; workspace number 8";
           "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
           "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
-          "XF86AudioRaiseVolume" = "exec --no-startup-id ${config.audioRaiseCommand}";
-          "XF86AudioLowerVolume" = "exec --no-startup-id ${config.audioLowerCommand}";
-          "XF86AudioMute" = "exec --no-startup-id ${config.audioToggleCommand}";
+          "XF86AudioRaiseVolume" = "exec --no-startup-id ${config.default.audioRaiseCommand}";
+          "XF86AudioLowerVolume" = "exec --no-startup-id ${config.default.audioLowerCommand}";
+          "XF86AudioMute" = "exec --no-startup-id ${config.default.audioToggleCommand}";
           "Print" = "exec ${grim} -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy && ${notify-send} \"Screen copied to clipboard\" -t 5000";
         };
     };

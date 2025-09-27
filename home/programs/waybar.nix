@@ -68,13 +68,13 @@
           format = "󰘚 {usage}%";
           tooltip = true;
           interval = 1;
-          on-click = "${config.defaultTerminal} -e btm";
+          on-click = "${config.default.terminal} -e btm";
         };
 
         memory = {
           format = "󰍛 {}%";
           interval = 1;
-          on-click = "${config.defaultTerminal} -e btm";
+          on-click = "${config.default.terminal} -e btm";
         };
 
         battery = {
@@ -107,7 +107,7 @@
           format-disconnected = "󰖪 Disconnected";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
           tooltip-format = "{ifname}: {ipaddr}";
-          on-click = "${config.defaultTerminal} -e nmtui";
+          on-click = "${config.default.terminal} -e nmtui";
         };
 
         wireplumber = {
@@ -123,9 +123,9 @@
             default = ["󰕿" "󰖀" "󰕾"];
           };
           on-click = "pavucontrol";
-          on-click-right = "${config.audioToggleCommand}";
-          on-scroll-up = "${config.audioRaiseCommand}";
-          on-scroll-down = "${config.audioLowerCommand}";
+          on-click-right = "${config.default.audioToggleCommand}";
+          on-scroll-up = "${config.default.audioRaiseCommand}";
+          on-scroll-down = "${config.default.audioLowerCommand}";
         };
 
         backlight = {
@@ -139,7 +139,7 @@
           interval = 30;
           format = "󰋊 {percentage_used}%";
           path = "/";
-          on-click = "${config.defaultTerminal} -e btm";
+          on-click = "${config.default.terminal} -e btm";
         };
 
         tray = {

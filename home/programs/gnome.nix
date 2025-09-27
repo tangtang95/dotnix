@@ -83,7 +83,7 @@
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "open-terminal";
-      command = config.defaultTerminal;
+      command = config.default.terminal;
       binding = "<Super>Return";
     };
     # extensions
