@@ -13,7 +13,7 @@
       spacing = 1;
       margin = "0";
 
-      modules-left = ["sway/workspaces" "sway/mode"];
+      modules-left = ["sway/workspaces" "sway/mode" "custom/weather"];
       modules-center = [];
       modules-right = ["clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "tray"];
 
@@ -27,21 +27,12 @@
         format = "<span style=\"italic\">{}</span>";
       };
 
-      # "custom/playerctl" = {
-      #   format = " 󰐊 {}";
-      #   return-type = "json";
-      #   max-length = 40;
-      #   exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{artist}} - {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-      #   on-click = "playerctl play-pause";
-      #   on-click-right = "playerctl next";
-      # };
-      #
-      # "custom/weather" = {
-      #   exec = "curl 'https://wttr.in/?format=1'";
-      #   interval = 3600;
-      #   format = "{}";
-      #   tooltip = true;
-      # };
+      "custom/weather" = {
+        exec = "curl 'https://wttr.in/?format=1'";
+        interval = 3600;
+        format = "{}";
+        tooltip = true;
+      };
 
       idle_inhibitor = {
         format = "{icon}";
@@ -54,7 +45,7 @@
 
       clock = {
         format = "󰥔 {:%H:%M}";
-        format-alt = "󰃮 {:%Y-%m-%d}";
+        format-alt = "󰃮 {:%d/%m/%Y}";
         tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         calendar = {
           mode = "month";
@@ -63,6 +54,7 @@
           on-scroll = 1;
           on-click-right = "mode";
           format = {
+            # TODO: use stylix base16 colors
             months = "<span color='#d3c6aa'><b>{}</b></span>";
             days = "<span color='#e67e80'>{}</span>";
             weeks = "<span color='#a7c080'><b>W{}</b></span>";
@@ -282,21 +274,6 @@
     #custom-weather {
         color: @weather-color;
         border-bottom-color: @weather-color;
-    }
-
-    #custom-playerctl {
-        color: @playerctl-color;
-        border-bottom-color: @playerctl-color;
-    }
-
-    #custom-playerctl.Playing {
-        color: @cyan;
-        border-bottom-color: @cyan;
-    }
-
-    #custom-playerctl.Paused {
-        color: @orange;
-        border-bottom-color: @orange;
     }
 
     #clock {
