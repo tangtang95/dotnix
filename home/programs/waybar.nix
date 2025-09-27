@@ -67,13 +67,13 @@
         cpu = {
           format = "󰘚 {usage}%";
           tooltip = true;
-          interval = 1;
+          interval = 5;
           on-click = "${config.default.terminal} -e btm";
         };
 
         memory = {
           format = "󰍛 {}%";
-          interval = 1;
+          interval = 5;
           on-click = "${config.default.terminal} -e btm";
         };
 
@@ -135,13 +135,6 @@
           on-scroll-down = "brightnessctl set 5%-";
         };
 
-        disk = {
-          interval = 30;
-          format = "󰋊 {percentage_used}%";
-          path = "/";
-          on-click = "${config.default.terminal} -e btm";
-        };
-
         tray = {
           icon-size = 18;
           spacing = 5;
@@ -173,13 +166,10 @@
       /* Text and border colors for modules */
       @define-color mode-color @orange;
       @define-color mpd-color @magenta;
-      @define-color weather-color @magenta;
       @define-color playerctl-color @magenta;
       @define-color clock-color @blue;
       @define-color cpu-color @green;
       @define-color memory-color @magenta;
-      @define-color temperature-color @yellow;
-      @define-color temperature-critical-color @red;
       @define-color battery-color @cyan;
       @define-color battery-charging-color @green;
       @define-color battery-warning-color @yellow;
@@ -191,18 +181,12 @@
       @define-color wireplumber-color @orange;
       @define-color wireplumber-muted-color @red;
       @define-color backlight-color @yellow;
-      @define-color disk-color @cyan;
-      @define-color uptime-color @green;
-      @define-color updates-color @orange;
-      @define-color quote-color @green;
-      @define-color idle-inhibitor-color @foreground;
-      @define-color idle-inhibitor-active-color @red;
 
       * {
           /* Base styling for all modules */
           border: none;
           border-radius: 0;
-          font-family: "Iosevka Nerd Font";
+          font-family: "${config.default.fontMonoNerd}";
           font-size: 14px;
           min-height: 0;
       }
@@ -213,10 +197,9 @@
       }
 
       /* Common module styling with border-bottom */
-      #mode, #mpd, #custom-weather, #custom-playerctl, #clock, #cpu,
-      #memory, #temperature, #battery, #network, #bluetooth, #wireplumber,
-      #backlight, #disk, #custom-uptime, #custom-updates, #custom-quote,
-      #idle_inhibitor, #tray {
+      #mode, #mpd, #custom-playerctl, #clock, #cpu,
+      #memory, #battery, #network, #bluetooth, #wireplumber,
+      #backlight, #tray {
           padding: 0 10px;
           margin: 0 2px;
           border-bottom: 2px solid transparent;
@@ -264,11 +247,6 @@
           border-bottom-color: transparent;
       }
 
-      #custom-weather {
-          color: @weather-color;
-          border-bottom-color: @weather-color;
-      }
-
       #clock {
           color: @clock-color;
           border-bottom-color: @clock-color;
@@ -282,16 +260,6 @@
       #memory {
           color: @memory-color;
           border-bottom-color: @memory-color;
-      }
-
-      #temperature {
-          color: @temperature-color;
-          border-bottom-color: @temperature-color;
-      }
-
-      #temperature.critical {
-          color: @temperature-critical-color;
-          border-bottom-color: @temperature-critical-color;
       }
 
       #battery {
@@ -344,36 +312,6 @@
           border-bottom-color: @backlight-color;
       }
 
-      #disk {
-          color: @disk-color;
-          border-bottom-color: @disk-color;
-      }
-
-      #custom-uptime {
-          color: @uptime-color;
-          border-bottom-color: @uptime-color;
-      }
-
-      #custom-updates {
-          color: @updates-color;
-          border-bottom-color: @updates-color;
-      }
-
-      #custom-quote {
-          color: @quote-color;
-          border-bottom-color: @quote-color;
-      }
-
-      #idle_inhibitor {
-          color: @idle-inhibitor-color;
-          border-bottom-color: transparent;
-      }
-
-      #idle_inhibitor.activated {
-          color: @idle-inhibitor-active-color;
-          border-bottom-color: @idle-inhibitor-active-color;
-      }
-
       #tray {
           background-color: transparent;
           padding: 0 10px;
@@ -389,7 +327,6 @@
           color: @red;
           border-bottom-color: @red;
       }
-
     '';
   };
 }

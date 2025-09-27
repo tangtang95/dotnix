@@ -31,6 +31,7 @@ in {
       startup = [
         {command = "xwayland-satellite";} # use xwayland-satellite instead of xwayland for correct scaling
         {command = "mako";}
+        {command = "${pkgs.autotiling}/bin/autotiling";}
         # {
         #   # idle mechanism TODO: fix this goes idle when using controller
         #   command = ''
@@ -56,7 +57,7 @@ in {
         grim = "${pkgs.grim}/bin/grim";
       in
         lib.mkOptionDefault {
-          "${modifier}+b" = "exec firefox";
+          "${modifier}+b" = "exec ${config.default.browser}";
           "${modifier}+q" = "kill";
           "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
           "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";

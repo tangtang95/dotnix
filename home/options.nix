@@ -13,6 +13,11 @@ in {
         default = "alacritty";
         description = "The default terminal emulator to use across the system.";
       };
+      browser = mkOption {
+        type = types.str;
+        default = "firefox";
+        description = "The default terminal emulator to use across the system.";
+      };
       audioToggleCommand = mkOption {
         type = types.str;
         default = "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
