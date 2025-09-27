@@ -6,6 +6,7 @@
     // (
       if installGui
       then {
+        waybar.addCss = false;
       }
       else {}
     );

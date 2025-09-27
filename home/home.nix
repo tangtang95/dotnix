@@ -42,7 +42,6 @@ in {
       pkgs.ripgrep
       pkgs.ripgrep-all
       pkgs.fd
-      pkgs.bat
       pkgs.bottom
       pkgs.du-dust
       pkgs.sd
@@ -177,6 +176,9 @@ in {
       eza = {
         enable = true;
         icons = "auto";
+      };
+      bat = {
+        enable = true;
       };
       zoxide = {
         enable = true;

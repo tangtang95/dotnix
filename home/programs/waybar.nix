@@ -153,19 +153,19 @@
     }
   ];
   style = ''
-    /* Tokyo Night */
-    @define-color background #1a1b26;
-    @define-color background-light #24283b;
-    @define-color foreground #c0caf5;
-    @define-color black #15161e;
-    @define-color red #f7768e;
-    @define-color green #9ece6a;
-    @define-color yellow #e0af68;
-    @define-color blue #7aa2f7;
-    @define-color magenta #bb9af7;
-    @define-color cyan #7dcfff;
-    @define-color white #a9b1d6;
-    @define-color orange #ff9e64;
+    /* Colors based on base16 scheme */
+    @define-color background @base00;
+    @define-color background-light @base01;
+    @define-color foreground @base05;
+    @define-color black @base0F;
+    @define-color red @base08;
+    @define-color green @base0B;
+    @define-color yellow @base0A;
+    @define-color blue @base0D;
+    @define-color magenta @base0E;
+    @define-color cyan @base0C;
+    @define-color white @base06;
+    @define-color orange @base09;
 
     /* Module-specific colors */
     @define-color workspaces-color @foreground;

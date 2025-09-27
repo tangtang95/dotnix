@@ -1,18 +1,16 @@
-{ 
-  config, 
+{
+  config,
   pkgs,
   lib,
   hostname,
   username,
   ...
-}:
-let
+}: let
   ip_static = "192.168.1.251";
 in {
-
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -23,22 +21,22 @@ in {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-      options = [ "noatime" ];
+      options = ["noatime"];
     };
     "/mnt/passdrive" = {
       device = "/dev/disk/by-uuid/ddb9e481-e4a5-4e43-b17b-2c0f853e73c5";
       fsType = "ext4";
-      options = [ "defaults" "nofail" "X-mount.owner=${username}" "X-mount.group=users" "X-mount.mode=0766" ];
-      depends = [ "/" ];
+      options = ["defaults" "nofail" "X-mount.owner=${username}" "X-mount.group=users" "X-mount.mode=0766"];
+      depends = ["/"];
     };
   };
 
   networking = {
     hostName = hostname;
-    firewall.allowedTCPPorts = [ 53 8123 8080 8443 ];
+    firewall.allowedTCPPorts = [53 8123 8080 8443];
   };
 
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     vim
     fastfetch
     speedtest-cli
@@ -54,7 +52,17 @@ in {
       openFirewall = true;
       environmentFile = "/etc/homepage-dashboard/.env";
       widgets = [
-	{ resources = { label = "system"; uptime = true; cpu = true; memory = true; cputemp = true; units = "metric"; network = true; }; }
+        {
+          resources = {
+            label = "system";
+            uptime = true;
+            cpu = true;
+            memory = true;
+            cputemp = true;
+            units = "metric";
+            network = true;
+          };
+        }
       ];
     };
     # media server
@@ -73,34 +81,38 @@ in {
       enable = false;
       openFirewall = true;
       settings = {
-	dns = {
-	  bind_hosts = [ "0.0.0.0" ];
-	  port = 53;
-	  upstream_dns = [
-	    "1.1.1.1" #cloudflare
-	    "8.8.8.8" #google
-	  ];
-	};
-	filtering = {
-	  protection_enabled = true;
-	  filtering_enabled = true;
-	  parental_enabled = false;
-	  safe_search.enabled = false;
-	};
-	filters = map(url: { enabled = true; url = url; }) [
-	  # The Big List of Hacked Malware Web Sites
-	  "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt" 
-	  # malicious url blocklist
-	  "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt" 
-	  # HaGeZi's Ultimate DNS Blocklist
-          "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/ultimate.txt"
-	];
+        dns = {
+          bind_hosts = ["0.0.0.0"];
+          port = 53;
+          upstream_dns = [
+            "1.1.1.1" #cloudflare
+            "8.8.8.8" #google
+          ];
+        };
+        filtering = {
+          protection_enabled = true;
+          filtering_enabled = true;
+          parental_enabled = false;
+          safe_search.enabled = false;
+        };
+        filters =
+          map (url: {
+            enabled = true;
+            url = url;
+          }) [
+            # The Big List of Hacked Malware Web Sites
+            "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
+            # malicious url blocklist
+            "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt"
+            # HaGeZi's Ultimate DNS Blocklist
+            "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/ultimate.txt"
+          ];
       };
     };
   };
 
   programs = {
-    fish = { 
+    fish = {
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
@@ -117,8 +129,8 @@ in {
       config = {
         user = {
           name = "Tangtang Zhou";
-	  email = "tangtang2995@gmail.com";
-	};
+          email = "tangtang2995@gmail.com";
+        };
         core = {
           editor = "nvim";
         };
@@ -147,13 +159,13 @@ in {
     mutableUsers = false;
     users."${username}" = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = ["wheel"];
       password = "tangtang";
       shell = pkgs.fish;
     };
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.05";
 }
