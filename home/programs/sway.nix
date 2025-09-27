@@ -42,7 +42,8 @@ in {
         #               before-sleep 'swaylock -f -c 000000'
         #   '';
         # }
-        # TODO:
+ 
+        # NOTE: already have xdg-desktop-portal (maybe due to gnome)
         # exec /usr/lib/xdg-desktop-portal --replace
       ];
       defaultWorkspace = "workspace number 1";
