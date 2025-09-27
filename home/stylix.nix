@@ -7,6 +7,7 @@
       if installGui
       then {
         waybar.addCss = false;
+        qt.enable = false;
       }
       else {}
     );

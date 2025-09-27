@@ -15,7 +15,7 @@
 
       modules-left = ["sway/workspaces" "sway/mode"];
       modules-center = [];
-      modules-right = ["clock" "wireplumber" "backlight" "network" "cpu" "memory" "battery" "disk" "tray"];
+      modules-right = ["clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "tray"];
 
       "sway/workspaces" = {
         disable-scroll = true;
@@ -105,6 +105,16 @@
         format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
       };
 
+      bluetooth = {
+        format = " {status}";
+        format-disabled = "";
+        format-connected = " {num_connections} connected";
+        tooltip-format = "{controller_alias}\t{controller_address}";
+        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+        on-click = "blueman-manager";
+      };
+
       network = {
         format-wifi = "󰖩 {essid} ({signalStrength}%)";
         format-ethernet = "󰈀 {ifname}";
@@ -144,6 +154,7 @@
         interval = 30;
         format = "󰋊 {percentage_used}%";
         path = "/";
+        on-click = "${terminal} -e btm";
       };
 
       tray = {
@@ -190,6 +201,8 @@
     @define-color battery-critical-color @red;
     @define-color network-color @blue;
     @define-color network-disconnected-color @red;
+    @define-color network-color @blue;
+    @define-color bluetooth-color @magenta;
     @define-color wireplumber-color @orange;
     @define-color wireplumber-muted-color @red;
     @define-color backlight-color @yellow;
@@ -214,11 +227,9 @@
         color: @foreground;
     }
 
-
-
     /* Common module styling with border-bottom */
     #mode, #mpd, #custom-weather, #custom-playerctl, #clock, #cpu,
-    #memory, #temperature, #battery, #network, #wireplumber,
+    #memory, #temperature, #battery, #network, #bluetooth, #wireplumber,
     #backlight, #disk, #custom-uptime, #custom-updates, #custom-quote,
     #idle_inhibitor, #tray {
         padding: 0 10px;
@@ -331,6 +342,11 @@
     #battery.critical:not(.charging) {
         color: @battery-critical-color;
         border-bottom-color: @battery-critical-color;
+    }
+
+    #bluetooth {
+        color: @bluetooth-color;
+        border-bottom-color: @bluetooth-color;
     }
 
     #network {
