@@ -1,14 +1,7 @@
-{installGui ? true, ...}: {
-  stylix.targets =
-    {
-      neovim.enable = false;
-    }
-    // (
-      if installGui
-      then {
-        waybar.addCss = false;
-        qt.enable = false;
-      }
-      else {}
-    );
+{...}: {
+  stylix.targets = {
+    neovim.enable = false;
+    waybar.addCss = false;
+    qt.enable = false;
+  };
 }
