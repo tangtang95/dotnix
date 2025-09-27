@@ -20,7 +20,7 @@
       efiSupport = true;
       devices = ["nodev"];
       font = lib.mkForce "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
-      fontSize = 56;
+      fontSize = lib.mkForce 56;
       # windows entry obtained by option `useOSProber = true;` avoid using useOSProber to speed up nixos rebuild
       extraEntries = ''
         menuentry 'Windows 11' --class windows --class os $menuentry_id_option 'osprober-efi-6E0F-9C7C' {

@@ -13,7 +13,7 @@
       spacing = 1;
       margin = "0";
 
-      modules-left = ["sway/workspaces" "sway/mode" "custom/weather"];
+      modules-left = ["sway/workspaces" "sway/mode"];
       modules-center = [];
       modules-right = ["clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "tray"];
 
@@ -25,13 +25,6 @@
 
       "sway/mode" = {
         format = "<span style=\"italic\">{}</span>";
-      };
-
-      "custom/weather" = {
-        exec = "curl 'https://wttr.in/?format=1'";
-        interval = 3600;
-        format = "{}";
-        tooltip = true;
       };
 
       idle_inhibitor = {
