@@ -35,6 +35,26 @@ in {
       ];
       window = {
         titlebar = false;
+        commands = [
+          {
+            criteria = {
+              app_id = "steam";
+            };
+            command = "move container to workspace 7";
+          }
+          {
+            criteria = {
+              app_id = "discord";
+            };
+            command = "move container to workspace 8";
+          }
+          {
+            criteria = {
+              app_id = "spotify";
+            };
+            command = "move container to workspace 10";
+          }
+        ];
       };
       startup = [
         {command = "xwayland-satellite";} # use xwayland-satellite instead of xwayland for correct scaling
