@@ -6,14 +6,22 @@
 }: let
   modifier = "Mod4";
 in {
-  wayland.windowManager.sway = {
+  wayland.windowManager.sway = with config.default; {
     enable = true;
     package = null;
+    swaynag = {
+      enable = true;
+      settings = {
+        "<config>" = {
+          font = fontMonoNerd;
+        };
+      };
+    };
     config = {
       modifier = modifier;
-      terminal = config.default.terminal;
+      terminal = terminal;
       fonts = {
-        names = [config.default.fontMonoNerd];
+        names = [fontMonoNerd];
         style = "Bold Semi-Condensed";
         size = 10.0;
       };
@@ -61,7 +69,7 @@ in {
         grim = "${pkgs.grim}/bin/grim";
       in
         lib.mkOptionDefault {
-          "${modifier}+b" = "exec ${config.default.browser}";
+          "${modifier}+b" = "exec ${browser}";
           "${modifier}+q" = "kill";
           "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
           "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";
@@ -73,9 +81,9 @@ in {
           "${modifier}+Shift+8" = "move container to workspace number 8; workspace number 8";
           "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
           "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
-          "XF86AudioRaiseVolume" = "exec --no-startup-id ${config.default.audioRaiseCommand}";
-          "XF86AudioLowerVolume" = "exec --no-startup-id ${config.default.audioLowerCommand}";
-          "XF86AudioMute" = "exec --no-startup-id ${config.default.audioToggleCommand}";
+          "XF86AudioRaiseVolume" = "exec --no-startup-id ${audioRaiseCommand}";
+          "XF86AudioLowerVolume" = "exec --no-startup-id ${audioLowerCommand}";
+          "XF86AudioMute" = "exec --no-startup-id ${audioToggleCommand}";
           "Print" = "exec ${grim} -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy && ${notify-send} \"Screen copied to clipboard\" -t 5000";
         };
     };

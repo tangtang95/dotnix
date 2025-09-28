@@ -15,7 +15,7 @@
 
         modules-left = ["sway/workspaces" "sway/mode"];
         modules-center = [];
-        modules-right = ["clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "custom/power" "tray"];
+        modules-right = ["tray" "clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "custom/power"];
 
         "sway/workspaces" = {
           disable-scroll = true;
@@ -69,7 +69,7 @@
           format = "󰘚 {usage}%";
           tooltip = true;
           interval = 5;
-          on-click = "${config.default.terminal} -e btm";
+          on-click = "${config.default.terminal} -e btm -b";
         };
 
         memory = {
