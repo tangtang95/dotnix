@@ -194,6 +194,7 @@
   ];
   environment.sessionVariables = {
     NVIM_USE_NIXOS_MODULE = "true";
+    NIXOS_OZONE_WL = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

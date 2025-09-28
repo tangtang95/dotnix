@@ -132,12 +132,6 @@
   # enable user fonts
   fonts.fontconfig = {
     enable = true;
-    defaultFonts = with config.default; {
-      serif = [fontMonoNerd];
-      sansSerif = [fontMonoNerd];
-      monospace = [fontMonoNerd];
-      emoji = [fontMonoNerd];
-    };
   };
 
   programs = {
