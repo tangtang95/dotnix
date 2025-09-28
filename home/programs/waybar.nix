@@ -15,7 +15,7 @@
 
         modules-left = ["sway/workspaces" "sway/mode"];
         modules-center = [];
-        modules-right = ["clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "tray"];
+        modules-right = ["clock" "wireplumber" "backlight" "bluetooth" "network" "cpu" "memory" "battery" "custom/power" "tray"];
 
         "sway/workspaces" = {
           disable-scroll = true;
@@ -25,6 +25,17 @@
 
         "sway/mode" = {
           format = "<span style=\"italic\">{}</span>";
+        };
+
+        "custom/power" = {
+          format = "";
+          on-click = ''
+            swaynag -t warning -m 'Power Menu Options' \
+              -b 'Logout' 'swaymsg exit' \
+              -b 'Suspend' 'swaymsg exec systemctl suspend' \
+              -b 'Reboot' 'systemctl reboot' \
+              -b 'Shutdown' 'systemctl shutdown' \
+          '';
         };
 
         clock = {
@@ -170,6 +181,7 @@
       @define-color wireplumber-color @orange;
       @define-color wireplumber-muted-color @red;
       @define-color backlight-color @yellow;
+      @define-color custom-power-color @red;
 
       * {
           /* Base styling for all modules */
@@ -186,7 +198,8 @@
       }
 
       /* Common module styling with border-bottom */
-      #mode, #clock, #cpu, memory, #battery, #network, #bluetooth, #wireplumber, backlight, #tray {
+      #mode, #clock, #cpu, #memory, #battery, #network, #bluetooth, #wireplumber, #backlight, #tray,
+      #custom-power {
           padding: 0 10px;
           margin: 0 2px;
           border-bottom: 2px solid transparent;
@@ -302,6 +315,11 @@
           -gtk-icon-effect: highlight;
           color: @red;
           border-bottom-color: @red;
+      }
+
+      #custom-power {
+          color: @custom-power-color;
+          border-bottom-color: @custom-power-color;
       }
     '';
   };
