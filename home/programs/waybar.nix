@@ -27,15 +27,6 @@
           format = "<span style=\"italic\">{}</span>";
         };
 
-        idle_inhibitor = {
-          format = "{icon}";
-          format-icons = {
-            activated = "󰈈";
-            deactivated = "󰈉";
-          };
-          tooltip = true;
-        };
-
         clock = {
           format = "󰥔 {:%H:%M}";
           format-alt = "󰃮 {:%d/%m/%Y}";
@@ -46,13 +37,12 @@
             weeks-pos = "right";
             on-scroll = 1;
             on-click-right = "mode";
-            format = {
-              # TODO: use stylix base16 colors
-              months = "<span color='#d3c6aa'><b>{}</b></span>";
-              days = "<span color='#e67e80'>{}</span>";
-              weeks = "<span color='#a7c080'><b>W{}</b></span>";
-              weekdays = "<span color='#7fbbb3'><b>{}</b></span>";
-              today = "<span color='#dbbc7f'><b><u>{}</u></b></span>";
+            format = with config.lib.stylix.colors; {
+              months = "<span color='#${base0A}'><b>{}</b></span>";
+              days = "<span color='#${base08}'>{}</span>";
+              weeks = "<span color='#${base0B}'><b>W{}</b></span>";
+              weekdays = "<span color='#${base0C}'><b>{}</b></span>";
+              today = "<span color='#${base0E}'><b><u>{}</u></b></span>";
             };
           };
           actions = {
@@ -165,7 +155,6 @@
 
       /* Text and border colors for modules */
       @define-color mode-color @orange;
-      @define-color mpd-color @magenta;
       @define-color playerctl-color @magenta;
       @define-color clock-color @blue;
       @define-color cpu-color @green;
@@ -197,9 +186,7 @@
       }
 
       /* Common module styling with border-bottom */
-      #mode, #mpd, #custom-playerctl, #clock, #cpu,
-      #memory, #battery, #network, #bluetooth, #wireplumber,
-      #backlight, #tray {
+      #mode, #clock, #cpu, memory, #battery, #network, #bluetooth, #wireplumber, backlight, #tray {
           padding: 0 10px;
           margin: 0 2px;
           border-bottom: 2px solid transparent;
@@ -234,17 +221,6 @@
       #mode {
           color: @mode-color;
           border-bottom-color: @mode-color;
-      }
-
-      #mpd {
-          color: @mpd-color;
-          border-bottom-color: @mpd-color;
-      }
-
-      #mpd.disconnected,
-      #mpd.stopped {
-          color: @foreground;
-          border-bottom-color: transparent;
       }
 
       #clock {

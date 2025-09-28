@@ -34,7 +34,7 @@ in {
         {command = "${pkgs.autotiling}/bin/autotiling";}
 
         # idle mechanism
-        {command = "${pkgs.wljoywake}/bin/wljoywake";} # NOTE: should work only up to sway v1.10.1
+        {command = "${pkgs.wljoywake}/bin/wljoywake";} # TODO: should work only up to sway v1.10.1, fix after updating nixos 25.05
         {
           command = ''
             exec swayidle -w \
