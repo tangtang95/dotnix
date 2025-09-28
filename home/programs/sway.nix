@@ -33,6 +33,10 @@ in {
           command = "${pkgs.waybar}/bin/waybar";
         }
       ];
+      gaps = {
+        inner = 5;
+        outer = 5;
+      };
       window = {
         titlebar = false;
         commands = [

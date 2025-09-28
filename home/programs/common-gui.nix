@@ -42,6 +42,18 @@
         font.size = 12;
       };
     };
+    firefox = {
+      enable = true;
+      profiles = {
+        tangtang = {
+          isDefault = true;
+          name = "tangtang";
+          extensions = {
+            force = true;
+          };
+        };
+      };
+    };
     thunderbird = {
       enable = true;
       profiles = {
