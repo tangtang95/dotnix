@@ -32,17 +32,20 @@ in {
         {command = "xwayland-satellite";} # use xwayland-satellite instead of xwayland for correct scaling
         {command = "mako";}
         {command = "${pkgs.autotiling}/bin/autotiling";}
-        # {
-        #   # idle mechanism TODO: fix this goes idle when using controller
-        #   command = ''
-        #     exec swayidle -w \
-        #               timeout 300 'swaylock -f -c 000000' \
-        #               timeout 600 'swaymsg "output * dpms off"' \
-        #                    resume 'swaymsg "output * dpms on"' \
-        #               before-sleep 'swaylock -f -c 000000'
-        #   '';
-        # }
- 
+
+        # idle mechanism
+        {command = "${pkgs.wljoywake}/bin/wljoywake";} # NOTE: should work only up to sway v1.10.1
+        {
+          command = ''
+            exec swayidle -w \
+                   timeout 600 'swaylock -f -c 000000' \
+                   timeout 900 'swaymsg "output * dpms off"' \
+                   resume 'swaymsg "output * dpms on"' \
+                   timeout 3600 'systemctl suspend' \
+                   before-sleep 'swaylock -f -c 000000'
+          '';
+        }
+
         # NOTE: already have xdg-desktop-portal (maybe due to gnome)
         # exec /usr/lib/xdg-desktop-portal --replace
       ];
