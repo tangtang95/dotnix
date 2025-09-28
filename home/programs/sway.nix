@@ -74,7 +74,7 @@ in {
           '';
         }
 
-        # NOTE: already have xdg-desktop-portal (maybe due to gnome)
+        # NOTE: already have xdg-desktop-portal (due to gnome and gdm login)
         # exec /usr/lib/xdg-desktop-portal --replace
       ];
       defaultWorkspace = "workspace number 1";

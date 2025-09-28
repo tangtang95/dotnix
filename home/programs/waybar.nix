@@ -34,7 +34,7 @@
               -b 'Logout' 'swaymsg exit' \
               -b 'Suspend' 'swaymsg exec systemctl suspend' \
               -b 'Reboot' 'systemctl reboot' \
-              -b 'Shutdown' 'systemctl shutdown' \
+              -b 'Shutdown' 'systemctl poweroff' \
           '';
         };
 
