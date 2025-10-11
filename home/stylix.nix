@@ -6,6 +6,7 @@
     firefox = {
       enable = true;
       colorTheme.enable = true;
+      firefoxGnomeTheme.enable = true;
       profileNames = ["tangtang"];
     };
   };
