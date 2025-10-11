@@ -10,6 +10,7 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dotnixvim.url = "github:tangtang95/dotnixvim";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nix-gl-host.url = "github:tangtang95/nix-gl-host-rs";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -21,6 +22,7 @@
     nixpkgs-unstable,
     home-manager,
     stylix,
+    dotnixvim,
     nixos-wsl,
     nix-gl-host,
     rust-overlay,
@@ -67,6 +69,7 @@
         nixos-wsl.nixosModules.default
         home-manager.nixosModules.home-manager
         stylix.nixosModules.stylix
+        dotnixvim.nixosModules.default
         ./systems/wsl/configuration.nix
       ];
     };

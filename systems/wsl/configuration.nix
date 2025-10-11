@@ -26,6 +26,9 @@
       enable = true;
       interactiveShellInit = ''set fish_greeting'';
     };
+    nixvim = {
+      enable = true;
+    };
   };
 
   environment.systemPackages = [];
