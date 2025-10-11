@@ -18,10 +18,7 @@
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    targets = {
-      grub.enable = false;
-    };
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
   };
 
   programs = {
@@ -30,6 +27,8 @@
       interactiveShellInit = ''set fish_greeting'';
     };
   };
+
+  environment.systemPackages = [];
 
   users.users.${username} = {
     isNormalUser = true;
