@@ -66,6 +66,19 @@
       enable = true;
       package = pkgs.unstable.rofi; #TODO: after 25.05 remove unstable for 2.0.0 that supports wayland when available in stable
       font = lib.mkForce "${config.default.fontMonoNerd} 14";
+      extraConfig = {
+        display-drun = "";
+      };
+      theme = let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in {
+        window = {
+          border = mkLiteral "1px solid";
+        };
+        mainbox = {
+          padding = mkLiteral "10px";
+        };
+      };
     };
   };
 }
