@@ -23,8 +23,6 @@
       enable = true;
       package = pkgs.unstable.ghostty;
       settings = {
-        theme = "Catppuccin Mocha";
-        font-family = config.default.fontMonoNerd;
         gtk-titlebar = false;
         confirm-close-surface = false;
         cursor-style = "block";
@@ -33,14 +31,6 @@
     };
     alacritty = {
       enable = true;
-      settings = {
-        window.dimensions = {
-          columns = 100;
-          lines = 25;
-        };
-        font.normal.family = lib.mkForce "JetBrainsMono Nerd Font Mono";
-        font.size = 12;
-      };
     };
     firefox = {
       enable = true;
@@ -65,7 +55,6 @@
     rofi = {
       enable = true;
       package = pkgs.unstable.rofi; #TODO: after 25.05 remove unstable for 2.0.0 that supports wayland when available in stable
-      font = lib.mkForce "${config.default.fontMonoNerd} 14";
       extraConfig = {
         display-drun = "";
       };

@@ -187,8 +187,6 @@
           /* Base styling for all modules */
           border: none;
           border-radius: 0;
-          font-family: "${config.default.fontMonoNerd}";
-          font-size: 14px;
           min-height: 0;
       }
 
