@@ -7,7 +7,6 @@
   programs.gnome-shell = {
     enable = true;
     extensions = with pkgs.gnomeExtensions; [
-      {package = clipboard-indicator;}
       {package = simple-workspaces-bar;}
       {package = forge;}
       {package = appindicator;}
@@ -85,10 +84,6 @@
       name = "open-terminal";
       command = config.default.terminal;
       binding = "<Super>Return";
-    };
-    # extensions
-    "org/gnome/shell/extensions/clipboard-indicator" = {
-      toggle-menu = ["<Super>p"];
     };
     "org/gnome/shell/extensions/forge" = {
       move-pointer-focus-enabled = false;

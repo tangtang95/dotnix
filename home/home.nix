@@ -9,6 +9,7 @@
     [
       ./options.nix
       ./stylix.nix
+      ./scripts.nix
       ./programs/git.nix
     ]
     ++ (
@@ -133,6 +134,9 @@
   fonts.fontconfig = {
     enable = true;
   };
+
+  # clipboard manager
+  services.cliphist.enable = true;
 
   programs = {
     home-manager.enable = true;
