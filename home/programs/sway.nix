@@ -91,11 +91,12 @@ in {
       keybindings = let
         notify-send = "${pkgs.libnotify}/bin/notify-send";
         grim = "${pkgs.grim}/bin/grim";
+        cliphist-rofi-img = "${pkgs.cliphist}/bin/cliphist-rofi-img";
       in
         lib.mkOptionDefault {
           "${modifier}+b" = "exec ${browser}";
           "${modifier}+q" = "kill";
-          "${modifier}+p" = "exec --no-startup-id rofi -show clipboard:~/.scripts/cliphist-rofi-img -show clipboard";
+          "${modifier}+p" = "exec --no-startup-id rofi -show clipboard:${cliphist-rofi-img} -show clipboard";
           "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
           "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";
           "${modifier}+Shift+3" = "move container to workspace number 3; workspace number 3";

@@ -9,7 +9,6 @@
     [
       ./options.nix
       ./stylix.nix
-      ./scripts.nix
       ./programs/git.nix
     ]
     ++ (
