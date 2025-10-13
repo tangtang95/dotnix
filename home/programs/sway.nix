@@ -85,7 +85,7 @@ in {
       output = {
         HDMI-A-2 = {
           scale = "2";
-          bg = "${../wallpapers/yoichi-isagi-blue-3840x2160.jpg} fill";
+          bg = "${../wallpapers/tanjiro-kamado-red.png} fill";
         };
       };
       keybindings = let
