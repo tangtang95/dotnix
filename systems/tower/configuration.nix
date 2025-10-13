@@ -73,6 +73,17 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # Enable greeter with sway
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --remember --cmd sway";
+        user = "greeter";
+      };
+    };
+  };
+
   # Enable Sway Window Manager
   programs.sway = {
     enable = true;
