@@ -78,7 +78,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --remember --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --remember --asterisks --cmd sway";
         user = "greeter";
       };
     };
