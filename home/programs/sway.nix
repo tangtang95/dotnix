@@ -9,6 +9,9 @@ in {
   home.sessionVariables = {
     DISPLAY = ":1";
   };
+  systemd.user.sessionVariables = {
+    DISPLAY = ":1";
+  };
   wayland.windowManager.sway = with config.default; {
     enable = true;
     package = null;
@@ -65,7 +68,6 @@ in {
       };
       startup = [
         {command = "xwayland-satellite :1";} # use xwayland-satellite instead of xwayland for correct scaling
-        {command = "systemctl --user set-environment DISPLAY=:1";}
         {command = "mako";}
         {command = "${pkgs.autotiling}/bin/autotiling";}
 
