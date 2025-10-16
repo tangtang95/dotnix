@@ -115,6 +115,8 @@
     nerd-fonts.jetbrains-mono
   ];
   home.sessionVariables = {
+    BROWSER = config.default.browser;
+    TERMINAL = config.default.terminal;
     EDITOR = "nvim";
     NVIM_USE_NIXOS_MODULE = "true";
   };

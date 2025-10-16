@@ -66,13 +66,6 @@
     LC_TIME = "it_IT.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   # Enable greeter with sway
   services.greetd = {
     enable = true;
@@ -89,7 +82,6 @@
     enable = true;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
-      xfce.thunar # file explorer
       blueman # bluetooth
       pavucontrol # gui for audio control
       brightnessctl
@@ -106,6 +98,7 @@
     xwayland.enable = false;
   };
   services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -121,6 +114,9 @@
       via
     ];
   };
+
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -172,6 +168,11 @@
 
   programs = {
     firefox.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+    };
+    xfconf.enable = true; # thunar preference persistency
     neovim.enable = true;
     fish.enable = true;
     steam = {
@@ -199,16 +200,25 @@
       enable = true;
     };
   };
+  services.gvfs.enable = true; # gnome virtual file system for thunar
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
     via
+    xarchiver # archive manager frontend
   ];
   environment.sessionVariables = {
     NVIM_USE_NIXOS_MODULE = "true";
     NIXOS_OZONE_WL = "1"; #NOTE: for electron and chromium app to use wayland
+  };
+  # Set default terminal app
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "alacritty.desktop" ];
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -4,12 +4,59 @@
   config,
   ...
 }: {
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = let
+      imageViewerApp = "org.gnome.Loupe.desktop";
+      emailApp = "userapp-Thunderbird-PB4G92.desktop";
+    in {
+      "x-scheme-handler/mailto" = emailApp;
+      "message/rfc822" = emailApp;
+      "x-scheme-handler/mid" = emailApp;
+      "application/pdf" = "org.gnome.Papers.desktop";
+      "image/jpeg" = imageViewerApp;
+      "image/png" = imageViewerApp;
+      "image/gif" = imageViewerApp;
+      "image/webp" = imageViewerApp;
+      "image/tiff" = imageViewerApp;
+      "image/x-tga" = imageViewerApp;
+      "image/vnd-ms.dds" = imageViewerApp;
+      "image/x-dds" = imageViewerApp;
+      "image/bmp" = imageViewerApp;
+      "image/vnd.microsoft.icon" = imageViewerApp;
+      "image/vnd.radiance" = imageViewerApp;
+      "image/x-exr" = imageViewerApp;
+      "image/x-portable-bitmap" = imageViewerApp;
+      "image/x-portable-graymap" = imageViewerApp;
+      "image/x-portable-pixmap" = imageViewerApp;
+      "image/x-portable-anymap" = imageViewerApp;
+      "image/x-qoi" = imageViewerApp;
+      "image/qoi" = imageViewerApp;
+      "image/svg+xml" = imageViewerApp;
+      "image/svg+xml-compressed" = imageViewerApp;
+      "image/avif" = imageViewerApp;
+      "image/heic" = imageViewerApp;
+      "image/jxl" = imageViewerApp;
+    };
+  };
+
   home.packages = with pkgs; [
+    # default apps
+    loupe # image viewer
+    papers # pdf viewer
+    libreoffice
+
     gimp
     spotify
     qbittorrent
     discord
-    libreoffice
     vlc
     whatsapp-for-linux
     bitwarden-desktop
@@ -19,18 +66,21 @@
   ];
 
   programs = {
-    ghostty = {
+    # default apps
+    # movie player
+    mpv = {
       enable = true;
-      package = pkgs.unstable.ghostty;
-      settings = {
-        gtk-titlebar = false;
-        confirm-close-surface = false;
-        cursor-style = "block";
-        shell-integration-features = "no-cursor";
-      };
     };
     alacritty = {
       enable = true;
+    };
+    thunderbird = {
+      enable = true;
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+      };
     };
     firefox = {
       enable = true;
@@ -44,12 +94,16 @@
         };
       };
     };
-    thunderbird = {
+
+    # other
+    ghostty = {
       enable = true;
-      profiles = {
-        default = {
-          isDefault = true;
-        };
+      package = pkgs.unstable.ghostty;
+      settings = {
+        gtk-titlebar = false;
+        confirm-close-surface = false;
+        cursor-style = "block";
+        shell-integration-features = "no-cursor";
       };
     };
     rofi = {
