@@ -98,7 +98,6 @@
     xwayland.enable = false;
   };
   services.gnome.gnome-keyring.enable = true;
-  security.polkit.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -167,6 +166,7 @@
   };
 
   programs = {
+    # default gui apps
     firefox.enable = true;
     thunar = {
       enable = true;
@@ -174,7 +174,7 @@
     };
     xfconf.enable = true; # thunar preference persistency
     neovim.enable = true;
-    fish.enable = true;
+
     steam = {
       enable = true;
       package = pkgs.steam.override {
@@ -185,6 +185,7 @@
       };
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     };
+    fish.enable = true;
     command-not-found.enable = false; # Does not work on nixos with flakes
     # gnome settings for all
     dconf.profiles.user.databases = [
@@ -202,9 +203,25 @@
   };
   services.gvfs.enable = true; # gnome virtual file system for thunar
 
+
+  # Set default terminal app
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "alacritty.desktop" ];
+    };
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # default gui apps
+    loupe # image viewer
+    decibels # audio player
+    showtime # media player
+    papers # pdf viewer
+    gnome-calculator
+    libreoffice
+
     wget
     via
     xarchiver # archive manager frontend
@@ -212,13 +229,6 @@
   environment.sessionVariables = {
     NVIM_USE_NIXOS_MODULE = "true";
     NIXOS_OZONE_WL = "1"; #NOTE: for electron and chromium app to use wayland
-  };
-  # Set default terminal app
-  xdg.terminal-exec = {
-    enable = true;
-    settings = {
-      default = [ "alacritty.desktop" ];
-    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -48,16 +48,10 @@
   };
 
   home.packages = with pkgs; [
-    # default apps
-    loupe # image viewer
-    papers # pdf viewer
-    libreoffice
-
     gimp
     spotify
     qbittorrent
     discord
-    vlc
     whatsapp-for-linux
     bitwarden-desktop
     obsidian
