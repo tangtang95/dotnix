@@ -16,11 +16,16 @@
     defaultApplications = let
       imageViewerApp = "org.gnome.Loupe.desktop";
       emailApp = "userapp-Thunderbird-PB4G92.desktop";
+      archiverApp = "org.gnome.FileRoller.desktop";
     in {
+      "application/x-zip" = archiverApp;
+      "application/x-gzip" = archiverApp;
+      "application/x-lzip" = archiverApp;
+      "application/x-tar" = archiverApp;
+      "application/pdf" = "org.gnome.Papers.desktop";
       "x-scheme-handler/mailto" = emailApp;
       "message/rfc822" = emailApp;
       "x-scheme-handler/mid" = emailApp;
-      "application/pdf" = "org.gnome.Papers.desktop";
       "image/jpeg" = imageViewerApp;
       "image/png" = imageViewerApp;
       "image/gif" = imageViewerApp;
@@ -44,6 +49,17 @@
       "image/avif" = imageViewerApp;
       "image/heic" = imageViewerApp;
       "image/jxl" = imageViewerApp;
+    };
+  };
+
+  # thunar config
+  home.file.".config/xfce4/helpers.rc".text = "TerminalEmulator=${config.default.terminal}";
+  xfconf = {
+    enable = true;
+    settings = {
+      thunar = {
+        last-menubar-visible = false;
+      };
     };
   };
 

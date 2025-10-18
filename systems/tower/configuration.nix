@@ -219,12 +219,13 @@
     decibels # audio player
     showtime # media player
     papers # pdf viewer
+    snapshot # camera
     gnome-calculator
     libreoffice
+    file-roller # archive manager
 
     wget
     via
-    xarchiver # archive manager frontend
   ];
   environment.sessionVariables = {
     NVIM_USE_NIXOS_MODULE = "true";
