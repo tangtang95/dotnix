@@ -19,6 +19,7 @@
         ./programs/waybar.nix
         ./programs/gnome.nix
         ./programs/common-gui.nix
+        ./programs/rclone.nix # TODO: move it to default imports when ready
       ]
       else []
     );
@@ -102,7 +103,6 @@
     # others
     presenterm
     python313Packages.weasyprint # for presenterm export pdf
-    rclone
     just
     fastfetch # fetch OS info
     onefetch # fetch git info
