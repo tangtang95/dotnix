@@ -168,6 +168,11 @@
   programs = {
     # default gui apps
     firefox.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+    };
+    xfconf.enable = true; # thunar preference persistency
     neovim.enable = true;
 
     steam = {
@@ -196,6 +201,7 @@
       enable = true;
     };
   };
+  services.gvfs.enable = true; # gnome virtual file system for thunar
 
 
   # Set default terminal app
@@ -209,7 +215,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # default gui apps
-    nautilus # file manager
     loupe # image viewer
     decibels # audio player
     showtime # media player
@@ -226,7 +231,6 @@
     NVIM_USE_NIXOS_MODULE = "true";
     NIXOS_OZONE_WL = "1"; #NOTE: for electron and chromium app to use wayland
   };
-  services.gvfs.enable = true; # file manager deps
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
