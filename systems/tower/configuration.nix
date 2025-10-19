@@ -231,6 +231,46 @@
     NVIM_USE_NIXOS_MODULE = "true";
     NIXOS_OZONE_WL = "1"; #NOTE: for electron and chromium app to use wayland
   };
+  xdg.mime = {
+    enable = true;
+    defaultApplications = let
+      imageViewerApp = "org.gnome.Loupe.desktop";
+      emailApp = "userapp-Thunderbird-PB4G92.desktop";
+      archiverApp = "org.gnome.FileRoller.desktop";
+    in {
+      "application/x-zip" = archiverApp;
+      "application/x-gzip" = archiverApp;
+      "application/x-lzip" = archiverApp;
+      "application/x-tar" = archiverApp;
+      "application/pdf" = "org.gnome.Papers.desktop";
+      "x-scheme-handler/mailto" = emailApp;
+      "message/rfc822" = emailApp;
+      "x-scheme-handler/mid" = emailApp;
+      "image/jpeg" = imageViewerApp;
+      "image/png" = imageViewerApp;
+      "image/gif" = imageViewerApp;
+      "image/webp" = imageViewerApp;
+      "image/tiff" = imageViewerApp;
+      "image/x-tga" = imageViewerApp;
+      "image/vnd-ms.dds" = imageViewerApp;
+      "image/x-dds" = imageViewerApp;
+      "image/bmp" = imageViewerApp;
+      "image/vnd.microsoft.icon" = imageViewerApp;
+      "image/vnd.radiance" = imageViewerApp;
+      "image/x-exr" = imageViewerApp;
+      "image/x-portable-bitmap" = imageViewerApp;
+      "image/x-portable-graymap" = imageViewerApp;
+      "image/x-portable-pixmap" = imageViewerApp;
+      "image/x-portable-anymap" = imageViewerApp;
+      "image/x-qoi" = imageViewerApp;
+      "image/qoi" = imageViewerApp;
+      "image/svg+xml" = imageViewerApp;
+      "image/svg+xml-compressed" = imageViewerApp;
+      "image/avif" = imageViewerApp;
+      "image/heic" = imageViewerApp;
+      "image/jxl" = imageViewerApp;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
