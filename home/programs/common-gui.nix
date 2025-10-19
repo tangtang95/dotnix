@@ -6,9 +6,10 @@
 }: {
   gtk = {
     enable = true;
+    # NOTE: adwaita seems to provide faster startup time for gnome apps
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
     };
   };
   xdg.mimeApps = {
