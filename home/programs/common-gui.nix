@@ -6,9 +6,10 @@
 }: {
   gtk = {
     enable = true;
+    # NOTE: adwaita seems to provide faster startup time for gnome apps
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
     };
   };
   xdg.mimeApps = {
@@ -49,17 +50,6 @@
       "image/avif" = imageViewerApp;
       "image/heic" = imageViewerApp;
       "image/jxl" = imageViewerApp;
-    };
-  };
-
-  # thunar config
-  home.file.".config/xfce4/helpers.rc".text = "TerminalEmulator=${config.default.terminal}";
-  xfconf = {
-    enable = true;
-    settings = {
-      thunar = {
-        last-menubar-visible = false;
-      };
     };
   };
 
