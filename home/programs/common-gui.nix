@@ -71,10 +71,8 @@
       enable = true;
       package = pkgs.unstable.ghostty;
       settings = {
-        gtk-titlebar = false;
+        command = "${pkgs.zellij}/bin/zellij";
         confirm-close-surface = false;
-        cursor-style = "block";
-        shell-integration-features = "no-cursor";
       };
     };
     rofi = {
