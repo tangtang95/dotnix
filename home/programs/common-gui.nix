@@ -71,7 +71,6 @@
       enable = true;
       package = pkgs.unstable.ghostty;
       settings = {
-        command = "${pkgs.zellij}/bin/zellij";
         confirm-close-surface = false;
       };
     };
