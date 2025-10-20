@@ -96,7 +96,7 @@
       libnotify
       pkgs.unstable.rofi #TODO: after 25.05 remove unstable for 2.0.0 that supports wayland when available in stable
     ];
-    xwayland.enable = true;
+    xwayland.enable = false;
   };
   services.gnome.gnome-keyring.enable = true;
 
