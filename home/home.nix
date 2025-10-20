@@ -142,6 +142,7 @@
 
   programs = {
     home-manager.enable = true;
+    bash.enable = true;
     fish = {
       enable = true;
       interactiveShellInit = ''
@@ -169,6 +170,7 @@
     starship = {
       enable = true;
       enableFishIntegration = true;
+      enableBashIntegration = false;
     };
     fzf = {
       enable = true;

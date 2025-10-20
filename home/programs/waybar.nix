@@ -106,9 +106,8 @@
           format-ethernet = "󰈀 {ifname}";
           format-linked = "󰈀 {ifname} (No IP)";
           format-disconnected = "󰖪 Disconnected";
-          format-alt = "{ifname}: {ipaddr}/{cidr}";
           tooltip-format = "{ifname}: {ipaddr}";
-          on-click = "${config.default.terminal} -e nmtui";
+          on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
         };
 
         wireplumber = {
