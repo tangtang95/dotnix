@@ -99,6 +99,27 @@
     xwayland.enable = false;
   };
   services.gnome.gnome-keyring.enable = true;
+  security.polkit = {
+    enable = true;
+    extraConfig = ''
+      // polkit rule for file manager mounting using udisks2
+      polkit.addRule(function(action, subject) {
+        var YES = polkit.Result.YES;
+        // NOTE: there must be a comma at the end of each line except for the last:
+        var permission = {
+          "org.freedesktop.udisks2.filesystem-mount": YES,
+          "org.freedesktop.udisks2.encrypted-unlock": YES,
+          "org.freedesktop.udisks2.eject-media": YES,
+          "org.freedesktop.udisks2.power-off-drive": YES,
+          // Thunar file manager specific
+          "org.freedesktop.udisks2.filesystem-mount-system": YES
+        };
+        if (subject.isInGroup("wheel")) {
+          return permission[action.id];
+        }
+      });
+    '';
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -171,7 +192,7 @@
     firefox.enable = true;
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+      plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
     };
     xfconf.enable = true; # thunar preference persistency
     neovim.enable = true;
@@ -204,12 +225,11 @@
   };
   services.gvfs.enable = true; # gnome virtual file system for thunar
 
-
   # Set default terminal app
   xdg.terminal-exec = {
     enable = true;
     settings = {
-      default = [ "alacritty.desktop" ];
+      default = ["alacritty.desktop"];
     };
   };
   # List packages installed in system profile. To search, run:
