@@ -25,6 +25,9 @@
       enable = true;
       qemu = {
         package = pkgs.qemu_kvm;
+        vhostUserPackages = with pkgs; [
+          virtiofsd # filesystem sharing
+        ];
         ovmf = {
           enable = true;
           packages = [pkgs.OVMFFull.fd];
