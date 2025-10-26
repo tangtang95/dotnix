@@ -54,12 +54,6 @@ in {
         commands = [
           {
             criteria = {
-              app_id = "steam";
-            };
-            command = "move container to workspace 7";
-          }
-          {
-            criteria = {
               app_id = "discord";
             };
             command = "move container to workspace 8";
