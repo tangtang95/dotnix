@@ -12,6 +12,12 @@ in {
   systemd.user.sessionVariables = {
     DISPLAY = ":1";
   };
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      image = ../wallpapers/yoichi-isagi-blue-3840x2160.jpg;
+    };
+  };
   wayland.windowManager.sway = with config.default; {
     enable = true;
     package = null;
