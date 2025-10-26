@@ -34,6 +34,7 @@
     obsidian
     yubioath-flutter # yubico
     localsend # file sharing
+    ghidra # reverse engineering
   ];
 
   programs = {
@@ -65,15 +66,6 @@
         };
       };
     };
-
-    # other
-    ghostty = {
-      enable = true;
-      package = pkgs.unstable.ghostty;
-      settings = {
-        confirm-close-surface = false;
-      };
-    };
     rofi = {
       enable = true;
       package = pkgs.unstable.rofi; #TODO: after 25.05 remove unstable for 2.0.0 that supports wayland when available in stable
@@ -89,6 +81,15 @@
         mainbox = {
           padding = mkLiteral "10px";
         };
+      };
+    };
+
+    # other
+    ghostty = {
+      enable = true;
+      package = pkgs.unstable.ghostty;
+      settings = {
+        confirm-close-surface = false;
       };
     };
   };

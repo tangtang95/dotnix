@@ -251,6 +251,8 @@
   environment.sessionVariables = {
     NVIM_USE_NIXOS_MODULE = "true";
     NIXOS_OZONE_WL = "1"; #NOTE: for electron and chromium app to use wayland
+    _JAVA_AWT_WM_NONREPARENTING = "1"; #NOTE: fix java apps in wayland
+    _JAVA_OPTIONS="-Dsun.java2d.uiScale=2";
   };
   xdg.mime = {
     enable = true;
