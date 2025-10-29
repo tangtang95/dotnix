@@ -77,6 +77,17 @@
       };
     };
   };
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    StandardOutput = "tty";
+    StandardError = "journal"; # avoid error logs on screen
+
+    # Avoid boot logs on screen
+    TTYReset = true;
+    TTYVHangup = true;
+    TTYVTDisallocate = true;
+  };
 
   # Enable Sway Window Manager
   programs.sway = {
@@ -252,7 +263,7 @@
     NVIM_USE_NIXOS_MODULE = "true";
     NIXOS_OZONE_WL = "1"; #NOTE: for electron and chromium app to use wayland
     _JAVA_AWT_WM_NONREPARENTING = "1"; #NOTE: fix java apps in wayland
-    _JAVA_OPTIONS="-Dsun.java2d.uiScale=2";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
   xdg.mime = {
     enable = true;
