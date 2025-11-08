@@ -17,7 +17,6 @@
       then [
         ./programs/sway.nix
         ./programs/waybar.nix
-        ./programs/gnome.nix
         ./programs/common-gui.nix
         ./programs/rclone.nix # TODO: move it to default imports when ready
       ]
