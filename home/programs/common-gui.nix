@@ -12,6 +12,12 @@
       package = pkgs.adwaita-icon-theme;
     };
   };
+  dconf.settings = {
+    # gtk apps appeareance
+    "org/gnome/desktop/interface" = {
+      color-scheme = lib.mkForce "prefer-dark";
+    };
+  };
 
   xdg.mimeApps = {
     enable = true;
