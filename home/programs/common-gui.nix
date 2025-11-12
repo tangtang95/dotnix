@@ -82,6 +82,7 @@
     yubioath-flutter # yubico
     localsend # file sharing
     ghidra # reverse engineering
+    qdirstat # disk space analyzer
   ];
 
   programs = {
