@@ -5,12 +5,18 @@
   hostname,
   username,
   ...
-}: let
+}:
+let
   ip_static = "192.168.1.251";
-in {
+in
+{
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    initrd.availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -21,19 +27,30 @@ in {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-      options = ["noatime"];
+      options = [ "noatime" ];
     };
     "/mnt/passdrive" = {
       device = "/dev/disk/by-uuid/ddb9e481-e4a5-4e43-b17b-2c0f853e73c5";
       fsType = "ext4";
-      options = ["defaults" "nofail" "X-mount.owner=${username}" "X-mount.group=users" "X-mount.mode=0766"];
-      depends = ["/"];
+      options = [
+        "defaults"
+        "nofail"
+        "X-mount.owner=${username}"
+        "X-mount.group=users"
+        "X-mount.mode=0766"
+      ];
+      depends = [ "/" ];
     };
   };
 
   networking = {
     hostName = hostname;
-    firewall.allowedTCPPorts = [53 8123 8080 8443];
+    firewall.allowedTCPPorts = [
+      53
+      8123
+      8080
+      8443
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -41,16 +58,15 @@ in {
     fastfetch
     speedtest-cli
   ];
-  environment.etc."homepage-dashboard/.env".text = ''
-    HOMEPAGE_ALLOWED_HOSTS="${hostname} ${ip_static}"
-  '';
 
   services = {
     openssh.enable = true;
-    homepage-dashboard = {
+    homepage-dashboard = let 
+      homepage-dashboard-port = "8082";
+    in {
       enable = true;
       openFirewall = true;
-      environmentFile = "/etc/homepage-dashboard/.env";
+      allowedHosts = "${hostname}:${homepage-dashboard-port},${ip_static}:${homepage-dashboard-port}";
       widgets = [
         {
           resources = {
@@ -82,11 +98,11 @@ in {
       openFirewall = true;
       settings = {
         dns = {
-          bind_hosts = ["0.0.0.0"];
+          bind_hosts = [ "0.0.0.0" ];
           port = 53;
           upstream_dns = [
-            "1.1.1.1" #cloudflare
-            "8.8.8.8" #google
+            "1.1.1.1" # cloudflare
+            "8.8.8.8" # google
           ];
         };
         filtering = {
@@ -96,17 +112,19 @@ in {
           safe_search.enabled = false;
         };
         filters =
-          map (url: {
-            enabled = true;
-            url = url;
-          }) [
-            # The Big List of Hacked Malware Web Sites
-            "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
-            # malicious url blocklist
-            "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt"
-            # HaGeZi's Ultimate DNS Blocklist
-            "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/ultimate.txt"
-          ];
+          map
+            (url: {
+              enabled = true;
+              url = url;
+            })
+            [
+              # The Big List of Hacked Malware Web Sites
+              "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
+              # malicious url blocklist
+              "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt"
+              # HaGeZi's Ultimate DNS Blocklist
+              "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/ultimate.txt"
+            ];
       };
     };
   };
@@ -159,13 +177,16 @@ in {
     mutableUsers = false;
     users."${username}" = {
       isNormalUser = true;
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" ];
       password = "tangtang";
       shell = pkgs.fish;
     };
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.05";
 }
