@@ -8,6 +8,8 @@
 }:
 let
   ip_static = "192.168.1.251";
+  gitea_port = 8090;
+  gitea_mirror_port = 4321;
 in
 {
   boot = {
@@ -50,6 +52,8 @@ in
       8123
       8080
       8443
+      gitea_port
+      gitea_mirror_port
     ];
   };
 
@@ -96,6 +100,17 @@ in
         enable = true;
 	port = 8112;
         openFirewall = true;
+      };
+    };
+    # git server
+    gitea = {
+      enable = true;
+      settings = {
+        server = {
+	  DOMAIN = hostname;
+	  DISABLE_SSH = true;
+	  HTTP_PORT = gitea_port;
+	};
       };
     };
     adguardhome = {
@@ -182,12 +197,43 @@ in
     mutableUsers = false;
     users."${username}" = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ 
+        "wheel"
+        "docker"
+      ];
       password = "tangtang";
       shell = pkgs.fish;
     };
   };
 
+  # containers
+  system.activationScripts.makeGiteaMirrorDir = lib.stringAfter [ "var" ] ''
+    mkdir -p /var/lib/gitea-mirror/data
+    chown -R 1000:1000 /var/lib/gitea-mirror
+  '';
+  virtualisation = {
+    oci-containers.containers = {
+      "gitea-mirror" = let 
+        url = "http://${hostname}:${builtins.toString gitea_mirror_port}";
+      in {
+        autoStart = true;
+	image = "ghcr.io/raylabshq/gitea-mirror:v3.9.2";
+	user = "1000:1000";
+	ports = [ "${builtins.toString gitea_mirror_port}:4321" ];
+	volumes = [ "/var/lib/gitea-mirror/data:/app/data"];
+	environment = {
+	  BETTER_AUTH_URL = url;
+	  BETTER_AUTH_TRUSTED_ORIGINS = url;
+	  NODE_ENV = "production";
+          DATABASE_URL = "file:/app/data/gitea-mirror.db";
+          HOST = "0.0.0.0";
+          PORT = "4321";
+          PUBLIC_BETTER_AUTH_URL = url;
+	};
+      };
+    };
+  };
+  
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
