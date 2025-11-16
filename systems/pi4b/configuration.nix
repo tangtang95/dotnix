@@ -62,11 +62,12 @@ in
   services = {
     openssh.enable = true;
     homepage-dashboard = let 
-      homepage-dashboard-port = "8082";
+      listenPort = 8082;
     in {
       enable = true;
+      inherit listenPort;
       openFirewall = true;
-      allowedHosts = "${hostname}:${homepage-dashboard-port},${ip_static}:${homepage-dashboard-port}";
+      allowedHosts = "${hostname}:${builtins.toString listenPort},${ip_static}:${builtins.toString listenPort}";
       widgets = [
         {
           resources = {
@@ -83,6 +84,7 @@ in
     };
     # media server
     jellyfin = {
+      # http port: 8096
       enable = true;
       openFirewall = true;
       user = username;
@@ -90,8 +92,11 @@ in
     # bittorrent ui client
     deluge = {
       enable = true;
-      web.enable = true;
-      web.openFirewall = true;
+      web = {
+        enable = true;
+	port = 8112;
+        openFirewall = true;
+      };
     };
     adguardhome = {
       enable = false;
