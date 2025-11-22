@@ -178,6 +178,10 @@
       enableFishIntegration = true;
     };
     lazygit.enable = true;
+    yazi = {
+      enable = true;
+      enableFishIntegration = true;
+    };
     neovim = {
       enable = true;
       defaultEditor = true;
