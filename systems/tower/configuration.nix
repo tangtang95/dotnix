@@ -77,6 +77,7 @@
       };
     };
   };
+  # NOTE: override greetd service to avoid error logs on screen
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
     StandardInput = "tty";
@@ -102,7 +103,6 @@
       swaylock
       wl-clipboard
       waybar # wayland bar
-      xwayland-satellite # x11 in wayland but with correct scaling
       mako # notification system
       libnotify
       rofi

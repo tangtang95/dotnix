@@ -5,12 +5,56 @@
   ...
 }: let
   modifier = "Mod4";
+
+  # NOTE: use xwayland-satellite on display :1
+  x11display = ":1";
 in {
   home.sessionVariables = {
-    DISPLAY = ":1";
+    DISPLAY = x11display;
   };
-  systemd.user.sessionVariables = {
-    DISPLAY = ":1";
+  systemd.user = {
+    sessionVariables = {
+      DISPLAY = x11display;
+    };
+    services = let
+      guiTarget = "graphical-session.target";
+    in {
+      # x11 apps in wayland: use xwayland-satellite instead of xwayland for correct scaling
+      xwayland-satellite = {
+        Unit = {
+          Description = "XWayland outside your Wayland";
+          BindsTo = guiTarget;
+          PartOf = guiTarget;
+          After = guiTarget;
+          Requisite = guiTarget;
+        };
+        Service = {
+          Type = "notify";
+          NotifyAccess = "all";
+          ExecStart = lib.concatStringsSep " " [
+            # TODO: remove unstable when xwayland-satellite goes to 0.8 (0.7 crashes at some point with steam)
+            "${pkgs.unstable.xwayland-satellite}/bin/xwayland-satellite"
+            x11display
+          ];
+          Restart = "on-failure";
+        };
+        Install.WantedBy = [guiTarget];
+      };
+      # idle mechanism (inhibit idle when playing audio; should work also for games)
+      wayland-pipewire-idle-inhibit = {
+        Unit = {
+          Description = "Wayland PipeWire Idle Inhibit service";
+        };
+        Service = {
+          ExecStart = lib.concatStringsSep " " [
+            "${pkgs.wayland-pipewire-idle-inhibit}/bin/wayland-pipewire-idle-inhibit"
+            "-v INFO"
+          ];
+          Restart = "on-failure";
+        };
+        Install.WantedBy = [guiTarget];
+      };
+    };
   };
   programs.swaylock = {
     enable = true;
@@ -37,8 +81,7 @@ in {
         style = "Bold Semi-Condensed";
         size = 10.0;
       };
-      # NOTE: use xwayland-satellite on display :1
-      menu = "DISPLAY=:1 rofi -show drun -show-icons";
+      menu = "DISPLAY=${x11display} rofi -show drun -show-icons";
       bars = [
         {
           mode = "dock";
@@ -67,14 +110,11 @@ in {
         ];
       };
       startup = [
-        {command = "xwayland-satellite :1";} # use xwayland-satellite instead of xwayland for correct scaling
         {command = "mako";}
         {command = "${pkgs.autotiling-rs}/bin/autotiling-rs";}
         {command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";} # polkit auth agent
         {command = "systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal-wlr.service";} # temporary fix for bug in quick logout and login where portal gtk and wlr does not start
 
-        # idle mechanism
-        {command = "${pkgs.wljoywake}/bin/wljoywake";} # TODO: should work only up to sway v1.10.1, fix after updating nixos 25.05
         {
           command = ''
             exec swayidle -w \
