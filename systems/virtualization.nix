@@ -10,7 +10,7 @@
   environment.systemPackages = with pkgs; [
     virt-viewer
     spice-protocol
-    win-virtio
+    virtio-win
     win-spice
   ];
 
@@ -28,10 +28,6 @@
         vhostUserPackages = with pkgs; [
           virtiofsd # filesystem sharing
         ];
-        ovmf = {
-          enable = true;
-          packages = [pkgs.OVMFFull.fd];
-        };
         swtpm.enable = true;
       };
     };

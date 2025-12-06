@@ -35,7 +35,7 @@
     ripgrep-all
     fd
     bottom
-    du-dust
+    dust
     sd
     procs
     tailspin
@@ -72,11 +72,6 @@
     go
     typst
     gcc
-
-    # cargo packages
-    cargo-llvm-cov
-    cargo-cross
-    unstable.cargo-xwin
 
     # lsp only for nixos
     nixd
@@ -172,6 +167,10 @@
     fzf = {
       enable = true;
       enableFishIntegration = true;
+    };
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
     };
     zellij = {
       enable = true;

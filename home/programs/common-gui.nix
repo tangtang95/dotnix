@@ -76,7 +76,7 @@
     spotify
     qbittorrent
     discord
-    whatsapp-for-linux
+    wasistlos
     bitwarden-desktop
     obsidian
     yubioath-flutter # yubico
