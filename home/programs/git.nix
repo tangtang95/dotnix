@@ -1,19 +1,18 @@
 {...}: {
   programs.git = {
     enable = true;
-    userName = "Tangtang Zhou";
-    userEmail = "tangtang2995@gmail.com";
-    aliases = {
-      s = "status";
-      pfl = "push --force-with-lease";
-      log1l = "log --oneline";
-      logp = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-      branch-merged = "!git branch --merged | grep  -v '\\*\\|master\\|main'";
-    };
-    delta = {
-      enable = true;
-    };
-    extraConfig = {
+    settings = {
+      alias = {
+        s = "status";
+        pfl = "push --force-with-lease";
+        log1l = "log --oneline";
+        logp = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        branch-merged = "!git branch --merged | grep  -v '\\*\\|master\\|main'";
+      };
+      user = {
+        name = "Tangtang Zhou";
+        email = "tangtang2995@gmail.com";
+      };
       core = {
         editor = "nvim";
       };
