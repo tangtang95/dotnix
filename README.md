@@ -42,3 +42,14 @@ NOTE: For WSL, you need to install and use fish on FHS env (e.g. /usr/bin/fish)
 - If there is screen tearing with NVIDIA gpu, enable force composition pipeline
 - In order to use VIA keyboard tool, you need to add udev rule for the USB driver keyboard (https://get.vial.today/manual/linux-udev.html)
 
+## Nix store cleanup
+
+I prefer doing the cleanup of nix store manually as when it is done as a job, it blocks disk io when running hinders me.
+So to cleanup the nix store, run these two commands whenever I need to restore some disk space:
+
+```sh
+sudo nix-collect-garbage --delete-older-than 7d # for nixos
+nix-collect-garbage --delete-older-than 7d # for home-manager
+```
+
+Both commands are necessary to cleanup completely
