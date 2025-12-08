@@ -154,9 +154,7 @@
       enable = true;
       icons = "auto";
     };
-    bat = {
-      enable = true;
-    };
+    bat.enable = true;
     zoxide = {
       enable = true;
     };
@@ -176,11 +174,12 @@
       enable = true;
       enableFishIntegration = true;
     };
-    lazygit.enable = true;
     yazi = {
       enable = true;
       enableFishIntegration = true;
     };
+    lazygit.enable = true;
+    btop.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
