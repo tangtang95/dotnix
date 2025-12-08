@@ -308,7 +308,7 @@
 
   # Automatic garbage collection of nix store
   nix.gc = {
-    automatic = true;
+    automatic = false;
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
