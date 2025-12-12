@@ -64,7 +64,7 @@
       extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
       targets = ["i686-pc-windows-msvc"];
     })
-    zigpkgs."0.14.1"
+    zigpkgs."0.15.2"
     (python3.withPackages (ps: with ps; [pip]))
     (lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
     gnumake
