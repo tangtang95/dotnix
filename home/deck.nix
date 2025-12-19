@@ -90,6 +90,7 @@ in {
       enable = true;
       package = makePackageWrapper pkgs.ghostty;
       settings = {
+        command = "zellij";
         theme = "Catppuccin Mocha";
         font-family = "JetBrainsMono Nerd Font Mono";
         confirm-close-surface = false;
@@ -126,5 +127,10 @@ in {
         };
       };
     };
+  };
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = ["nix-command" "flakes"];
   };
 }
