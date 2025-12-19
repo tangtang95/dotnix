@@ -85,6 +85,9 @@
     qdirstat # disk space analyzer
   ];
 
+  # clipboard manager
+  services.cliphist.enable = true;
+
   programs = {
     # default apps
     # movie player

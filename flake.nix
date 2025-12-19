@@ -61,7 +61,10 @@
           username = "deck";
           installGui = false;
         };
-        modules = [ ./home/deck.nix ];
+        modules = [
+          stylix.homeModules.stylix
+          ./home/deck.nix
+        ];
       };
       nixosConfigurations.nixos-wsl = nixpkgs.lib.nixosSystem {
         inherit system pkgs;

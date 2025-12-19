@@ -1,11 +1,11 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   # wrapper code obtained from: https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix#L212
-  makePackageWrapper = pkg:
-  (pkg.overrideAttrs (old: {
+  makePackageWrapper = pkg: (pkg.overrideAttrs (old: {
     name = "nixGL-${pkg.name}";
     separateDebugInfo = false;
     nativeBuildInputs = old.nativeBuildInputs or [] ++ [pkgs.makeWrapper];
@@ -52,7 +52,7 @@ in {
   imports = [
     ./home.nix
   ];
-  home.pointerCursor = {
+  home.pointerCursor = lib.mkForce {
     enable = true;
     name = "breeze-dark";
     package = pkgs.kdePackages.breeze;
@@ -61,19 +61,69 @@ in {
   home.packages = with pkgs; [
     patchelf
     nix-gl-host
+    xclip
     (makePackageWrapper spotify)
     (makePackageWrapper discord)
   ];
+  home.keyboard = {
+    layout = "us";
+    options = ["caps:swapescape"];
+  };
   programs = {
+    fish = {
+      shellAliases = {
+        pbcopy = lib.mkForce "xclip";
+        pbpaste = lib.mkForce "xclip -o";
+      };
+    };
+    alacritty = {
+      enable = true;
+      package = makePackageWrapper pkgs.alacritty;
+      theme = "catppuccin_mocha";
+      settings = {
+        terminal = {
+          shell = "fish";
+        };
+      };
+    };
     ghostty = {
       enable = true;
       package = makePackageWrapper pkgs.ghostty;
       settings = {
-        theme = "catppuccin-mocha";
+        theme = "Catppuccin Mocha";
         font-family = "JetBrainsMono Nerd Font Mono";
         confirm-close-surface = false;
         cursor-style = "block";
         shell-integration-features = "no-cursor";
+      };
+    };
+  };
+
+  systemd.user = {
+    services = lib.mkIf (config.home.keyboard != null) {
+      setxkbmap = {
+        Unit = {
+          Description = "Set up keyboard in X";
+          After = ["graphical-session-pre.target"];
+          PartOf = ["graphical-session.target"];
+        };
+
+        Install = {
+          WantedBy = ["graphical-session.target"];
+        };
+
+        Service = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = with config.home.keyboard; let
+            args =
+              lib.optional (layout != null) "-layout '${layout}'"
+              ++ lib.optional (variant != null) "-variant '${variant}'"
+              ++ lib.optional (model != null) "-model '${model}'"
+              ++ ["-option ''"]
+              ++ map (v: "-option '${v}'") options;
+          in "${pkgs.xorg.setxkbmap}/bin/setxkbmap ${toString args}";
+        };
       };
     };
   };
