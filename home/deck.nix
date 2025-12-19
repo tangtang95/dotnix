@@ -52,6 +52,7 @@ in {
   imports = [
     ./home.nix
   ];
+  default.terminal = "ghostty";
   home.pointerCursor = lib.mkForce {
     enable = true;
     name = "breeze-dark";
@@ -76,14 +77,11 @@ in {
         pbpaste = lib.mkForce "xclip -o";
       };
     };
-    alacritty = {
+    # NOTE: need to add manually shortcut rofi -show drun -show-icons
+    rofi = {
       enable = true;
-      package = makePackageWrapper pkgs.alacritty;
-      theme = "catppuccin_mocha";
-      settings = {
-        terminal = {
-          shell = "fish";
-        };
+      extraConfig = {
+        display-drun = "";
       };
     };
     ghostty = {
