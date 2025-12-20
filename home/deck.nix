@@ -52,7 +52,7 @@ in {
   imports = [
     ./home.nix
   ];
-  default.terminal = "ghostty";
+  default.terminal = "alacritty";
   home.pointerCursor = lib.mkForce {
     enable = true;
     name = "breeze-dark";
@@ -82,6 +82,22 @@ in {
       enable = true;
       extraConfig = {
         display-drun = "";
+      };
+    };
+    alacritty = {
+      enable = true;
+      package = makePackageWrapper pkgs.alacritty;
+      theme = "catppuccin_mocha";
+      settings = {
+        font = {
+          size = 14;
+          normal = {
+            family = "JetBrainsMono Nerd Font Mono";
+          };
+        };
+        terminal = {
+          shell = "fish";
+        };
       };
     };
     ghostty = {
