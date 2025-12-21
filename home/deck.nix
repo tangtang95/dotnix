@@ -43,6 +43,8 @@
         src="$(readlink "$dsk")"
         rm "$dsk"
         sed "s|${pkg.out}|$out|g" "$src" > "$dsk"
+        # NOTE: Remove DBusActivatable flag as not working with nixglhost
+        sed -i '/^DBusActivatable=/d' "$dsk"
       done
 
       shopt -u nullglob # Revert nullglob back to its normal default state
