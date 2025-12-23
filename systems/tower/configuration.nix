@@ -181,6 +181,7 @@
   };
   home-manager = {
     users.${username}.imports = [
+      ../../home.stylix.nix
       ../../home/home.nix
     ];
     extraSpecialArgs = {

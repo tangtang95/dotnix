@@ -62,7 +62,6 @@
           installGui = false;
         };
         modules = [
-          stylix.homeModules.stylix
           ./home/deck.nix
         ];
       };

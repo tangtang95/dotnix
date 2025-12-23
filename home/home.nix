@@ -9,7 +9,6 @@
   imports =
     [
       ./options.nix
-      ./stylix.nix
       ./programs/git.nix
     ]
     ++ (

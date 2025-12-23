@@ -43,6 +43,7 @@
 
   home-manager = {
     users.tangtang.imports = [
+      ../../home.stylix.nix
       ../../home/home.nix
     ];
     extraSpecialArgs = {
