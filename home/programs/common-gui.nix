@@ -3,7 +3,19 @@
   lib,
   config,
   ...
-}: {
+}: let
+  ghosttyNoDBus =
+    pkgs.ghostty.overrideAttrs
+    (old: {
+      postInstall =
+        (old.postInstall or "")
+        + ''
+          # Remove DBusActivatable line from desktop file
+          substituteInPlace $out/share/applications/*.desktop \
+          --replace-fail "DBusActivatable=true" ""
+        '';
+    });
+in {
   gtk = {
     enable = true;
     # NOTE: adwaita seems to provide faster startup time for gnome apps
@@ -137,7 +149,7 @@
     # other
     ghostty = {
       enable = true;
-      package = pkgs.unstable.ghostty;
+      package = ghosttyNoDBus;
       settings = {
         confirm-close-surface = false;
       };
