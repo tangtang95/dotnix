@@ -34,10 +34,13 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = let
+      fileManagerApp = "thunar.desktop";
       imageViewerApp = "org.gnome.Loupe.desktop";
       emailApp = "userapp-Thunderbird-PB4G92.desktop";
       archiverApp = "org.gnome.FileRoller.desktop";
     in {
+      "inode/directory" = fileManagerApp;
+      "inode/mount-point" = fileManagerApp;
       "application/x-zip" = archiverApp;
       "application/x-gzip" = archiverApp;
       "application/x-lzip" = archiverApp;
