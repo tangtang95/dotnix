@@ -122,7 +122,7 @@
           "org.freedesktop.udisks2.encrypted-unlock": YES,
           "org.freedesktop.udisks2.eject-media": YES,
           "org.freedesktop.udisks2.power-off-drive": YES,
-          // Thunar file manager specific
+          // For file manager
           "org.freedesktop.udisks2.filesystem-mount-system": YES
         };
         if (subject.isInGroup("wheel")) {
@@ -202,11 +202,6 @@
   programs = {
     # default gui apps
     firefox.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
-    };
-    xfconf.enable = true; # thunar preference persistency
     neovim.enable = true;
 
     steam = {
@@ -235,7 +230,7 @@
       enable = true;
     };
   };
-  services.gvfs.enable = true; # gnome virtual file system for thunar
+  services.gvfs.enable = true; # gnome virtual file system for file manager
 
   # Set default terminal app
   xdg.terminal-exec = {
@@ -257,6 +252,24 @@
     libreoffice
     file-roller # archive manager
 
+    # dolphin with open app fix https://github.com/rumboon/dolphin-overlay/blob/main/default.nix
+    (kdePackages.overrideScope (kfinal: kprev: {
+      dolphin = kprev.dolphin.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+        postInstall =
+          (oldAttrs.postInstall or "")
+          + ''
+            wrapProgram $out/bin/dolphin \
+                --set XDG_CONFIG_DIRS "${pkgs.libsForQt5.kservice}/etc/xdg:$XDG_CONFIG_DIRS" \
+                --run "${kprev.kservice}/bin/kbuildsycoca6 --noincremental ${pkgs.libsForQt5.kservice}/etc/xdg/menus/applications.menu"
+          '';
+      });
+    })).dolphin
+    kdePackages.qtsvg
+    kdePackages.kio
+    kdePackages.kio-fuse
+    kdePackages.kio-extras
+
     wget
     via
   ];
@@ -269,10 +282,11 @@
   xdg.mime = {
     enable = true;
     defaultApplications = let
-      fileManagerApp = "thunar.desktop";
+      fileManagerApp = "org.kde.dolphin.desktop";
       imageViewerApp = "org.gnome.Loupe.desktop";
       emailApp = "userapp-Thunderbird-PB4G92.desktop";
       archiverApp = "org.gnome.FileRoller.desktop";
+      textApp = "nvim.desktop";
     in {
       "inode/directory" = fileManagerApp;
       "inode/mount-point" = fileManagerApp;
@@ -280,7 +294,10 @@
       "application/x-gzip" = archiverApp;
       "application/x-lzip" = archiverApp;
       "application/x-tar" = archiverApp;
+      "application/x-compressed-tar" = archiverApp;
       "application/pdf" = "org.gnome.Papers.desktop";
+      "text/plain" = textApp;
+      "text/x-log" = textApp;
       "x-scheme-handler/mailto" = emailApp;
       "message/rfc822" = emailApp;
       "x-scheme-handler/mid" = emailApp;

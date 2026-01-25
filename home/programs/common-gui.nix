@@ -4,6 +4,7 @@
   config,
   ...
 }: let
+  term = config.default.terminal;
   ghosttyNoDBus =
     pkgs.ghostty.overrideAttrs
     (old: {
@@ -34,10 +35,11 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = let
-      fileManagerApp = "thunar.desktop";
+      fileManagerApp = "org.kde.dolphin.desktop";
       imageViewerApp = "org.gnome.Loupe.desktop";
       emailApp = "userapp-Thunderbird-PB4G92.desktop";
       archiverApp = "org.gnome.FileRoller.desktop";
+      textApp = "nvim.desktop";
     in {
       "inode/directory" = fileManagerApp;
       "inode/mount-point" = fileManagerApp;
@@ -45,10 +47,13 @@ in {
       "application/x-gzip" = archiverApp;
       "application/x-lzip" = archiverApp;
       "application/x-tar" = archiverApp;
+      "application/x-compressed-tar" = archiverApp;
       "application/pdf" = "org.gnome.Papers.desktop";
       "x-scheme-handler/mailto" = emailApp;
       "message/rfc822" = emailApp;
       "x-scheme-handler/mid" = emailApp;
+      "text/plain" = textApp;
+      "text/x-log" = textApp;
       "image/jpeg" = imageViewerApp;
       "image/png" = imageViewerApp;
       "image/gif" = imageViewerApp;
@@ -74,17 +79,11 @@ in {
       "image/jxl" = imageViewerApp;
     };
   };
-
-  # thunar config
-  home.file.".config/xfce4/helpers.rc".text = "TerminalEmulator=${config.default.terminal}";
-  xfconf = {
-    enable = true;
-    settings = {
-      thunar = {
-        last-menubar-visible = false;
-      };
-    };
-  };
+  xdg.configFile."kdeglobals".text = ''
+    [General]
+    TerminalApplication=${term}
+    TerminalExec=${term} -e
+  '';
 
   home.packages = with pkgs; [
     gimp
