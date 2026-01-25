@@ -44,10 +44,8 @@
           nix-gl-host.overlays.default
           (_final: prev: {
             unstable = import nixpkgs-unstable {
-              # TODO: fix system deprecation https://discourse.nixos.org/t/how-to-fix-evaluation-warning-system-has-been-renamed-to-replaced-by-stdenv-hostplatform-system/72120/1
-              # after other overlays has also fixed it
-              inherit (prev) system;
-              inherit config;
+              inherit (prev) config;
+              localSystem = prev.stdenv.hostPlatform;
             };
           })
         ];
@@ -104,7 +102,7 @@
             overlays = [
               (_final: prev: {
                 unstable = import nixpkgs-unstable {
-                  inherit (prev) system;
+                  localSystem = prev.stdenv.hostPlatform;
                 };
               })
             ];
