@@ -91,7 +91,7 @@
   };
   systemd.services.fstrim.serviceConfig = {
     # HACK: speed up fstrim by freeing only contiguos memory of 64 KiB or more
-    ExecStart = "${pkgs.fstrim}/sbin/fstrim --listed-in /etc/fstab:/proc/self/mountinfo --verbose --quiet-unsupported -m 128K";
+    ExecStart = "${pkgs.util-linux}/sbin/fstrim --listed-in /etc/fstab:/proc/self/mountinfo --verbose --quiet-unsupported -m 128K";
   };
 
   # Enable Sway Window Manager
