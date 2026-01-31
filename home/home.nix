@@ -93,6 +93,9 @@
     samply
     hyperfine
 
+    # ai
+    unstable.opencode
+
     # others
     presenterm
     python313Packages.weasyprint # for presenterm export pdf
