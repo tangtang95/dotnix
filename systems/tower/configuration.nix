@@ -89,6 +89,7 @@
     TTYVHangup = true;
     TTYVTDisallocate = true;
   };
+  services.fstrim.interval = "monthly";
   systemd.services.fstrim.serviceConfig = {
     # HACK: speed up fstrim by freeing only contiguos memory of 64 KiB or more
     ExecStart = [
