@@ -157,4 +157,16 @@ in {
       };
     };
   };
+
+  services = {
+    wlsunset = {
+      enable = true;
+      latitude = "45.46";
+      longitude = "9.19";
+      temperature = {
+        day = 6500;
+        night = 4000;
+      };
+    };
+  };
 }
