@@ -165,7 +165,7 @@ in {
       longitude = "9.19";
       temperature = {
         day = 6500;
-        night = 4000;
+        night = 3500;
       };
     };
   };
