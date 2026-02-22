@@ -36,9 +36,15 @@
         allowUnfree = true;
       };
       username = "tangtang";
+      ownOverlay = final: prev: {
+        myPackages = {
+          iroga = prev.callPackage ./packages/iroga.nix {};
+        };
+      };
       pkgs = import nixpkgs {
         inherit system config;
         overlays = [
+          ownOverlay
           rust-overlay.overlays.default
           zig-overlay.overlays.default
           nix-gl-host.overlays.default
@@ -52,6 +58,8 @@
       };
     in
     {
+      # packages
+      packages.${system}.iroga = pkgs.myPackages.iroga;
       # home config for steamdeck
       homeConfigurations.deck = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

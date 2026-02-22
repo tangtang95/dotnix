@@ -109,6 +109,9 @@
     xdg-utils
     watchexec
     nerd-fonts.jetbrains-mono
+
+    # my packages
+    myPackages.iroga
   ];
   home.sessionVariables = {
     BROWSER = config.default.browser;
