@@ -110,6 +110,7 @@ in {
         ];
       };
       startup = [
+        {command = "dbus-update-activation-environment --all";}
         {command = "mako";}
         {command = "${pkgs.autotiling-rs}/bin/autotiling-rs";}
         {command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";} # polkit auth agent
