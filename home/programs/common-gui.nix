@@ -5,17 +5,6 @@
   ...
 }: let
   term = config.default.terminal;
-  ghosttyNoDBus =
-    pkgs.ghostty.overrideAttrs
-    (old: {
-      postInstall =
-        (old.postInstall or "")
-        + ''
-          # Remove DBusActivatable line from desktop file
-          substituteInPlace $out/share/applications/*.desktop \
-          --replace-fail "DBusActivatable=true" ""
-        '';
-    });
 in {
   gtk = {
     enable = true;
@@ -151,7 +140,6 @@ in {
     # other
     ghostty = {
       enable = true;
-      package = ghosttyNoDBus;
       settings = {
         confirm-close-surface = false;
       };
