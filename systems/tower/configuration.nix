@@ -111,7 +111,6 @@
       swaylock
       wl-clipboard
       waybar # wayland bar
-      mako # notification system
       libnotify
       rofi
     ];
