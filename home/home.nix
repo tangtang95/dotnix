@@ -65,6 +65,7 @@
     })
     zigpkgs."0.15.2"
     (python3.withPackages (ps: with ps; [pip]))
+    uv
     (lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
     gnumake
     nodejs
@@ -109,6 +110,7 @@
     xdg-utils
     watchexec
     nerd-fonts.jetbrains-mono
+    wine
 
     # my packages
     myPackages.iroga
@@ -118,6 +120,9 @@
     TERMINAL = config.default.terminal;
     EDITOR = "nvim";
     NVIM_USE_NIXOS_MODULE = "true";
+
+    # Python environment
+    UV_PYTHON_DOWNLOADS = "never";
   };
 
   home.pointerCursor = {
