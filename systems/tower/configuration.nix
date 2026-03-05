@@ -89,6 +89,8 @@
     TTYVHangup = true;
     TTYVTDisallocate = true;
   };
+
+  # fstrim override
   services.fstrim.interval = "monthly";
   systemd.services.fstrim.serviceConfig = {
     # HACK: speed up fstrim by freeing only contiguos memory of 64 KiB or more
@@ -96,6 +98,12 @@
       ""
       "${pkgs.util-linux}/sbin/fstrim --listed-in /etc/fstab:/proc/self/mountinfo --verbose --quiet-unsupported -m 128K"
     ];
+  };
+
+  #ollama service
+  services.ollama = {
+    enable = true;
+    package = pkgs.unstable.ollama-rocm;
   };
 
   # Enable Sway Window Manager
