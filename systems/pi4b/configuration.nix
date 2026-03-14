@@ -61,6 +61,7 @@ in
     vim
     fastfetch
     speedtest-cli
+    wpa_supplicant
   ];
 
   services = {
