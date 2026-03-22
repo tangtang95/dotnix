@@ -154,6 +154,7 @@ in {
           "${modifier}+b" = "exec ${browser}";
           "${modifier}+q" = "kill";
           "${modifier}+p" = "exec --no-startup-id rofi -show clipboard:${cliphist-rofi-img} -show clipboard";
+          "${modifier}+equal" = "exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort -no-history -calc-command \"echo -n '{result}' | wl-copy\""; # calculator
           "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
           "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";
           "${modifier}+Shift+3" = "move container to workspace number 3; workspace number 3";

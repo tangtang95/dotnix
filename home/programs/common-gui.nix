@@ -122,8 +122,13 @@ in {
     };
     rofi = {
       enable = true;
+      plugins = with pkgs; [
+        rofi-calc
+      ];
       extraConfig = {
         display-drun = "";
+        display-calc = "󱖦";
+        display-clipboard = "";
       };
       theme = let
         inherit (config.lib.formats.rasi) mkLiteral;
