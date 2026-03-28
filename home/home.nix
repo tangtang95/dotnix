@@ -35,13 +35,10 @@
     fd
     bottom
     dust
-    sd
-    procs
     tailspin
 
     # web tools
     wget
-    httpie
     termscp
     dogdns
     bandwhich
@@ -73,21 +70,10 @@
     typst
     gcc
 
-    # lsp only for nixos
-    nixd
-    gopls
-    zls
-    lua-language-server
-    marksman
-
-    # formatters only for nixos
-    alejandra
-
     # language tools
     tree-sitter
 
-    # dap (debugger tool)
-    vscode-extensions.vadimcn.vscode-lldb
+    # debuggers
     lldb
 
     # benchmarking tools
@@ -104,7 +90,6 @@
     fastfetch # fetch OS info
     onefetch # fetch git info
     tokei
-    onefetch
     tealdeer
     wl-clipboard
     xdg-utils
@@ -191,6 +176,20 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+      extraPackages = with pkgs; [
+        # lsp only for nixos
+        nixd
+        gopls
+        zls
+        lua-language-server
+        marksman
+
+        # formatters only for nixos
+        alejandra
+
+        # dap (debugger tool)
+        vscode-extensions.vadimcn.vscode-lldb
+      ];
     };
   };
 }
