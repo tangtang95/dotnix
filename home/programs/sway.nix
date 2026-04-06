@@ -32,8 +32,7 @@ in {
           Type = "notify";
           NotifyAccess = "all";
           ExecStart = lib.concatStringsSep " " [
-            # TODO: remove unstable when xwayland-satellite goes to 0.8 (0.7 crashes at some point with steam)
-            "${pkgs.unstable.xwayland-satellite}/bin/xwayland-satellite"
+            "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
             x11display
           ];
           Restart = "on-failure";
