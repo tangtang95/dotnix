@@ -52,6 +52,7 @@ in
       8123
       8080
       8443
+      4533 # navidrome port
       gitea_port
       gitea_mirror_port
     ];
@@ -112,6 +113,14 @@ in
 	  DISABLE_SSH = true;
 	  HTTP_PORT = gitea_port;
 	};
+      };
+    };
+    navidrome = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        Address = ip_static;
+        MusicFolder = "/mnt/passdrive/audio/music";
       };
     };
     adguardhome = {
