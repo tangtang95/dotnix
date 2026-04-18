@@ -120,7 +120,7 @@ in
       openFirewall = true;
       settings = {
         Address = ip_static;
-        MusicFolder = "/mnt/passdrive/audio/music";
+        MusicFolder = "/mnt/passdrive/audio";
       };
     };
     adguardhome = {
