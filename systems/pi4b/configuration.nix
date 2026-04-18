@@ -10,6 +10,7 @@ let
   ip_static = "192.168.1.251";
   gitea_port = 8090;
   gitea_mirror_port = 4321;
+  common_group = "users";
 in
 {
   boot = {
@@ -38,7 +39,7 @@ in
         "defaults"
         "nofail"
         "X-mount.owner=${username}"
-        "X-mount.group=users"
+        "X-mount.group=${common_group}"
         "X-mount.mode=0766"
       ];
       depends = [ "/" ];
@@ -95,14 +96,13 @@ in
       openFirewall = true;
       user = username;
     };
-    # bittorrent ui client
-    deluge = {
+    # torrent ui client
+    qbittorrent = {
       enable = true;
-      web = {
-        enable = true;
-	port = 8112;
-        openFirewall = true;
-      };
+      user = username;
+      group = common_group;
+      webuiPort = 8111;
+      openFirewall = true;
     };
     # git server
     gitea = {
