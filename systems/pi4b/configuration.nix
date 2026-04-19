@@ -121,6 +121,7 @@ in
       settings = {
         Address = ip_static;
         MusicFolder = "/mnt/passdrive/audio";
+	PlaylistsPath = "music/playlists";
       };
     };
     adguardhome = {
