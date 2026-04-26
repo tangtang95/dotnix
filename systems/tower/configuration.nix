@@ -102,7 +102,7 @@
 
   #ollama service
   services.ollama = {
-    enable = true;
+    enable = false;
     package = pkgs.unstable.ollama-rocm;
   };
 
