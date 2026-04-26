@@ -60,7 +60,7 @@
       extensions = ["rust-analyzer" "rust-src" "llvm-tools"];
       targets = ["i686-pc-windows-msvc"];
     })
-    zigpkgs."0.15.2"
+    zigpkgs."0.16.0"
     (python3.withPackages (ps: with ps; [pip]))
     uv
     (lua51Packages.lua.withPackages (ps: with ps; [jsregexp luarocks]))
@@ -180,7 +180,7 @@
         # lsp only for nixos
         nixd
         gopls
-        zls
+        unstable.zls
         lua-language-server
         marksman
 
