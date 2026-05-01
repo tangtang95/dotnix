@@ -13,6 +13,7 @@
     ../virtualization.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   # Bootloader.
   boot.loader = {
     efi.canTouchEfiVariables = true;
