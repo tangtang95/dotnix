@@ -40,18 +40,23 @@ in {
         Install.WantedBy = [guiTarget];
       };
       # idle mechanism (inhibit idle when playing audio; should work also for games)
+      # config coming from https://github.com/rafaelrc7/wayland-pipewire-idle-inhibit/blob/948aa87003f6c94080650804a6974182e5948ca1/nix/modules/home-manager.nix
       wayland-pipewire-idle-inhibit = {
         Unit = {
-          Description = "Wayland PipeWire Idle Inhibit service";
-        };
-        Service = {
-          ExecStart = lib.concatStringsSep " " [
-            "${pkgs.wayland-pipewire-idle-inhibit}/bin/wayland-pipewire-idle-inhibit"
-            "-v INFO"
+          Description = "Inhibit Wayland idling when media is played through pipewire";
+          Documentation = "https://github.com/rafaelrc7/wayland-pipewire-idle-inhibit";
+          After = [
+            "pipewire.service"
+            guiTarget
           ];
-          Restart = "on-failure";
+          Wants = [ "pipewire.service" ];
         };
         Install.WantedBy = [guiTarget];
+        Service = {
+          ExecStart = "${pkgs.wayland-pipewire-idle-inhibit}/bin/wayland-pipewire-idle-inhibit -v INFO";
+          Restart = "always";
+          RestartSec = 10;
+        };
       };
     };
   };
