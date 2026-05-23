@@ -80,9 +80,6 @@
     samply
     hyperfine
 
-    # ai
-    unstable.opencode
-
     # others
     presenterm
     python313Packages.weasyprint # for presenterm export pdf
@@ -190,6 +187,14 @@
         # dap (debugger tool)
         vscode-extensions.vadimcn.vscode-lldb
       ];
+    };
+    # ai
+    opencode = {
+      enable = true;
+      package = pkgs.unstable.opencode;
+      settings = {
+        autoupdate = false;
+      };
     };
   };
 }
