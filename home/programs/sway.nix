@@ -18,6 +18,7 @@ in {
     };
     services = let
       guiTarget = "graphical-session.target";
+      swayTarget = "sway-session.target";
     in {
       # x11 apps in wayland: use xwayland-satellite instead of xwayland for correct scaling
       xwayland-satellite = {
@@ -47,11 +48,11 @@ in {
           Documentation = "https://github.com/rafaelrc7/wayland-pipewire-idle-inhibit";
           After = [
             "pipewire.service"
-            guiTarget
+            swayTarget
           ];
           Wants = [ "pipewire.service" ];
         };
-        Install.WantedBy = [guiTarget];
+        Install.WantedBy = [swayTarget];
         Service = {
           ExecStart = "${pkgs.wayland-pipewire-idle-inhibit}/bin/wayland-pipewire-idle-inhibit -v INFO";
           Restart = "always";
