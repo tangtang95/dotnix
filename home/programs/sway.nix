@@ -71,7 +71,7 @@ in {
   programs.swaylock = {
     enable = true;
     settings = {
-      image = ../wallpapers/yoichi-isagi-blue-3840x2160.jpg;
+      image = ../wallpapers/sagittarius-a-black.jpg;
     };
   };
   wayland.windowManager.sway = with config.default; {
