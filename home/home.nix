@@ -40,7 +40,6 @@
     # web tools
     wget
     termscp
-    dogdns
     bandwhich
 
     # file processors
@@ -166,6 +165,7 @@
     yazi = {
       enable = true;
       enableFishIntegration = true;
+      shellWrapperName = "y";
     };
     lazygit.enable = true;
     btop.enable = true;
@@ -173,6 +173,8 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+      withRuby = false;
+      withPython3 = false;
       extraPackages = with pkgs; [
         # lsp only for nixos
         nixd
@@ -187,6 +189,7 @@
         # dap (debugger tool)
         vscode-extensions.vadimcn.vscode-lldb
       ];
+      initLua = lib.mkForce "";
     };
     # ai
     opencode = {

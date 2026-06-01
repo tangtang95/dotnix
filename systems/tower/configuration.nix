@@ -275,8 +275,8 @@
           (oldAttrs.postInstall or "")
           + ''
             wrapProgram $out/bin/dolphin \
-                --set XDG_CONFIG_DIRS "${pkgs.libsForQt5.kservice}/etc/xdg:$XDG_CONFIG_DIRS" \
-                --run "${kprev.kservice}/bin/kbuildsycoca6 --noincremental ${pkgs.libsForQt5.kservice}/etc/xdg/menus/applications.menu"
+                --set XDG_CONFIG_DIRS "${pkgs.kdePackages.kservice}/etc/xdg:$XDG_CONFIG_DIRS" \
+                --run "${kprev.kservice}/bin/kbuildsycoca6 --noincremental ${pkgs.kdePackages.kservice}/etc/xdg/menus/applications.menu"
           '';
       });
     })).dolphin

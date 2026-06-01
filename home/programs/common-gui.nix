@@ -8,6 +8,7 @@
 in {
   gtk = {
     enable = true;
+    gtk4.theme = null;
     # NOTE: adwaita seems to provide faster startup time for gnome apps
     iconTheme = {
       name = "Adwaita";
@@ -79,8 +80,8 @@ in {
     spotify
     qbittorrent
     discord
-    wasistlos
-    bitwarden-desktop
+    karere
+    keyguard # alternative to vulnerable bitwarden-desktop
     obsidian
     yubioath-flutter # yubico
     localsend # file sharing
@@ -110,6 +111,7 @@ in {
     };
     firefox = {
       enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       profiles = {
         tangtang = {
           isDefault = true;
