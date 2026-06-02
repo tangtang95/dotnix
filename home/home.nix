@@ -173,8 +173,8 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
-      withRuby = false;
-      withPython3 = false;
+      withRuby = true;
+      withPython3 = true;
       extraPackages = with pkgs; [
         # lsp only for nixos
         nixd
