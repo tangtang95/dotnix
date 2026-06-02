@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
-      url = "github:nix-community/stylix/master"; # TODO: bump when available
+      url = "github:nix-community/stylix/master"; # TODO: set 26.05 when available
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotnixvim.url = "github:tangtang95/dotnixvim";
