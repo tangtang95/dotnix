@@ -117,6 +117,13 @@
   # zellij static config file (because limitation in nix to kdl converter)
   xdg.configFile."zellij/config.kdl".source = ../config/zellij.kdl;
 
+  # HACK: fix kde theme https://github.com/nix-community/stylix/issues/2183
+  xdg.configFile."kdeglobals".text =
+    ''
+      [UiSettings]
+      ColorScheme=*
+    '';
+
   # enable user fonts
   fonts.fontconfig = {
     enable = true;
