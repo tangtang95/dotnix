@@ -8,7 +8,7 @@
 in {
   gtk = {
     enable = true;
-    gtk4.theme = null;
+    gtk4.theme = config.gtk.theme;
     # NOTE: adwaita seems to provide faster startup time for gnome apps
     iconTheme = {
       name = "Adwaita";

@@ -268,17 +268,37 @@
     file-roller # archive manager
 
     # dolphin with open app fix https://github.com/rumboon/dolphin-overlay/blob/main/default.nix
-    (kdePackages.overrideScope (kfinal: kprev: {
-      dolphin = kprev.dolphin.overrideAttrs (oldAttrs: {
-        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
-        postInstall =
-          (oldAttrs.postInstall or "")
-          + ''
-            wrapProgram $out/bin/dolphin \
-                --set XDG_CONFIG_DIRS "${pkgs.kdePackages.kservice}/etc/xdg:$XDG_CONFIG_DIRS" \
-                --run "${kprev.kservice}/bin/kbuildsycoca6 --noincremental ${pkgs.kdePackages.kservice}/etc/xdg/menus/applications.menu"
-          '';
-      });
+    (kdePackages.overrideScope (kfinal: kprev: let
+      kservice5Menu = pkgs.stdenv.mkDerivation {
+        name = "kservice5-applications-menu";
+        version = "5.116.0";
+
+        src = pkgs.fetchFromGitLab {
+          domain = "invent.kde.org";
+          owner = "frameworks";
+          repo = "kservice";
+          tag = "v5.116.0";
+          sparseCheckout = ["src/applications.menu"];
+          hash = "sha256-28ueuJiI34o1wayiq85KPNkUCwjdhPMYtU2nJTQ84V4=";
+        };
+
+        installPhase = ''
+          mkdir -p $out/etc/xdg/menus
+          cp ./src/applications.menu $out/etc/xdg/menus/applications.menu
+        '';
+      };
+    in {
+      dolphin = pkgs.symlinkJoin {
+        name = "dolphin-wrapped";
+        paths = [kprev.dolphin];
+        nativeBuildInputs = [pkgs.makeWrapper];
+        postBuild = ''
+          rm $out/bin/dolphin
+          makeWrapper ${kprev.dolphin}/bin/dolphin $out/bin/dolphin \
+            --set XDG_CONFIG_DIRS "${kservice5Menu}/etc/xdg:$XDG_CONFIG_DIRS" \
+            --run "${kprev.kservice}/bin/kbuildsycoca6 --noincremental ${kservice5Menu}/etc/xdg/menus/applications.menu"
+        '';
+      };
     })).dolphin
     kdePackages.qtsvg
     kdePackages.kio
