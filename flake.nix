@@ -6,6 +6,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix = {
       url = "github:nix-community/stylix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +26,7 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
+      nixos-hardware,
       stylix,
       dotnixvim,
       nixos-wsl,
@@ -119,7 +124,10 @@
             hostname = "home-server";
             inherit username;
           };
-          modules = [ ./systems/pi4b/configuration.nix ];
+          modules = [ 
+	    nixos-hardware.nixosModules.raspberry-pi-4
+	    ./systems/pi4b/configuration.nix
+	  ];
         };
     };
 }
