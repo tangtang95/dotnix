@@ -124,10 +124,10 @@
             hostname = "home-server";
             inherit username;
           };
-          modules = [ 
-	    nixos-hardware.nixosModules.raspberry-pi-4
-	    ./systems/pi4b/configuration.nix
-	  ];
+          modules = [
+            nixos-hardware.nixosModules.raspberry-pi-4
+            ./systems/pi4b/configuration.nix
+          ];
         };
     };
 }
