@@ -79,6 +79,7 @@
         };
 
         battery = {
+          bat = "BAT0"; # NOTE: Avoid crash due to controller disconnect
           states = {
             good = 95;
             warning = 30;
@@ -92,7 +93,8 @@
         };
 
         bluetooth = {
-          format = " {status}";
+          format-on = " {status}";
+          format-off = "";
           format-disabled = "";
           format-connected = " {num_connections} connected";
           tooltip-format = "{controller_alias}\t{controller_address}";
