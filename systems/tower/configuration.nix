@@ -185,6 +185,24 @@
     #media-session.enable = true;
   };
 
+  # Enable Geoclue for localization
+  location.provider = "geoclue2";
+  services = {
+    geoclue2 = {
+      enable = true;
+      enableStatic = true;
+      enableWifi = false;
+      enableNmea = false;
+      enable3G = false;
+      enableCDMA = false;
+      enableModemGPS = false;
+      staticLatitude = 45.46;
+      staticLongitude = 9.19;
+      staticAccuracy = 1000;
+      staticAltitude = 0;
+    };
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
