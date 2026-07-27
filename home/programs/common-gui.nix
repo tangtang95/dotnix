@@ -80,12 +80,15 @@ in {
     qbittorrent
     discord
     karere
-    keyguard # alternative to vulnerable bitwarden-desktop
+    unstable.bitwarden-desktop
     obsidian
     yubioath-flutter # yubico
     localsend # file sharing
     ghidra # reverse engineering
     qdirstat # disk space analyzer
+
+    unstable.shadps4
+    shadps4-qtlauncher
   ];
 
   # clipboard manager
