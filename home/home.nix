@@ -94,6 +94,7 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     wine
+    unstable.shadps4
 
     # my packages
     myPackages.iroga

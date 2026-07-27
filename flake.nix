@@ -46,6 +46,9 @@
           iroga = prev.callPackage ./packages/iroga.nix {};
         };
       };
+      unstable = import nixpkgs-unstable {
+        inherit system config;
+      };
       pkgs = import nixpkgs {
         inherit system config;
         overlays = [
@@ -53,12 +56,7 @@
           rust-overlay.overlays.default
           zig-overlay.overlays.default
           nix-gl-host.overlays.default
-          (_final: prev: {
-            unstable = import nixpkgs-unstable {
-              inherit (prev) config;
-              localSystem = prev.stdenv.hostPlatform;
-            };
-          })
+          (_final: prev: { inherit unstable; })
         ];
       };
     in
