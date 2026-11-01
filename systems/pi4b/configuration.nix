@@ -23,7 +23,16 @@ in
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
+    # USB drives port suspend hard on the Pi 4 and drop off the bus
+    # ("usb disconnect" in dmesg / lost mounts). Keep USB ports awake.
+    kernelParams = [ "usbcore.autosuspend=-1" ];
   };
+
+  # Belt and suspenders: disable runtime power management for USB devices
+  # (covers drives when autosuspend=-1 isn't enough on some kernels).
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on"
+  '';
 
   fileSystems = {
     "/" = {
@@ -37,6 +46,11 @@ in
       options = [
         "defaults"
         "nofail"
+        "noatime"
+        "x-systemd.automount"
+        # remounts on first access after the drive drops & comes back;
+        # unmounts again after inactivity so the drive can spin down
+        "x-systemd.idle-timeout=300"
         "X-mount.owner=${username}"
         "X-mount.group=${common_group}"
         "X-mount.mode=0766"
