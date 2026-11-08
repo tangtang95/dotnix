@@ -141,7 +141,8 @@ in {
       defaultWorkspace = "workspace number 1";
       input = {
         "type:pointer" = {
-          pointer_accel = "-0.7"; # to avoid changing mouse sensibility when switching from windows to linux
+          # for logitech vertical mouse
+          pointer_accel = "-0.3"; # to avoid changing mouse sensibility when switching from windows to linux
         };
       };
       output = {
